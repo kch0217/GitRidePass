@@ -1,16 +1,24 @@
 <ion-view title="HKUST RideSharing 2.0">
     <ion-content padding="true" class="has-header has-footer">
         <center><h3>RideSharing - Passenger</h3></center>
-        <form>
+        <form name="myForm">
             <label class="item item-input">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="">
+                <input type="email" placeholder="" name="email" ng-model="email" required>
+
             </label>
             <label class="item item-input">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="">
+                <input type="password" placeholder="" name="password" ng-model="password" required>
             </label>
         </form>
+        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+            <span ng-show="myForm.email.$error.required">Email is required.</span>
+            <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+        </span>
+       <span style="color:red" ng-show="myForm.password.$dirty">
+            <span ng-show="myForm.password.$error.required">Password is required.</span>
+        </span>
         <button class="button button-balanced button-block" ng-click="signin()">Login</button>
         <div class="button-bar">
             <button class="button button-positive button-outline button-block button-small icon ">Register</button>

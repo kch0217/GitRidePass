@@ -1,0 +1,110 @@
+<ion-view view-title="Matching in Progress" hide-back-button="true">
+  <ion-content>
+<div class="list card" ng-if='searching'>
+
+
+
+  <div class="item item-divider">
+	<center>Your destination is</center>
+  </div>
+
+  <div class="item" >
+    <br>
+  	<center style="font-size: 40px">
+  
+   	{{destination}}
+   	</center>
+    <br>
+
+  </div>
+
+    <div class="item item-divider">
+	<center>from</center>
+  </div>
+
+    <div class="item">
+  	<center style="font-size: 20px" ng-if="pickUp!='No Preference'">
+  
+   	HKUST {{pickUp}}
+   	</center>
+    <center style="font-size: 20px" ng-if="pickUp=='No Preference'">
+  
+    HKUST
+    </center>
+
+  </div>
+
+
+</div>
+
+<div class="list card" ng-if="!searching">
+
+   <div class="item" >
+    <center style="font-size: 40px">
+  
+    Found a match
+    </center>
+
+  </div>
+
+  <div class="item">
+    <center style="font-size: 40px"><i class="icon ion-model-s"></i>
+  
+    AB 123
+    </center>
+
+  </div>
+
+  <div class="item item-divider">
+  <center>departing in</center>
+  </div>
+
+  <div class="item" >
+    <center style="font-size: 40px"><i class="icon ion-ios-time-outline"></i>
+  
+    3 minutes
+    </center>
+
+  </div>
+
+    <div class="item item-divider" >
+  <center>from</center>
+  </div>
+
+    <div class="item">
+    <center style="font-size: 20px">
+  
+    HKUST North Gate
+    </center>
+
+  </div>
+
+
+</div>
+
+<br>
+<br>
+
+<center><ion-spinner class="spinner-positive" ng-init="testing()" ng-if='searching'></ion-spinner></center>
+
+<center style="font-size: 40px" ng-if='!searching'><timer time="1/3"></timer> sec to accept... </center>
+
+
+
+  </ion-content>
+
+  <ion-footer-bar class="bar-assertive" ng-click="goBack()" ng-if="searching">
+
+  <h1 class="title">Cancel</h1>
+
+</ion-footer-bar>
+  <ion-footer-bar ng-if="!searching">
+
+ <div class="button-bar">
+  <a class="button button-balanced">Accept</a>
+  <a class="button button-assertive" ng-click="goBack()">Cancel</a>
+</div>
+
+</ion-footer-bar>
+
+</ion-view>

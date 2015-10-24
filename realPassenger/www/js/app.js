@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.directives'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -51,17 +51,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-leave.html',
-        controller: 'DashCtrl'
+        controller: 'goHomeCtrl'
+      }
+    }
+  })
+  .state('tab.gohome-matching', {
+    url: '/gohome/:destination/:pickUp',
+    views: {
+      'tab-gohome': {
+        templateUrl: 'templates/passenger-leavematching.html',
+        controller: 'goHomeMatchingCtrl',
+        params: ['destination', 'pickUp']
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+
+
+  .state('tab.setting', {
+      url: '/setting',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-setting': {
+          templateUrl: 'templates/passenger-setting.html',
+          controller: 'settingCtrl'
         }
       }
     })
@@ -79,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/gohkust',
     views: {
       'tab-gohkust': {
-        templateUrl: 'templates/passenger-askaccept.html',
+        templateUrl: 'templates/passenger-toUSTaskaccept.html',
         controller: 'askAcceptCtrl'
       }
     }
