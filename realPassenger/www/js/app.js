@@ -66,6 +66,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
     }
   })
 
+  .state('tab.gohome-matching-confirm', {
+    url: '/gohome/:destination/:pickUp/:id',
+    views: {
+      'tab-gohome': {
+        templateUrl: 'templates/passenger-confirmmatch.html',
+        controller: 'goHomeMatchingConfirmCtrl',
+        params: ['destination', 'pickUp','id']
+      }
+    }
+  })
+
 
 
   .state('tab.setting', {

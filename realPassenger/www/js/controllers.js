@@ -85,7 +85,7 @@ $scope.pickupPt = availablePoints[4];
 })
 
 
-.controller('goHomeMatchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout){
+.controller('goHomeMatchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state){
 
   $scope.destination = $stateParams.destination;
   $scope.pickUp = $stateParams.pickUp;
@@ -104,24 +104,77 @@ $scope.pickupPt = availablePoints[4];
   };
 
 
+$scope.confirm = function(){
+    $timeout.cancel(timeCounter);
+    $timeout.cancel(timeCounter2);
 
+  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'id':'001'});
+}
   
   //temp
   $scope.testing = function(){
     timeCounter2 = $timeout(matched, 5000);
   }
 
+
+  
   var matched = function(){
     $scope.searching = false;
+    $scope.countDownTime = 20;
     console.log('matched');
-    timeCounter = $timeout($scope.goBack, 20000);
+    timeCounter = $timeout(decreaseCount, 1000);
+
+  }
+
+  var decreaseCount = function(){
+    $scope.countDownTime--;
+    if ($scope.countDownTime ==0){
+      $scope.goBack();
+    }
+    else
+    {
+      timeCounter = $timeout(decreaseCount, 1000);
+    }
+
 
   }
 
 
 
 
+
+
   
+})
+
+
+.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout){
+  
+  //retrieve from server
+  $scope.licence = 'AB 123';
+  $scope.time = 8/3;
+  $scope.destination = $stateParams.destination;
+  $scope.location = $stateParams.pickUp;
+  var timer;
+
+  $scope.cancel = function(){
+    $timeout.cancel(timer);
+    $state.go('tab.gohome');
+  }
+
+  $scope.finishedCount = false;
+
+  $scope.countDown = function(){
+
+    timer = $timeout(changeCount,1000*60*8/3);
+  }
+
+  var changeCount  = function(){
+    $scope.finishedCount = true;
+  }
+
+
+
 })
 
 .controller('settingCtrl', function($scope){
@@ -142,8 +195,9 @@ $scope.pickupPt = availablePoints[4];
       var min = Math.floor(timeInSec/60);
       var sec = timeInSec %60
 
-
-      $scope.displayTime = sec;
+      if (sec <10)
+        sec = '0' + sec;
+      $scope.displayTime = min + ' : ' + sec;
 
       $timeout($scope.startTime, 1000);
     }
