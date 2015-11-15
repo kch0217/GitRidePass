@@ -148,7 +148,7 @@ $scope.confirm = function(){
 })
 
 
-.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout){
+.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory){
   
   //retrieve from server
   $scope.licence = 'AB 123';
@@ -172,6 +172,10 @@ $scope.confirm = function(){
   var changeCount  = function(){
     $scope.finishedCount = true;
   }
+
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
 
 
 
