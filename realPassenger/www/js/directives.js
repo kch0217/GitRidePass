@@ -3,7 +3,8 @@ angular.module('starter.directives', [])
 	return{
 		restrict: 'E',
 		scope: {
-			time: '='
+			time: '=',
+			context: '='
 		},
 		template: '<span ng-init="startTime()">{{displayTime}}</span>',
 		controller : 'timeCtrl',

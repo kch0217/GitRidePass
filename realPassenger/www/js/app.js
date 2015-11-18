@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
     }
   })
   .state('tab.gohome-matching', {
+    cache: false,
     url: '/gohome/:destination/:pickUp',
     views: {
       'tab-gohome': {

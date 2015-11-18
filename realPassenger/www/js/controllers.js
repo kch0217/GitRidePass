@@ -38,49 +38,51 @@ angular.module('starter.controllers', [])
 .controller('askAcceptCtrl', function($scope){
 })
 
-.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet){
+.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory){
 
   
 
   $scope.ready = function(destination){
-    $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': $scope.pickupPt });
+    $ionicHistory.clearCache();
+    $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination] });
+
   };
 
 
-var availablePoints = ['North Gate', 'South Gate', 'Piazza', 'Hall 9', 'No Preference' ]
+var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
 $scope.pickupPt = availablePoints[4];
 
-   // Triggered on a button click, or some other target
- $scope.showOption = function() {
+ //   // Triggered on a button click, or some other target
+ // $scope.showOption = function() {
 
-   // Show the action sheet
-   var hideSheet = $ionicActionSheet.show({
-     buttons: [
-       { text: 'North Gate' },
-       { text: 'South Gate' },
-       { text: 'Piazza' },
-       { text: 'Hall 9' }
-     ],
-     destructiveText: 'No preferred point',
-     titleText: 'Choose a pickup point',
-     cancelText: 'Cancel',
-     cancel: function() {
-          // add cancel code..
-        },
-     buttonClicked: function(index) {
-        $scope.pickupPt = availablePoints[index]; 
-        return true;
-     },
-     destructiveButtonClicked: function(){
-        $scope.pickupPt = availablePoints[4];
-        return true;
-     }
-   });
+ //   // Show the action sheet
+ //   var hideSheet = $ionicActionSheet.show({
+ //     buttons: [
+ //       { text: 'North Gate' },
+ //       { text: 'South Gate' },
+ //       { text: 'Piazza' },
+ //       { text: 'Hall 9' }
+ //     ],
+ //     destructiveText: 'No preferred point',
+ //     titleText: 'Choose a pickup point',
+ //     cancelText: 'Cancel',
+ //     cancel: function() {
+ //          // add cancel code..
+ //        },
+ //     buttonClicked: function(index) {
+ //        $scope.pickupPt = availablePoints[index]; 
+ //        return true;
+ //     },
+ //     destructiveButtonClicked: function(){
+ //        $scope.pickupPt = availablePoints[4];
+ //        return true;
+ //     }
+ //   });
 
 
 
- };
+ // };
 
 })
 
@@ -99,7 +101,8 @@ $scope.pickupPt = availablePoints[4];
     console.log("Back");
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
-    $ionicHistory.goBack();
+    // $ionicHistory.goBack();
+    $state.go('tab.gohome');
 
   };
 
@@ -107,7 +110,7 @@ $scope.pickupPt = availablePoints[4];
 $scope.confirm = function(){
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
-
+    // $ionicHistory.goBack();
   $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'id':'001'});
 }
   
@@ -148,34 +151,80 @@ $scope.confirm = function(){
 })
 
 
-.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory){
+.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet){
   
   //retrieve from server
   $scope.licence = 'AB 123';
-  $scope.time = 8/3;
+  $scope.time = 1/2;
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
+  $scope.confirmationTime = 20;
+
   var timer;
+  var timer2;
 
   $scope.cancel = function(){
     $timeout.cancel(timer);
+    $timeout.cancel(timer2);
     $state.go('tab.gohome');
   }
 
   $scope.finishedCount = false;
 
   $scope.countDown = function(){
+    console.log("countdown");
 
-    timer = $timeout(changeCount,1000*60*8/3);
+    timer = $timeout(changeCount,1000*60*($scope.time+1));
+    timer2 = $timeout(confirmCountDown, 1000);
+  }
+
+  var confirmCountDown = function(){
+    $scope.confirmationTime--;
+    if ($scope.confirmationTime > 0){
+      timer2 = $timeout(confirmCountDown, 1000);
+    }
   }
 
   var changeCount  = function(){
     $scope.finishedCount = true;
+    console.log($scope.finishedCount);
   }
 
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
+
+
+// Triggered on a button click, or some other target
+ $scope.cancelOption = function() {
+
+   // Show the action sheet
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: 'Wait for another ride.' }
+     ],
+     destructiveText: 'Cancel the queuing',
+     titleText: 'Have a problem with the current match?',
+     cancelText: 'Cancel',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
+        $state.go('tab.gohome-matching', {'destination': $scope.destination, 'pickUp': $scope.location },  { reload: true });
+        return true;
+     },
+     destructiveButtonClicked: function(){
+        $ionicHistory.clearCache();
+        $state.go("tab.gohome");
+        return true;
+     }
+   });
+
+
+
+ };
 
 
 
@@ -189,7 +238,7 @@ $scope.confirm = function(){
 .controller('timeCtrl', function($scope, $timeout){
   var timeInSec = this.time*60;
   $scope.displayTime = null;
-
+  var ctrl = this;
 
   
 
@@ -197,12 +246,24 @@ $scope.confirm = function(){
     if (timeInSec > 0){
       timeInSec--;
       var min = Math.floor(timeInSec/60);
-      var sec = timeInSec %60
+      var sec = timeInSec %60;
+      // console.log(min + " " + ctrl.context);
+      if (min < 1 && ctrl.context =="matchToHome"){
+        $scope.displayTime = "Arriving";
+        console.log("matchToHome");
+      }else{
+        if (sec <10)
+          sec = '0' + sec;
+        $scope.displayTime = min + ' : ' + sec;
 
-      if (sec <10)
-        sec = '0' + sec;
-      $scope.displayTime = min + ' : ' + sec;
+      }
 
+
+
+      $timeout($scope.startTime, 1000);
+    }
+    else if (ctrl.context == "matchToHome" && sec > -60 ){
+      timeInSec--;
       $timeout($scope.startTime, 1000);
     }
     

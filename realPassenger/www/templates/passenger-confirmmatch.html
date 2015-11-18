@@ -29,9 +29,9 @@
   </div>
 
   <div class="item" >
-  	<center style="font-size: 40px"><i class="icon ion-ios-time-outline" ng-init="countdown()"></i>
+  	<center style="font-size: 30px"><i class="icon ion-ios-time-outline" ng-init="countdown()"></i>
   
-   	<timer time="time" ng-init="countDown()"></timer>
+   	<timer time="time" context="'matchToHome'" ng-init="countDown()"></timer>
    	</center>
 
   </div>
@@ -90,15 +90,31 @@
 
 
   </ion-content>
-  <ion-footer-bar class="bar-assertive" ng-click="goBack()" ng-if="!finishedCount">
+  <ion-footer-bar class="bar-assertive" ng-click="goBack()" ng-if="!finishedCount && (confirmationTime!=0)">
 
-  <h1 class="title" ng-click='cancel()'>Cancel</h1>
+  <h1 class="title" ng-click='cancel()'>Cancel <span class="badge badge-assertive">{{confirmationTime}}</span></h1>
+  
 
 </ion-footer-bar>
 
-  <ion-footer-bar class="bar-balanced" ng-click="goBack()" ng-if="finishedCount">
+<!--   <ion-footer-bar class="bar-balanced" ng-click="goBack()" >
 
   <h1 class="title" ng-click='cancel()'>Finished</h1>
+
+</ion-footer-bar>
+
+  <ion-footer-bar class="bar-assertive" ng-click="cancelOption()" ng-if="finishedCount">
+
+  <h1 class="title" ng-click='cancelOption()'>Cancel</h1>
+
+</ion-footer-bar> -->
+
+  <ion-footer-bar ng-if="finishedCount">
+
+ <div class="button-bar">
+  <a class="button button-balanced" ng-click="goBack()">Finish</a>
+  <a class="button button-assertive" ng-click="cancelOption()">Cancel</a>
+</div>
 
 </ion-footer-bar>
 
