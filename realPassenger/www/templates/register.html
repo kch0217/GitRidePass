@@ -1,0 +1,103 @@
+<ion-view title="Registration">
+    <ion-content padding="true" class="has-header has-footer" scroll="true">
+        <div class="list">
+            <label class="item item-divider">
+                <span>Basic Information</span>
+
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">First name</span>
+                <input type="text" placeholder="">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last name</span>
+                <input type="text" placeholder="">
+              </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                  Gender
+                </div>
+                <select>
+                    <option selected></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Type your passward again</span>
+                <input type="password" placeholder="">
+              </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Phone number</span>
+                <input type="text" placeholder="">
+              </label>
+
+
+        </div>
+        <div class="list">
+            <label class="item item-divider">
+                <span>User Authentication</span>
+            </label>
+
+            <label class="item item-toggle">
+                Do you have an HKUST email account?
+                <label class="toggle">
+                   <input type="checkbox" ng-model="hkustMember">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                </label>
+        
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="hkustMember">
+                <span class="input-label">Your HKUST email address</span>
+                <input type="email" placeholder="">
+            </label>
+        </div>
+
+        <div class="list">
+            <label class="item item-divider">
+                <span>Ridesharing Preference</span>
+            </label>
+            <label class="item item-toggle">
+                Do you have a car?
+                <label class="toggle">
+                   <input type="checkbox" ng-model="haveCar" ng-change="checkCar();">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                </label>
+
+        
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="haveCar" ng-repeat="car in carLicence track by $index">
+                <span class="input-label">Car's licence number {{}}</span>
+                <input type="email" placeholder="" ng-model="carNo[$index]">
+            </label>
+            <div class="button-bar" ng-if="haveCar">
+              <a class="button" ng-click="addCar();">Add</a>
+              <a class="button" ng-click="removeCar();">Remove</a>
+            </div>
+
+<!--             <label class="item item-divider item-icon-left item-icon-right" ng-if="haveCar">
+                <button class="icon ion-android-add" ng-click="addCar();"></button>
+
+                <button class="icon ion-ios-minus-empty" ng-click="alert('hi');"></button>
+            </label> -->
+
+        </div>
+    </ion-content>
+
+<ion-footer-bar align-title="left" class="bar-light">
+
+  <div class="button-bar">
+  <a class="button button-balanced" ng-click="confirm()">Confirm</a>
+  <a class="button button-dark" ng-click="reset()">Reset</a>
+
+</ion-footer-bar>
+</ion-view>
