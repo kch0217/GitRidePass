@@ -27,10 +27,20 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('signInCtrl', function($scope, $state){
+.controller('signInCtrl', function($scope, $state, Member){
 
   $scope.signin = function(){
     console.log('Test');
+    
+    Member.login({"username": "ken93939", "password":"24657021"}, function(content, code){
+      //success
+      console.log(content);
+      console.log('success');
+    }, function(error){
+      //fail
+      console.log(error);
+      console.log('fail');
+    });
     $state.go('tab.gohome');
   }
 })
