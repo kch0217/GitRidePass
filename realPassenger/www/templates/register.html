@@ -7,25 +7,25 @@
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">First name</span>
-                <input type="text" placeholder="">
+                <input type="text" placeholder="" ng-model="info.firstname">
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Last name</span>
-                <input type="text" placeholder="">
+                <input type="text" placeholder="" ng-model="info.lastname">
               </label>
             <label class="item item-input item-select">
                 <div class="input-label">
                   Gender
                 </div>
-                <select>
+                <select ng-model="info.gender">
                     <option selected></option>
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option>male</option>
+                    <option>female</option>
                 </select>
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="">
+                <input type="password" placeholder="" ng-model="info.password">
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Type your passward again</span>
@@ -34,7 +34,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Phone number</span>
-                <input type="text" placeholder="">
+                <input type="text" placeholder="" ng-model="info.phonenumber">
               </label>
 
 
@@ -56,7 +56,7 @@
             </label>
             <label class="item item-input item-stacked-label" ng-if="hkustMember">
                 <span class="input-label">Your HKUST email address</span>
-                <input type="email" placeholder="">
+                <input type="email" placeholder="" ng-model="info.email">
             </label>
         </div>
 
@@ -67,7 +67,7 @@
             <label class="item item-toggle">
                 Do you have a car?
                 <label class="toggle">
-                   <input type="checkbox" ng-model="haveCar" ng-change="checkCar();">
+                   <input type="checkbox" ng-model="info.haveCar" ng-change="checkCar();">
                    <div class="track">
                      <div class="handle"></div>
                    </div>
@@ -75,11 +75,27 @@
 
         
             </label>
-            <label class="item item-input item-stacked-label" ng-if="haveCar" ng-repeat="car in carLicence track by $index">
-                <span class="input-label">Car's licence number {{}}</span>
-                <input type="email" placeholder="" ng-model="carNo[$index]">
+            <div ng-if="info.haveCar" ng-repeat="car in carLicence track by $index">
+              <label class="item item-divider">
+                <span>Car {{$index +1}}</span>
+              </label>
+              <label class="item item-input item-stacked-label">
+                  <span class="input-label">Licence number</span>
+                  <input type="text" placeholder="" ng-model="info.carNo[$index].license_number">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Color</span>
+                <input type="text" placeholder="" ng-model="info.carNo[$index].color">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Manufacturer</span>
+                <input type="text" placeholder="" ng-model="info.carNo[$index].maker">
+              </label>
+              
+            </div>
+
             </label>
-            <div class="button-bar" ng-if="haveCar">
+            <div class="button-bar" ng-if="info.haveCar">
               <a class="button" ng-click="addCar();">Add</a>
               <a class="button" ng-click="removeCar();">Remove</a>
             </div>

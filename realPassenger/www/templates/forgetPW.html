@@ -1,0 +1,26 @@
+<ion-view title="Forget your Password">
+    <ion-content padding="true" class="has-header has-footer">
+        <center><h6>Please enter your HKUST email</h6></center>
+        <form name="myForm">
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="" name="email" ng-model="email" required>
+
+            </label>
+
+        </form>
+        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+            <span ng-show="myForm.email.$error.required">Email is required.</span>
+            <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+        </span>
+
+        <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email" ng-click="sendForget()" style="border-radius: 18px;">Send</button>
+
+    </ion-content>
+
+<ion-footer-bar align-title="left" class="bar-light">
+
+  <h1 class="title">Only for HKUST members</h1>
+
+</ion-footer-bar>
+</ion-view>

@@ -27,19 +27,20 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('signInCtrl', function($scope, $state, Member,$ionicPopup){
+.controller('signInCtrl', function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth){
 
   $scope.signin = function(){
     console.log('Test');
+    loadingService.start($ionicLoading);
     
-    Member.login({"username": "ken93939", "password":"24657021"}, function(content, code){
+    Member.login({"email": this.email, "password": this.password}, function(content, code){
       //success
-      console.log(content);
-      console.log('success');
+
+      loadingService.end($ionicLoading);
+      $state.go('tab.gohome');
     }, function(error){
       //fail
-      console.log(error);
-      console.log('fail');
+      loadingService.end($ionicLoading);
       var alertPopup = $ionicPopup.alert({
         title: 'Error',
         template: 'Unable to login'
@@ -48,21 +49,27 @@ angular.module('starter.controllers', [])
         console.log('Error to login');
       });
     });
-    $state.go('tab.gohome');
+    
   }
 })
 
 
-.controller('registerCtrl', function($scope, $ionicPopup, $ionicHistory){
+.controller('registerCtrl',function($scope, $ionicPopup, $ionicHistory, Member){
   $scope.numOfCar = 0;
   $scope.carLicence = [];
+  $scope.info = { 'carNo':[]}
+
+  
 
   $scope.checkCar = function(){
     console.log("click check car");
+
     
-    if (this.haveCar){
+    if ($scope.info.haveCar){
       $scope.numOfCar = 1;
       $scope.carLicence.push('');
+      
+      $scope.info.carNo.push('');
       console.log($scope.carLicence);
     }
     else{
@@ -72,7 +79,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.addCar = function(){
-    if (this.haveCar){
+    if ($scope.info.haveCar){
       console.log("click add car");
       $scope.numOfCar++;
       $scope.carLicence.push('');
@@ -80,7 +87,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.removeCar = function(){
-    if (this.haveCar && $scope.numOfCar > 1){
+    if ($scope.info.haveCar && $scope.numOfCar > 1){
       console.log("click remove car");
       $scope.numOfCar--;
       $scope.carLicence.splice(-1,1);
@@ -89,6 +96,7 @@ angular.module('starter.controllers', [])
 
   $scope.confirm = function(){
     // A confirm dialog
+    console.log($scope.info.carNo);
 
    var confirmPopup = $ionicPopup.confirm({
      title: 'Confirm you application',
@@ -97,13 +105,56 @@ angular.module('starter.controllers', [])
    confirmPopup.then(function(res) {
      if(res) {
        //submit
-       var alertPopup = $ionicPopup.alert({
-         title: 'Done',
-         template: 'Please activate your account from your email.'
-       });
-       alertPopup.then(function(res) {
-         $ionicHistory.goBack();
-       });
+
+
+       var datasent = { "first_name": $scope.info.firstname,
+                        "last_name": $scope.info.lastname,
+                        "phone_number": parseInt($scope.info.phonenumber),
+                        "gender": $scope.info.gender,
+                        "gender_preference": 'no',
+                        "authorized": 'no',
+                        "isDriver": $scope.numOfCar>0? 'yes': 'no',
+                        "email": $scope.info.email,
+                        "password": $scope.info.password,
+                        "car": $scope.info.carNo
+                      };
+
+      var test = {   "first_name": "string",   "last_name": "string",   "phone_number": 0,   "gender": "string",   "gender_preference": "string",   "authorized": "string",   "isDriver": "yes",   "email": "nic@nic.com",   "password": "123456",
+"car": [
+{"license_number": "DLLM",   "color": "pink",   "maker": "BENZ"},
+{"license_number": "DLLLLM",   "color": "pink",   "maker": "BENZ"}
+]
+}
+
+
+
+      Member.register(test, function(content, code){
+
+        console.log(content);
+      }, function(error){
+        console.log(error);
+      });
+
+
+
+      // Member.register(datasent, function(content){
+      //   console.log(content);
+      //   var alertPopup = $ionicPopup.alert({
+      //    title: 'Done',
+      //    template: 'Please activate your account from your email.'
+      //  });
+      //  alertPopup.then(function(res) {
+      //    $ionicHistory.goBack();
+      //  });
+      // }, function(error){
+      //   console.log(error);
+
+      // })
+
+
+
+
+
 
      } else {
        
@@ -112,6 +163,14 @@ angular.module('starter.controllers', [])
 
 
   }
+
+  $scope.reset = function(){
+
+  }
+})
+
+.controller('forgetCtrl', function($scope){
+
 })
 
 .controller('askAcceptCtrl', function($scope){
@@ -309,7 +368,16 @@ $scope.confirm = function(){
 
 })
 
-.controller('settingCtrl', function($scope){
+.controller('settingCtrl', function($scope, $state, Member){
+  $scope.logout = function(){
+    Member.logout({}, function(value, responseheader){
+      $state.go('signIn');
+    }, function(error){
+      console.log('fail to logout');
+
+    })
+    
+  }
 
 })
 

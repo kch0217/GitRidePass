@@ -1,4 +1,4 @@
-<ion-view title="HKUST RideSharing 2.0">
+<ion-view title="Login">
     <ion-content padding="true" class="has-header has-footer">
         <center><h3>RideSharing - Passenger</h3></center>
         <form name="myForm">
@@ -22,7 +22,7 @@
         <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email || myForm.password.$error.required" ng-click="signin()" style="border-radius: 18px;">Login</button>
         <div class="button-bar">
             <button class="button button-positive button-outline button-block button-small icon" ui-sref="register">Register</button>
-            <button class="button button-assertive button-outline button-block button-small">Forget Password</button>
+            <button class="button button-assertive button-outline button-block button-small" ui-sref="forgetPW">Forget Password</button>
         </div>
     </ion-content>
 

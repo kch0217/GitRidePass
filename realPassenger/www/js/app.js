@@ -43,6 +43,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
     controller: 'registerCtrl'
   })
 
+  .state('forgetPW',{
+    url:'/forget',
+    templateUrl: 'templates/forgetPW.html',
+    controller: 'forgetCtrl'
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -118,4 +124,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/signin');
 
-});
+})
+
+.config(function(LoopBackResourceProvider){
+  // Change the URL where to access the LoopBack REST API server
+    LoopBackResourceProvider.setUrlBase('http://147.8.173.245:3000/api');
+})
+
+
+;
