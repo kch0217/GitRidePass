@@ -1,44 +1,62 @@
 <ion-view title="Registration">
     <ion-content padding="true" class="has-header has-footer" scroll="true">
+    <form name="myForm">
         <div class="list">
-            <label class="item item-divider">
-                <span>Basic Information</span>
+          <label class="item item-divider">
+              <span>Basic Information</span>
 
+          </label>
+          <label class="item item-input item-stacked-label">
+              <span class="input-label">First name</span>
+              <span style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$error.required">
+              First name is required
+              </span>
+              <input type="text" placeholder="" ng-model="info.firstname" name="firstname" required>
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">First name</span>
-                <input type="text" placeholder="" ng-model="info.firstname">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Last name</span>
-                <input type="text" placeholder="" ng-model="info.lastname">
-              </label>
-            <label class="item item-input item-select">
-                <div class="input-label">
-                  Gender
-                </div>
-                <select ng-model="info.gender">
-                    <option selected></option>
-                    <option>male</option>
-                    <option>female</option>
-                </select>
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Password</span>
-                <input type="password" placeholder="" ng-model="info.password">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Type your passward again</span>
-                <input type="password" placeholder="">
-              </label>
+              <span class="input-label">Last name</span>
+              <span style="color:red" ng-show="myForm.lastname.$dirty && myForm.lastname.$error.required">
+              Last name is required
+              </span>
+              <input type="text" placeholder="" ng-model="info.lastname" name="lastname" required>
+            </label>
 
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Phone number</span>
-                <input type="text" placeholder="" ng-model="info.phonenumber">
-              </label>
+          <label class="item item-input item-select">
+              <div class="input-label">
+                Gender
+              </div>
+              <select ng-model="info.gender">
+                  <option selected>male</option>
+                  <option>female</option>
+              </select>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Password</span>
+              <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$error.required">
+              Password is required
+              </span>
+              <input type="password" placeholder="" ng-model="info.password" name="password" required>
+            </label>
 
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Must match the password</span>
+              <span style="color:red" ng-show="myForm.password2.$dirty && myForm.password2.$error.compareTo">
+              Please type your password again
+              </span>
+              <input type="password" placeholder="" ng-model="info.password2" name="password2" required compare-to="info.password">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Phone number</span>
+              <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$error.required">
+              Phone number is required
+              </span>
+              <input type="text" placeholder="" ng-model="info.phonenumber" name="phone" required>
+            </label>
 
         </div>
+
+        </form>
         <div class="list">
             <label class="item item-divider">
                 <span>User Authentication</span>
@@ -47,14 +65,14 @@
             <label class="item item-toggle">
                 Do you have an HKUST email account?
                 <label class="toggle">
-                   <input type="checkbox" ng-model="hkustMember">
+                   <input type="checkbox" ng-model="info.hkustMember">
                    <div class="track">
                      <div class="handle"></div>
                    </div>
                 </label>
         
             </label>
-            <label class="item item-input item-stacked-label" ng-if="hkustMember">
+            <label class="item item-input item-stacked-label" ng-if="info.hkustMember">
                 <span class="input-label">Your HKUST email address</span>
                 <input type="email" placeholder="" ng-model="info.email">
             </label>

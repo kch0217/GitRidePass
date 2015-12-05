@@ -29,13 +29,19 @@ angular.module('starter.controllers', [])
 
 .controller('signInCtrl', function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth){
 
+
+  // if (LoopBackAuth.currentUserId != null && LoopBackAuth.accessTokenId != null){
+  //   $state.go('tab.gohome');
+  // }
+
   $scope.signin = function(){
     console.log('Test');
     loadingService.start($ionicLoading);
     
     Member.login({"email": this.email, "password": this.password}, function(content, code){
       //success
-
+      console.log(content);
+      // console.log(code);
       loadingService.end($ionicLoading);
       $state.go('tab.gohome');
     }, function(error){
@@ -57,7 +63,7 @@ angular.module('starter.controllers', [])
 .controller('registerCtrl',function($scope, $ionicPopup, $ionicHistory, Member){
   $scope.numOfCar = 0;
   $scope.carLicence = [];
-  $scope.info = { 'carNo':[]}
+  $scope.info = { 'carNo':[], 'gender': 'male'}
 
   
 
@@ -119,37 +125,37 @@ angular.module('starter.controllers', [])
                         "car": $scope.info.carNo
                       };
 
-      var test = {   "first_name": "string",   "last_name": "string",   "phone_number": 0,   "gender": "string",   "gender_preference": "string",   "authorized": "string",   "isDriver": "yes",   "email": "nic@nic.com",   "password": "123456",
-"car": [
-{"license_number": "DLLM",   "color": "pink",   "maker": "BENZ"},
-{"license_number": "DLLLLM",   "color": "pink",   "maker": "BENZ"}
-]
-}
+//       var test = {   "first_name": "string",   "last_name": "string",   "phone_number": 0,   "gender": "string",   "gender_preference": "string",   "authorized": "string",   "isDriver": "yes",   "email": "nic@nic.com",   "password": "123456",
+// "car": [
+// {"license_number": "DLLM",   "color": "pink",   "maker": "BENZ"},
+// {"license_number": "DLLLLM",   "color": "pink",   "maker": "BENZ"}
+// ]
+// }
 
 
 
-      Member.register(test, function(content, code){
+//       Member.register(test, function(content, code){
 
+//         console.log(content);
+//       }, function(error){
+//         console.log(error);
+//       });
+
+
+
+      Member.register(datasent, function(content){
         console.log(content);
+        var alertPopup = $ionicPopup.alert({
+         title: 'Done',
+         template: 'Please activate your account from your email.'
+       });
+       alertPopup.then(function(res) {
+         $ionicHistory.goBack();
+       });
       }, function(error){
         console.log(error);
-      });
 
-
-
-      // Member.register(datasent, function(content){
-      //   console.log(content);
-      //   var alertPopup = $ionicPopup.alert({
-      //    title: 'Done',
-      //    template: 'Please activate your account from your email.'
-      //  });
-      //  alertPopup.then(function(res) {
-      //    $ionicHistory.goBack();
-      //  });
-      // }, function(error){
-      //   console.log(error);
-
-      // })
+      })
 
 
 
@@ -165,6 +171,10 @@ angular.module('starter.controllers', [])
   }
 
   $scope.reset = function(){
+    $scope.numOfCar = 0;
+    $scope.carLicence = [];
+    $scope.info = { 'carNo':[]};
+
 
   }
 })
@@ -176,12 +186,17 @@ angular.module('starter.controllers', [])
 .controller('askAcceptCtrl', function($scope){
 })
 
-.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory){
+.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory, Request){
 
   
 
   $scope.ready = function(destination){
     $ionicHistory.clearCache();
+    Request.addRequest({'destination_name': destination}, function(value, responseheader){
+      console.log(value);
+    }, function(error){
+      console.log(error);
+    })
     $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination] });
 
   };

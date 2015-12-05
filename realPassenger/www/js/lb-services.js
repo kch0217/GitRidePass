@@ -1237,6 +1237,33 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Member.rides.findById() instead.
+        "prototype$__findById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.rides.destroyById() instead.
+        "prototype$__destroyById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.rides.updateById() instead.
+        "prototype$__updateById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "PUT"
+        },
+
         // INTERNAL. Use Member.owns.findById() instead.
         "prototype$__findById__owns": {
           params: {
@@ -1261,6 +1288,33 @@ module.factory(
           'fk': '@fk'
           },
           url: urlBase + "/Members/:id/owns/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Member.requests.findById() instead.
+        "prototype$__findById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.requests.destroyById() instead.
+        "prototype$__destroyById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.requests.updateById() instead.
+        "prototype$__updateById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
           method: "PUT"
         },
 
@@ -1401,6 +1455,31 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Member.rides() instead.
+        "prototype$__get__rides": {
+          isArray: true,
+          url: urlBase + "/Members/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.rides.create() instead.
+        "prototype$__create__rides": {
+          url: urlBase + "/Members/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.rides.destroyAll() instead.
+        "prototype$__delete__rides": {
+          url: urlBase + "/Members/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.rides.count() instead.
+        "prototype$__count__rides": {
+          url: urlBase + "/Members/:id/rides/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use Member.owns() instead.
         "prototype$__get__owns": {
           isArray: true,
@@ -1423,6 +1502,31 @@ module.factory(
         // INTERNAL. Use Member.owns.count() instead.
         "prototype$__count__owns": {
           url: urlBase + "/Members/:id/owns/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.requests() instead.
+        "prototype$__get__requests": {
+          isArray: true,
+          url: urlBase + "/Members/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.requests.create() instead.
+        "prototype$__create__requests": {
+          url: urlBase + "/Members/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.requests.destroyAll() instead.
+        "prototype$__delete__requests": {
+          url: urlBase + "/Members/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.requests.count() instead.
+        "prototype$__count__requests": {
+          url: urlBase + "/Members/:id/requests/count",
           method: "GET"
         },
 
@@ -2051,97 +2155,22 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use Ride.drivers() instead.
-        "::get::Ride::drivers": {
-          url: urlBase + "/Rides/:id/drivers",
+        // INTERNAL. Use Ride.member() instead.
+        "::get::Ride::member": {
+          url: urlBase + "/Rides/:id/member",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.drivers.create() instead.
-        "::create::Ride::drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.drivers.createMany() instead.
-        "::createMany::Ride::drivers": {
-          isArray: true,
-          url: urlBase + "/Rides/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.drivers.update() instead.
-        "::update::Ride::drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Ride.drivers.destroy() instead.
-        "::destroy::Ride::drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Own.drivers() instead.
-        "::get::Own::drivers": {
-          url: urlBase + "/Owns/:id/drivers",
+        // INTERNAL. Use Own.member() instead.
+        "::get::Own::member": {
+          url: urlBase + "/Owns/:id/member",
           method: "GET"
         },
 
-        // INTERNAL. Use Own.drivers.create() instead.
-        "::create::Own::drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Own.drivers.createMany() instead.
-        "::createMany::Own::drivers": {
-          isArray: true,
-          url: urlBase + "/Owns/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Own.drivers.update() instead.
-        "::update::Own::drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Own.drivers.destroy() instead.
-        "::destroy::Own::drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Request.members() instead.
-        "::get::request::members": {
-          url: urlBase + "/requests/:id/members",
+        // INTERNAL. Use Request.memberId() instead.
+        "::get::request::memberId": {
+          url: urlBase + "/requests/:id/memberId",
           method: "GET"
-        },
-
-        // INTERNAL. Use Request.members.create() instead.
-        "::create::request::members": {
-          url: urlBase + "/requests/:id/members",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Request.members.createMany() instead.
-        "::createMany::request::members": {
-          isArray: true,
-          url: urlBase + "/requests/:id/members",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Request.members.update() instead.
-        "::update::request::members": {
-          url: urlBase + "/requests/:id/members",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Request.members.destroy() instead.
-        "::destroy::request::members": {
-          url: urlBase + "/requests/:id/members",
-          method: "DELETE"
         },
 
         /**
@@ -2359,6 +2388,307 @@ module.factory(
     */
     R.modelName = "Member";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Member.rides
+     * @header lbServices.Member.rides
+     * @object
+     * @description
+     *
+     * The object `Member.rides` groups methods
+     * manipulating `Ride` instances related to `Member`.
+     *
+     * Call {@link lbServices.Member#rides Member.rides()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member#rides
+         * @methodOf lbServices.Member
+         *
+         * @description
+         *
+         * Queries rides of Member.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::get::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#count
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Counts rides of Member.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.rides.count = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::count::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#create
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.create = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::create::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#createMany
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.createMany = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::createMany::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#destroyAll
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Deletes all rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyAll = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::delete::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#destroyById
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Delete a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::destroyById::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#findById
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Find a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.findById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::findById::Member::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.rides#updateById
+         * @methodOf lbServices.Member.rides
+         *
+         * @description
+         *
+         * Update a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.updateById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::updateById::Member::rides"];
+          return action.apply(R, arguments);
+        };
     /**
      * @ngdoc object
      * @name lbServices.Member.owns
@@ -2658,6 +2988,307 @@ module.factory(
         R.owns.updateById = function() {
           var TargetResource = $injector.get("Own");
           var action = TargetResource["::updateById::Member::owns"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Member.requests
+     * @header lbServices.Member.requests
+     * @object
+     * @description
+     *
+     * The object `Member.requests` groups methods
+     * manipulating `Request` instances related to `Member`.
+     *
+     * Call {@link lbServices.Member#requests Member.requests()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member#requests
+         * @methodOf lbServices.Member
+         *
+         * @description
+         *
+         * Queries requests of Member.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::get::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#count
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Counts requests of Member.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.requests.count = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::count::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#create
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.create = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::create::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#createMany
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.createMany = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::createMany::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#destroyAll
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Deletes all requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyAll = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::delete::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#destroyById
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Delete a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::destroyById::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#findById
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Find a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.findById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::findById::Member::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Member.requests#updateById
+         * @methodOf lbServices.Member.requests
+         *
+         * @description
+         *
+         * Update a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.updateById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::updateById::Member::requests"];
           return action.apply(R, arguments);
         };
 
@@ -3212,35 +3843,16 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use Own.vehicles() instead.
-        "::get::Own::vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
+        // INTERNAL. Use Ride.vehicle() instead.
+        "::get::Ride::vehicle": {
+          url: urlBase + "/Rides/:id/vehicle",
           method: "GET"
         },
 
-        // INTERNAL. Use Own.vehicles.create() instead.
-        "::create::Own::vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Own.vehicles.createMany() instead.
-        "::createMany::Own::vehicles": {
-          isArray: true,
-          url: urlBase + "/Owns/:id/vehicles",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Own.vehicles.update() instead.
-        "::update::Own::vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Own.vehicles.destroy() instead.
-        "::destroy::Own::vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
-          method: "DELETE"
+        // INTERNAL. Use Own.vehicle() instead.
+        "::get::Own::vehicle": {
+          url: urlBase + "/Owns/:id/vehicle",
+          method: "GET"
         },
       }
     );
@@ -4009,76 +4621,86 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Ride.drivers() instead.
-        "prototype$__get__drivers": {
-          url: urlBase + "/Rides/:id/drivers",
+        // INTERNAL. Use Ride.member() instead.
+        "prototype$__get__member": {
+          url: urlBase + "/Rides/:id/member",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.drivers.create() instead.
-        "prototype$__create__drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.drivers.update() instead.
-        "prototype$__update__drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Ride.drivers.destroy() instead.
-        "prototype$__destroy__drivers": {
-          url: urlBase + "/Rides/:id/drivers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Ride.pickups() instead.
-        "prototype$__get__pickups": {
-          url: urlBase + "/Rides/:id/pickups",
+        // INTERNAL. Use Ride.vehicle() instead.
+        "prototype$__get__vehicle": {
+          url: urlBase + "/Rides/:id/vehicle",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.pickups.create() instead.
-        "prototype$__create__pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.pickups.update() instead.
-        "prototype$__update__pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Ride.pickups.destroy() instead.
-        "prototype$__destroy__pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Ride.destinations() instead.
-        "prototype$__get__destinations": {
-          url: urlBase + "/Rides/:id/destinations",
+        // INTERNAL. Use Ride.own() instead.
+        "prototype$__get__own": {
+          url: urlBase + "/Rides/:id/own",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.destinations.create() instead.
-        "prototype$__create__destinations": {
-          url: urlBase + "/Rides/:id/destinations",
-          method: "POST"
+        // INTERNAL. Use Ride.joins.findById() instead.
+        "prototype$__findById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
+          method: "GET"
         },
 
-        // INTERNAL. Use Ride.destinations.update() instead.
-        "prototype$__update__destinations": {
-          url: urlBase + "/Rides/:id/destinations",
+        // INTERNAL. Use Ride.joins.destroyById() instead.
+        "prototype$__destroyById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Ride.joins.updateById() instead.
+        "prototype$__updateById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
           method: "PUT"
         },
 
-        // INTERNAL. Use Ride.destinations.destroy() instead.
-        "prototype$__destroy__destinations": {
-          url: urlBase + "/Rides/:id/destinations",
+        // INTERNAL. Use Ride.pickup() instead.
+        "prototype$__get__pickup": {
+          url: urlBase + "/Rides/:id/pickup",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ride.destination() instead.
+        "prototype$__get__destination": {
+          url: urlBase + "/Rides/:id/destination",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ride.joins() instead.
+        "prototype$__get__joins": {
+          isArray: true,
+          url: urlBase + "/Rides/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ride.joins.create() instead.
+        "prototype$__create__joins": {
+          url: urlBase + "/Rides/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Ride.joins.destroyAll() instead.
+        "prototype$__delete__joins": {
+          url: urlBase + "/Rides/:id/joins",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Ride.joins.count() instead.
+        "prototype$__count__joins": {
+          url: urlBase + "/Rides/:id/joins/count",
+          method: "GET"
         },
 
         /**
@@ -4500,6 +5122,65 @@ module.factory(
           method: "POST"
         },
 
+        // INTERNAL. Use Member.rides.findById() instead.
+        "::findById::Member::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.rides.destroyById() instead.
+        "::destroyById::Member::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.rides.updateById() instead.
+        "::updateById::Member::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/rides/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Member.rides() instead.
+        "::get::Member::rides": {
+          isArray: true,
+          url: urlBase + "/Members/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.rides.create() instead.
+        "::create::Member::rides": {
+          url: urlBase + "/Members/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.rides.createMany() instead.
+        "::createMany::Member::rides": {
+          isArray: true,
+          url: urlBase + "/Members/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.rides.destroyAll() instead.
+        "::delete::Member::rides": {
+          url: urlBase + "/Members/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.rides.count() instead.
+        "::count::Member::rides": {
+          url: urlBase + "/Members/:id/rides/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use Vehicle.rides.findById() instead.
         "::findById::Vehicle::rides": {
           params: {
@@ -4559,35 +5240,187 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Join.rides() instead.
-        "::get::Join::rides": {
-          url: urlBase + "/Joins/:id/rides",
+        // INTERNAL. Use Own.rides.findById() instead.
+        "::findById::Own::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
           method: "GET"
         },
 
-        // INTERNAL. Use Join.rides.create() instead.
-        "::create::Join::rides": {
-          url: urlBase + "/Joins/:id/rides",
-          method: "POST"
+        // INTERNAL. Use Own.rides.destroyById() instead.
+        "::destroyById::Own::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
+          method: "DELETE"
         },
 
-        // INTERNAL. Use Join.rides.createMany() instead.
-        "::createMany::Join::rides": {
-          isArray: true,
-          url: urlBase + "/Joins/:id/rides",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Join.rides.update() instead.
-        "::update::Join::rides": {
-          url: urlBase + "/Joins/:id/rides",
+        // INTERNAL. Use Own.rides.updateById() instead.
+        "::updateById::Own::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
           method: "PUT"
         },
 
-        // INTERNAL. Use Join.rides.destroy() instead.
-        "::destroy::Join::rides": {
-          url: urlBase + "/Joins/:id/rides",
+        // INTERNAL. Use Own.rides() instead.
+        "::get::Own::rides": {
+          isArray: true,
+          url: urlBase + "/Owns/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Own.rides.create() instead.
+        "::create::Own::rides": {
+          url: urlBase + "/Owns/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Own.rides.createMany() instead.
+        "::createMany::Own::rides": {
+          isArray: true,
+          url: urlBase + "/Owns/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Own.rides.destroyAll() instead.
+        "::delete::Own::rides": {
+          url: urlBase + "/Owns/:id/rides",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Own.rides.count() instead.
+        "::count::Own::rides": {
+          url: urlBase + "/Owns/:id/rides/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Join.ride() instead.
+        "::get::Join::ride": {
+          url: urlBase + "/Joins/:id/ride",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides.findById() instead.
+        "::findById::pickup::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides.destroyById() instead.
+        "::destroyById::pickup::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.rides.updateById() instead.
+        "::updateById::pickup::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Pickup.rides() instead.
+        "::get::pickup::rides": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides.create() instead.
+        "::create::pickup::rides": {
+          url: urlBase + "/pickups/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.rides.createMany() instead.
+        "::createMany::pickup::rides": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.rides.destroyAll() instead.
+        "::delete::pickup::rides": {
+          url: urlBase + "/pickups/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.rides.count() instead.
+        "::count::pickup::rides": {
+          url: urlBase + "/pickups/:id/rides/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides.findById() instead.
+        "::findById::destination::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides.destroyById() instead.
+        "::destroyById::destination::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.rides.updateById() instead.
+        "::updateById::destination::rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Destination.rides() instead.
+        "::get::destination::rides": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides.create() instead.
+        "::create::destination::rides": {
+          url: urlBase + "/destinations/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.rides.createMany() instead.
+        "::createMany::destination::rides": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.rides.destroyAll() instead.
+        "::delete::destination::rides": {
+          url: urlBase + "/destinations/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.rides.count() instead.
+        "::count::destination::rides": {
+          url: urlBase + "/destinations/:id/rides/count",
+          method: "GET"
         },
       }
     );
@@ -4725,29 +5558,15 @@ module.factory(
     */
     R.modelName = "Ride";
 
-    /**
-     * @ngdoc object
-     * @name lbServices.Ride.drivers
-     * @header lbServices.Ride.drivers
-     * @object
-     * @description
-     *
-     * The object `Ride.drivers` groups methods
-     * manipulating `Member` instances related to `Ride`.
-     *
-     * Call {@link lbServices.Ride#drivers Ride.drivers()}
-     * to query all related instances.
-     */
-
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride#drivers
+         * @name lbServices.Ride#member
          * @methodOf lbServices.Ride
          *
          * @description
          *
-         * Fetches hasOne relation drivers.
+         * Fetches belongsTo relation member.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4770,20 +5589,177 @@ module.factory(
          * This usually means the response is a `Member` object.)
          * </em>
          */
-        R.drivers = function() {
+        R.member = function() {
           var TargetResource = $injector.get("Member");
-          var action = TargetResource["::get::Ride::drivers"];
+          var action = TargetResource["::get::Ride::member"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride.drivers#create
-         * @methodOf lbServices.Ride.drivers
+         * @name lbServices.Ride#vehicle
+         * @methodOf lbServices.Ride
          *
          * @description
          *
-         * Creates a new instance in drivers of this model.
+         * Fetches belongsTo relation vehicle.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Vehicle` object.)
+         * </em>
+         */
+        R.vehicle = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::get::Ride::vehicle"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride#own
+         * @methodOf lbServices.Ride
+         *
+         * @description
+         *
+         * Fetches belongsTo relation own.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Own` object.)
+         * </em>
+         */
+        R.own = function() {
+          var TargetResource = $injector.get("Own");
+          var action = TargetResource["::get::Ride::own"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Ride.joins
+     * @header lbServices.Ride.joins
+     * @object
+     * @description
+     *
+     * The object `Ride.joins` groups methods
+     * manipulating `Join` instances related to `Ride`.
+     *
+     * Call {@link lbServices.Ride#joins Ride.joins()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride#joins
+         * @methodOf lbServices.Ride
+         *
+         * @description
+         *
+         * Queries joins of Ride.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::get::Ride::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride.joins#count
+         * @methodOf lbServices.Ride.joins
+         *
+         * @description
+         *
+         * Counts joins of Ride.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.joins.count = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::count::Ride::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride.joins#create
+         * @methodOf lbServices.Ride.joins
+         *
+         * @description
+         *
+         * Creates a new instance in joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4805,23 +5781,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.drivers.create = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::create::Ride::drivers"];
+        R.joins.create = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::create::Ride::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride.drivers#createMany
-         * @methodOf lbServices.Ride.drivers
+         * @name lbServices.Ride.joins#createMany
+         * @methodOf lbServices.Ride.joins
          *
          * @description
          *
-         * Creates a new instance in drivers of this model.
+         * Creates a new instance in joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4843,23 +5819,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.drivers.createMany = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::createMany::Ride::drivers"];
+        R.joins.createMany = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::createMany::Ride::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride.drivers#destroy
-         * @methodOf lbServices.Ride.drivers
+         * @name lbServices.Ride.joins#destroyAll
+         * @methodOf lbServices.Ride.joins
          *
          * @description
          *
-         * Deletes drivers of this model.
+         * Deletes all joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4877,24 +5853,95 @@ module.factory(
          *
          * This method returns no data.
          */
-        R.drivers.destroy = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::destroy::Ride::drivers"];
+        R.joins.destroyAll = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::delete::Ride::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride.drivers#update
-         * @methodOf lbServices.Ride.drivers
+         * @name lbServices.Ride.joins#destroyById
+         * @methodOf lbServices.Ride.joins
          *
          * @description
          *
-         * Update drivers of this model.
+         * Delete a related item by id for joins.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.joins.destroyById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::destroyById::Ride::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride.joins#findById
+         * @methodOf lbServices.Ride.joins
+         *
+         * @description
+         *
+         * Find a related item by id for joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins.findById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::findById::Ride::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ride.joins#updateById
+         * @methodOf lbServices.Ride.joins
+         *
+         * @description
+         *
+         * Update a related item by id for joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
          *
          * @param {Object} postData Request data.
          *
@@ -4912,37 +5959,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.drivers.update = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::update::Ride::drivers"];
+        R.joins.updateById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::updateById::Ride::joins"];
           return action.apply(R, arguments);
         };
-    /**
-     * @ngdoc object
-     * @name lbServices.Ride.pickups
-     * @header lbServices.Ride.pickups
-     * @object
-     * @description
-     *
-     * The object `Ride.pickups` groups methods
-     * manipulating `Pickup` instances related to `Ride`.
-     *
-     * Call {@link lbServices.Ride#pickups Ride.pickups()}
-     * to query all related instances.
-     */
-
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride#pickups
+         * @name lbServices.Ride#pickup
          * @methodOf lbServices.Ride
          *
          * @description
          *
-         * Fetches hasOne relation pickups.
+         * Fetches belongsTo relation pickup.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4965,179 +5998,20 @@ module.factory(
          * This usually means the response is a `Pickup` object.)
          * </em>
          */
-        R.pickups = function() {
+        R.pickup = function() {
           var TargetResource = $injector.get("Pickup");
-          var action = TargetResource["::get::Ride::pickups"];
+          var action = TargetResource["::get::Ride::pickup"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ride.pickups#create
-         * @methodOf lbServices.Ride.pickups
-         *
-         * @description
-         *
-         * Creates a new instance in pickups of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Pickup` object.)
-         * </em>
-         */
-        R.pickups.create = function() {
-          var TargetResource = $injector.get("Pickup");
-          var action = TargetResource["::create::Ride::pickups"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.pickups#createMany
-         * @methodOf lbServices.Ride.pickups
-         *
-         * @description
-         *
-         * Creates a new instance in pickups of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Pickup` object.)
-         * </em>
-         */
-        R.pickups.createMany = function() {
-          var TargetResource = $injector.get("Pickup");
-          var action = TargetResource["::createMany::Ride::pickups"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.pickups#destroy
-         * @methodOf lbServices.Ride.pickups
-         *
-         * @description
-         *
-         * Deletes pickups of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.pickups.destroy = function() {
-          var TargetResource = $injector.get("Pickup");
-          var action = TargetResource["::destroy::Ride::pickups"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.pickups#update
-         * @methodOf lbServices.Ride.pickups
-         *
-         * @description
-         *
-         * Update pickups of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Pickup` object.)
-         * </em>
-         */
-        R.pickups.update = function() {
-          var TargetResource = $injector.get("Pickup");
-          var action = TargetResource["::update::Ride::pickups"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.Ride.destinations
-     * @header lbServices.Ride.destinations
-     * @object
-     * @description
-     *
-     * The object `Ride.destinations` groups methods
-     * manipulating `Destination` instances related to `Ride`.
-     *
-     * Call {@link lbServices.Ride#destinations Ride.destinations()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride#destinations
+         * @name lbServices.Ride#destination
          * @methodOf lbServices.Ride
          *
          * @description
          *
-         * Fetches hasOne relation destinations.
+         * Fetches belongsTo relation destination.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -5160,154 +6034,9 @@ module.factory(
          * This usually means the response is a `Destination` object.)
          * </em>
          */
-        R.destinations = function() {
+        R.destination = function() {
           var TargetResource = $injector.get("Destination");
-          var action = TargetResource["::get::Ride::destinations"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.destinations#create
-         * @methodOf lbServices.Ride.destinations
-         *
-         * @description
-         *
-         * Creates a new instance in destinations of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Destination` object.)
-         * </em>
-         */
-        R.destinations.create = function() {
-          var TargetResource = $injector.get("Destination");
-          var action = TargetResource["::create::Ride::destinations"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.destinations#createMany
-         * @methodOf lbServices.Ride.destinations
-         *
-         * @description
-         *
-         * Creates a new instance in destinations of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Destination` object.)
-         * </em>
-         */
-        R.destinations.createMany = function() {
-          var TargetResource = $injector.get("Destination");
-          var action = TargetResource["::createMany::Ride::destinations"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.destinations#destroy
-         * @methodOf lbServices.Ride.destinations
-         *
-         * @description
-         *
-         * Deletes destinations of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.destinations.destroy = function() {
-          var TargetResource = $injector.get("Destination");
-          var action = TargetResource["::destroy::Ride::destinations"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Ride.destinations#update
-         * @methodOf lbServices.Ride.destinations
-         *
-         * @description
-         *
-         * Update destinations of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Destination` object.)
-         * </em>
-         */
-        R.destinations.update = function() {
-          var TargetResource = $injector.get("Destination");
-          var action = TargetResource["::update::Ride::destinations"];
+          var action = TargetResource["::get::Ride::destination"];
           return action.apply(R, arguments);
         };
 
@@ -5339,52 +6068,68 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Own.drivers() instead.
-        "prototype$__get__drivers": {
-          url: urlBase + "/Owns/:id/drivers",
+        // INTERNAL. Use Own.member() instead.
+        "prototype$__get__member": {
+          url: urlBase + "/Owns/:id/member",
           method: "GET"
         },
 
-        // INTERNAL. Use Own.drivers.create() instead.
-        "prototype$__create__drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Own.drivers.update() instead.
-        "prototype$__update__drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Own.drivers.destroy() instead.
-        "prototype$__destroy__drivers": {
-          url: urlBase + "/Owns/:id/drivers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Own.vehicles() instead.
-        "prototype$__get__vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
+        // INTERNAL. Use Own.vehicle() instead.
+        "prototype$__get__vehicle": {
+          url: urlBase + "/Owns/:id/vehicle",
           method: "GET"
         },
 
-        // INTERNAL. Use Own.vehicles.create() instead.
-        "prototype$__create__vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
-          method: "POST"
+        // INTERNAL. Use Own.rides.findById() instead.
+        "prototype$__findById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
+          method: "GET"
         },
 
-        // INTERNAL. Use Own.vehicles.update() instead.
-        "prototype$__update__vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
+        // INTERNAL. Use Own.rides.destroyById() instead.
+        "prototype$__destroyById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Own.rides.updateById() instead.
+        "prototype$__updateById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Owns/:id/rides/:fk",
           method: "PUT"
         },
 
-        // INTERNAL. Use Own.vehicles.destroy() instead.
-        "prototype$__destroy__vehicles": {
-          url: urlBase + "/Owns/:id/vehicles",
+        // INTERNAL. Use Own.rides() instead.
+        "prototype$__get__rides": {
+          isArray: true,
+          url: urlBase + "/Owns/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Own.rides.create() instead.
+        "prototype$__create__rides": {
+          url: urlBase + "/Owns/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Own.rides.destroyAll() instead.
+        "prototype$__delete__rides": {
+          url: urlBase + "/Owns/:id/rides",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Own.rides.count() instead.
+        "prototype$__count__rides": {
+          url: urlBase + "/Owns/:id/rides/count",
+          method: "GET"
         },
 
         /**
@@ -5923,6 +6668,12 @@ module.factory(
           url: urlBase + "/Vehicles/:id/owns/count",
           method: "GET"
         },
+
+        // INTERNAL. Use Ride.own() instead.
+        "::get::Ride::own": {
+          url: urlBase + "/Rides/:id/own",
+          method: "GET"
+        },
       }
     );
 
@@ -6059,29 +6810,15 @@ module.factory(
     */
     R.modelName = "Own";
 
-    /**
-     * @ngdoc object
-     * @name lbServices.Own.drivers
-     * @header lbServices.Own.drivers
-     * @object
-     * @description
-     *
-     * The object `Own.drivers` groups methods
-     * manipulating `Member` instances related to `Own`.
-     *
-     * Call {@link lbServices.Own#drivers Own.drivers()}
-     * to query all related instances.
-     */
-
 
         /**
          * @ngdoc method
-         * @name lbServices.Own#drivers
+         * @name lbServices.Own#member
          * @methodOf lbServices.Own
          *
          * @description
          *
-         * Fetches hasOne relation drivers.
+         * Fetches belongsTo relation member.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6104,179 +6841,20 @@ module.factory(
          * This usually means the response is a `Member` object.)
          * </em>
          */
-        R.drivers = function() {
+        R.member = function() {
           var TargetResource = $injector.get("Member");
-          var action = TargetResource["::get::Own::drivers"];
+          var action = TargetResource["::get::Own::member"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Own.drivers#create
-         * @methodOf lbServices.Own.drivers
-         *
-         * @description
-         *
-         * Creates a new instance in drivers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
-         * </em>
-         */
-        R.drivers.create = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::create::Own::drivers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Own.drivers#createMany
-         * @methodOf lbServices.Own.drivers
-         *
-         * @description
-         *
-         * Creates a new instance in drivers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
-         * </em>
-         */
-        R.drivers.createMany = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::createMany::Own::drivers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Own.drivers#destroy
-         * @methodOf lbServices.Own.drivers
-         *
-         * @description
-         *
-         * Deletes drivers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.drivers.destroy = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::destroy::Own::drivers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Own.drivers#update
-         * @methodOf lbServices.Own.drivers
-         *
-         * @description
-         *
-         * Update drivers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
-         * </em>
-         */
-        R.drivers.update = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::update::Own::drivers"];
-          return action.apply(R, arguments);
-        };
-    /**
-     * @ngdoc object
-     * @name lbServices.Own.vehicles
-     * @header lbServices.Own.vehicles
-     * @object
-     * @description
-     *
-     * The object `Own.vehicles` groups methods
-     * manipulating `Vehicle` instances related to `Own`.
-     *
-     * Call {@link lbServices.Own#vehicles Own.vehicles()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Own#vehicles
+         * @name lbServices.Own#vehicle
          * @methodOf lbServices.Own
          *
          * @description
          *
-         * Fetches hasOne relation vehicles.
+         * Fetches belongsTo relation vehicle.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6299,20 +6877,105 @@ module.factory(
          * This usually means the response is a `Vehicle` object.)
          * </em>
          */
-        R.vehicles = function() {
+        R.vehicle = function() {
           var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::get::Own::vehicles"];
+          var action = TargetResource["::get::Own::vehicle"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Own.rides
+     * @header lbServices.Own.rides
+     * @object
+     * @description
+     *
+     * The object `Own.rides` groups methods
+     * manipulating `Ride` instances related to `Own`.
+     *
+     * Call {@link lbServices.Own#rides Own.rides()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Own#rides
+         * @methodOf lbServices.Own
+         *
+         * @description
+         *
+         * Queries rides of Own.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::get::Own::rides"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Own.vehicles#create
-         * @methodOf lbServices.Own.vehicles
+         * @name lbServices.Own.rides#count
+         * @methodOf lbServices.Own.rides
          *
          * @description
          *
-         * Creates a new instance in vehicles of this model.
+         * Counts rides of Own.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.rides.count = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::count::Own::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Own.rides#create
+         * @methodOf lbServices.Own.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6334,23 +6997,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Vehicle` object.)
+         * This usually means the response is a `Ride` object.)
          * </em>
          */
-        R.vehicles.create = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::create::Own::vehicles"];
+        R.rides.create = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::create::Own::rides"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Own.vehicles#createMany
-         * @methodOf lbServices.Own.vehicles
+         * @name lbServices.Own.rides#createMany
+         * @methodOf lbServices.Own.rides
          *
          * @description
          *
-         * Creates a new instance in vehicles of this model.
+         * Creates a new instance in rides of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6372,23 +7035,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Vehicle` object.)
+         * This usually means the response is a `Ride` object.)
          * </em>
          */
-        R.vehicles.createMany = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::createMany::Own::vehicles"];
+        R.rides.createMany = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::createMany::Own::rides"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Own.vehicles#destroy
-         * @methodOf lbServices.Own.vehicles
+         * @name lbServices.Own.rides#destroyAll
+         * @methodOf lbServices.Own.rides
          *
          * @description
          *
-         * Deletes vehicles of this model.
+         * Deletes all rides of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -6406,24 +7069,95 @@ module.factory(
          *
          * This method returns no data.
          */
-        R.vehicles.destroy = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::destroy::Own::vehicles"];
+        R.rides.destroyAll = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::delete::Own::rides"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Own.vehicles#update
-         * @methodOf lbServices.Own.vehicles
+         * @name lbServices.Own.rides#destroyById
+         * @methodOf lbServices.Own.rides
          *
          * @description
          *
-         * Update vehicles of this model.
+         * Delete a related item by id for rides.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::destroyById::Own::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Own.rides#findById
+         * @methodOf lbServices.Own.rides
+         *
+         * @description
+         *
+         * Find a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.findById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::findById::Own::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Own.rides#updateById
+         * @methodOf lbServices.Own.rides
+         *
+         * @description
+         *
+         * Update a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
          *
          * @param {Object} postData Request data.
          *
@@ -6441,12 +7175,12 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Vehicle` object.)
+         * This usually means the response is a `Ride` object.)
          * </em>
          */
-        R.vehicles.update = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::update::Own::vehicles"];
+        R.rides.updateById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::updateById::Own::rides"];
           return action.apply(R, arguments);
         };
 
@@ -6478,28 +7212,10 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Join.rides() instead.
-        "prototype$__get__rides": {
-          url: urlBase + "/Joins/:id/rides",
+        // INTERNAL. Use Join.ride() instead.
+        "prototype$__get__ride": {
+          url: urlBase + "/Joins/:id/ride",
           method: "GET"
-        },
-
-        // INTERNAL. Use Join.rides.create() instead.
-        "prototype$__create__rides": {
-          url: urlBase + "/Joins/:id/rides",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Join.rides.update() instead.
-        "prototype$__update__rides": {
-          url: urlBase + "/Joins/:id/rides",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Join.rides.destroy() instead.
-        "prototype$__destroy__rides": {
-          url: urlBase + "/Joins/:id/rides",
-          method: "DELETE"
         },
 
         // INTERNAL. Use Join.requests() instead.
@@ -6524,6 +7240,12 @@ module.factory(
         "prototype$__destroy__requests": {
           url: urlBase + "/Joins/:id/requests",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Join.icon() instead.
+        "prototype$__get__icon": {
+          url: urlBase + "/Joins/:id/icon",
+          method: "GET"
         },
 
         /**
@@ -6944,6 +7666,155 @@ module.factory(
           url: urlBase + "/Joins/change-stream",
           method: "POST"
         },
+
+        // INTERNAL. Use Ride.joins.findById() instead.
+        "::findById::Ride::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ride.joins.destroyById() instead.
+        "::destroyById::Ride::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Ride.joins.updateById() instead.
+        "::updateById::Ride::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Rides/:id/joins/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Ride.joins() instead.
+        "::get::Ride::joins": {
+          isArray: true,
+          url: urlBase + "/Rides/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ride.joins.create() instead.
+        "::create::Ride::joins": {
+          url: urlBase + "/Rides/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Ride.joins.createMany() instead.
+        "::createMany::Ride::joins": {
+          isArray: true,
+          url: urlBase + "/Rides/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Ride.joins.destroyAll() instead.
+        "::delete::Ride::joins": {
+          url: urlBase + "/Rides/:id/joins",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Ride.joins.count() instead.
+        "::count::Ride::joins": {
+          url: urlBase + "/Rides/:id/joins/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Request.joins() instead.
+        "::get::request::joins": {
+          url: urlBase + "/requests/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Request.joins.create() instead.
+        "::create::request::joins": {
+          url: urlBase + "/requests/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Request.joins.createMany() instead.
+        "::createMany::request::joins": {
+          isArray: true,
+          url: urlBase + "/requests/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Request.joins.update() instead.
+        "::update::request::joins": {
+          url: urlBase + "/requests/:id/joins",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Request.joins.destroy() instead.
+        "::destroy::request::joins": {
+          url: urlBase + "/requests/:id/joins",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Icon.joins.findById() instead.
+        "::findById::Icon::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Icon.joins.destroyById() instead.
+        "::destroyById::Icon::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Icon.joins.updateById() instead.
+        "::updateById::Icon::joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Icon.joins() instead.
+        "::get::Icon::joins": {
+          isArray: true,
+          url: urlBase + "/Icons/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Icon.joins.create() instead.
+        "::create::Icon::joins": {
+          url: urlBase + "/Icons/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Icon.joins.createMany() instead.
+        "::createMany::Icon::joins": {
+          isArray: true,
+          url: urlBase + "/Icons/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Icon.joins.destroyAll() instead.
+        "::delete::Icon::joins": {
+          url: urlBase + "/Icons/:id/joins",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Icon.joins.count() instead.
+        "::count::Icon::joins": {
+          url: urlBase + "/Icons/:id/joins/count",
+          method: "GET"
+        },
       }
     );
 
@@ -7080,29 +7951,15 @@ module.factory(
     */
     R.modelName = "Join";
 
-    /**
-     * @ngdoc object
-     * @name lbServices.Join.rides
-     * @header lbServices.Join.rides
-     * @object
-     * @description
-     *
-     * The object `Join.rides` groups methods
-     * manipulating `Ride` instances related to `Join`.
-     *
-     * Call {@link lbServices.Join#rides Join.rides()}
-     * to query all related instances.
-     */
-
 
         /**
          * @ngdoc method
-         * @name lbServices.Join#rides
+         * @name lbServices.Join#ride
          * @methodOf lbServices.Join
          *
          * @description
          *
-         * Fetches hasOne relation rides.
+         * Fetches belongsTo relation ride.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -7125,154 +7982,9 @@ module.factory(
          * This usually means the response is a `Ride` object.)
          * </em>
          */
-        R.rides = function() {
+        R.ride = function() {
           var TargetResource = $injector.get("Ride");
-          var action = TargetResource["::get::Join::rides"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Join.rides#create
-         * @methodOf lbServices.Join.rides
-         *
-         * @description
-         *
-         * Creates a new instance in rides of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ride` object.)
-         * </em>
-         */
-        R.rides.create = function() {
-          var TargetResource = $injector.get("Ride");
-          var action = TargetResource["::create::Join::rides"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Join.rides#createMany
-         * @methodOf lbServices.Join.rides
-         *
-         * @description
-         *
-         * Creates a new instance in rides of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ride` object.)
-         * </em>
-         */
-        R.rides.createMany = function() {
-          var TargetResource = $injector.get("Ride");
-          var action = TargetResource["::createMany::Join::rides"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Join.rides#destroy
-         * @methodOf lbServices.Join.rides
-         *
-         * @description
-         *
-         * Deletes rides of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.rides.destroy = function() {
-          var TargetResource = $injector.get("Ride");
-          var action = TargetResource["::destroy::Join::rides"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Join.rides#update
-         * @methodOf lbServices.Join.rides
-         *
-         * @description
-         *
-         * Update rides of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ride` object.)
-         * </em>
-         */
-        R.rides.update = function() {
-          var TargetResource = $injector.get("Ride");
-          var action = TargetResource["::update::Join::rides"];
+          var action = TargetResource["::get::Join::ride"];
           return action.apply(R, arguments);
         };
     /**
@@ -7471,6 +8183,42 @@ module.factory(
           return action.apply(R, arguments);
         };
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Join#icon
+         * @methodOf lbServices.Join
+         *
+         * @description
+         *
+         * Fetches belongsTo relation icon.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        R.icon = function() {
+          var TargetResource = $injector.get("Icon");
+          var action = TargetResource["::get::Join::icon"];
+          return action.apply(R, arguments);
+        };
+
     return R;
   }]);
 
@@ -7499,28 +8247,46 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Request.members() instead.
-        "prototype$__get__members": {
-          url: urlBase + "/requests/:id/members",
+        // INTERNAL. Use Request.memberId() instead.
+        "prototype$__get__memberId": {
+          url: urlBase + "/requests/:id/memberId",
           method: "GET"
         },
 
-        // INTERNAL. Use Request.members.create() instead.
-        "prototype$__create__members": {
-          url: urlBase + "/requests/:id/members",
+        // INTERNAL. Use Request.joins() instead.
+        "prototype$__get__joins": {
+          url: urlBase + "/requests/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Request.joins.create() instead.
+        "prototype$__create__joins": {
+          url: urlBase + "/requests/:id/joins",
           method: "POST"
         },
 
-        // INTERNAL. Use Request.members.update() instead.
-        "prototype$__update__members": {
-          url: urlBase + "/requests/:id/members",
+        // INTERNAL. Use Request.joins.update() instead.
+        "prototype$__update__joins": {
+          url: urlBase + "/requests/:id/joins",
           method: "PUT"
         },
 
-        // INTERNAL. Use Request.members.destroy() instead.
-        "prototype$__destroy__members": {
-          url: urlBase + "/requests/:id/members",
+        // INTERNAL. Use Request.joins.destroy() instead.
+        "prototype$__destroy__joins": {
+          url: urlBase + "/requests/:id/joins",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Request.pickup() instead.
+        "prototype$__get__pickup": {
+          url: urlBase + "/requests/:id/pickup",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Request.destination() instead.
+        "prototype$__get__destination": {
+          url: urlBase + "/requests/:id/destination",
+          method: "GET"
         },
 
         /**
@@ -7942,6 +8708,104 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Request#addRequest
+         * @methodOf lbServices.Request
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `status` – `{string=}` - 
+         */
+        "addRequest": {
+          url: urlBase + "/requests/addRequest",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.requests.findById() instead.
+        "::findById::Member::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.requests.destroyById() instead.
+        "::destroyById::Member::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.requests.updateById() instead.
+        "::updateById::Member::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Members/:id/requests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Member.requests() instead.
+        "::get::Member::requests": {
+          isArray: true,
+          url: urlBase + "/Members/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Member.requests.create() instead.
+        "::create::Member::requests": {
+          url: urlBase + "/Members/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.requests.createMany() instead.
+        "::createMany::Member::requests": {
+          isArray: true,
+          url: urlBase + "/Members/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Member.requests.destroyAll() instead.
+        "::delete::Member::requests": {
+          url: urlBase + "/Members/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Member.requests.count() instead.
+        "::count::Member::requests": {
+          url: urlBase + "/Members/:id/requests/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use Join.requests() instead.
         "::get::Join::requests": {
           url: urlBase + "/Joins/:id/requests",
@@ -7971,6 +8835,124 @@ module.factory(
         "::destroy::Join::requests": {
           url: urlBase + "/Joins/:id/requests",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.requests.findById() instead.
+        "::findById::pickup::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.requests.destroyById() instead.
+        "::destroyById::pickup::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.requests.updateById() instead.
+        "::updateById::pickup::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Pickup.requests() instead.
+        "::get::pickup::requests": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.requests.create() instead.
+        "::create::pickup::requests": {
+          url: urlBase + "/pickups/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.requests.createMany() instead.
+        "::createMany::pickup::requests": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.requests.destroyAll() instead.
+        "::delete::pickup::requests": {
+          url: urlBase + "/pickups/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.requests.count() instead.
+        "::count::pickup::requests": {
+          url: urlBase + "/pickups/:id/requests/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.requests.findById() instead.
+        "::findById::destination::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.requests.destroyById() instead.
+        "::destroyById::destination::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.requests.updateById() instead.
+        "::updateById::destination::requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Destination.requests() instead.
+        "::get::destination::requests": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.requests.create() instead.
+        "::create::destination::requests": {
+          url: urlBase + "/destinations/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.requests.createMany() instead.
+        "::createMany::destination::requests": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.requests.destroyAll() instead.
+        "::delete::destination::requests": {
+          url: urlBase + "/destinations/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.requests.count() instead.
+        "::count::destination::requests": {
+          url: urlBase + "/destinations/:id/requests/count",
+          method: "GET"
         },
       }
     );
@@ -8108,29 +9090,15 @@ module.factory(
     */
     R.modelName = "Request";
 
-    /**
-     * @ngdoc object
-     * @name lbServices.Request.members
-     * @header lbServices.Request.members
-     * @object
-     * @description
-     *
-     * The object `Request.members` groups methods
-     * manipulating `Member` instances related to `Request`.
-     *
-     * Call {@link lbServices.Request#members Request.members()}
-     * to query all related instances.
-     */
-
 
         /**
          * @ngdoc method
-         * @name lbServices.Request#members
+         * @name lbServices.Request#memberId
          * @methodOf lbServices.Request
          *
          * @description
          *
-         * Fetches hasOne relation members.
+         * Fetches belongsTo relation memberId.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -8153,20 +9121,70 @@ module.factory(
          * This usually means the response is a `Member` object.)
          * </em>
          */
-        R.members = function() {
+        R.memberId = function() {
           var TargetResource = $injector.get("Member");
-          var action = TargetResource["::get::request::members"];
+          var action = TargetResource["::get::request::memberId"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Request.joins
+     * @header lbServices.Request.joins
+     * @object
+     * @description
+     *
+     * The object `Request.joins` groups methods
+     * manipulating `Join` instances related to `Request`.
+     *
+     * Call {@link lbServices.Request#joins Request.joins()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Request#joins
+         * @methodOf lbServices.Request
+         *
+         * @description
+         *
+         * Fetches hasOne relation joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::get::request::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Request.members#create
-         * @methodOf lbServices.Request.members
+         * @name lbServices.Request.joins#create
+         * @methodOf lbServices.Request.joins
          *
          * @description
          *
-         * Creates a new instance in members of this model.
+         * Creates a new instance in joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -8188,23 +9206,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.members.create = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::create::request::members"];
+        R.joins.create = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::create::request::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Request.members#createMany
-         * @methodOf lbServices.Request.members
+         * @name lbServices.Request.joins#createMany
+         * @methodOf lbServices.Request.joins
          *
          * @description
          *
-         * Creates a new instance in members of this model.
+         * Creates a new instance in joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -8226,23 +9244,23 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.members.createMany = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::createMany::request::members"];
+        R.joins.createMany = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::createMany::request::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Request.members#destroy
-         * @methodOf lbServices.Request.members
+         * @name lbServices.Request.joins#destroy
+         * @methodOf lbServices.Request.joins
          *
          * @description
          *
-         * Deletes members of this model.
+         * Deletes joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -8260,20 +9278,20 @@ module.factory(
          *
          * This method returns no data.
          */
-        R.members.destroy = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::destroy::request::members"];
+        R.joins.destroy = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::destroy::request::joins"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Request.members#update
-         * @methodOf lbServices.Request.members
+         * @name lbServices.Request.joins#update
+         * @methodOf lbServices.Request.joins
          *
          * @description
          *
-         * Update members of this model.
+         * Update joins of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -8295,12 +9313,84 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Member` object.)
+         * This usually means the response is a `Join` object.)
          * </em>
          */
-        R.members.update = function() {
-          var TargetResource = $injector.get("Member");
-          var action = TargetResource["::update::request::members"];
+        R.joins.update = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::update::request::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Request#pickup
+         * @methodOf lbServices.Request
+         *
+         * @description
+         *
+         * Fetches belongsTo relation pickup.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Pickup` object.)
+         * </em>
+         */
+        R.pickup = function() {
+          var TargetResource = $injector.get("Pickup");
+          var action = TargetResource["::get::request::pickup"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Request#destination
+         * @methodOf lbServices.Request
+         *
+         * @description
+         *
+         * Fetches belongsTo relation destination.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Destination` object.)
+         * </em>
+         */
+        R.destination = function() {
+          var TargetResource = $injector.get("Destination");
+          var action = TargetResource["::get::request::destination"];
           return action.apply(R, arguments);
         };
 
@@ -8331,6 +9421,110 @@ module.factory(
       urlBase + "/pickups/:id",
       { 'id': '@id' },
       {
+
+        // INTERNAL. Use Pickup.requests.findById() instead.
+        "prototype$__findById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.requests.destroyById() instead.
+        "prototype$__destroyById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.requests.updateById() instead.
+        "prototype$__updateById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/requests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Pickup.rides.findById() instead.
+        "prototype$__findById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides.destroyById() instead.
+        "prototype$__destroyById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.rides.updateById() instead.
+        "prototype$__updateById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pickups/:id/rides/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Pickup.requests() instead.
+        "prototype$__get__requests": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.requests.create() instead.
+        "prototype$__create__requests": {
+          url: urlBase + "/pickups/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.requests.destroyAll() instead.
+        "prototype$__delete__requests": {
+          url: urlBase + "/pickups/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.requests.count() instead.
+        "prototype$__count__requests": {
+          url: urlBase + "/pickups/:id/requests/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides() instead.
+        "prototype$__get__rides": {
+          isArray: true,
+          url: urlBase + "/pickups/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Pickup.rides.create() instead.
+        "prototype$__create__rides": {
+          url: urlBase + "/pickups/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Pickup.rides.destroyAll() instead.
+        "prototype$__delete__rides": {
+          url: urlBase + "/pickups/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Pickup.rides.count() instead.
+        "prototype$__count__rides": {
+          url: urlBase + "/pickups/:id/rides/count",
+          method: "GET"
+        },
 
         /**
          * @ngdoc method
@@ -8751,35 +9945,16 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use Ride.pickups() instead.
-        "::get::Ride::pickups": {
-          url: urlBase + "/Rides/:id/pickups",
+        // INTERNAL. Use Ride.pickup() instead.
+        "::get::Ride::pickup": {
+          url: urlBase + "/Rides/:id/pickup",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.pickups.create() instead.
-        "::create::Ride::pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.pickups.createMany() instead.
-        "::createMany::Ride::pickups": {
-          isArray: true,
-          url: urlBase + "/Rides/:id/pickups",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.pickups.update() instead.
-        "::update::Ride::pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Ride.pickups.destroy() instead.
-        "::destroy::Ride::pickups": {
-          url: urlBase + "/Rides/:id/pickups",
-          method: "DELETE"
+        // INTERNAL. Use Request.pickup() instead.
+        "::get::request::pickup": {
+          url: urlBase + "/requests/:id/pickup",
+          method: "GET"
         },
       }
     );
@@ -8917,6 +10092,608 @@ module.factory(
     */
     R.modelName = "Pickup";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Pickup.requests
+     * @header lbServices.Pickup.requests
+     * @object
+     * @description
+     *
+     * The object `Pickup.requests` groups methods
+     * manipulating `Request` instances related to `Pickup`.
+     *
+     * Call {@link lbServices.Pickup#requests Pickup.requests()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup#requests
+         * @methodOf lbServices.Pickup
+         *
+         * @description
+         *
+         * Queries requests of pickup.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::get::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#count
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Counts requests of pickup.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.requests.count = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::count::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#create
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.create = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::create::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#createMany
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.createMany = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::createMany::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#destroyAll
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Deletes all requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyAll = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::delete::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#destroyById
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Delete a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::destroyById::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#findById
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Find a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.findById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::findById::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.requests#updateById
+         * @methodOf lbServices.Pickup.requests
+         *
+         * @description
+         *
+         * Update a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.updateById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::updateById::pickup::requests"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Pickup.rides
+     * @header lbServices.Pickup.rides
+     * @object
+     * @description
+     *
+     * The object `Pickup.rides` groups methods
+     * manipulating `Ride` instances related to `Pickup`.
+     *
+     * Call {@link lbServices.Pickup#rides Pickup.rides()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup#rides
+         * @methodOf lbServices.Pickup
+         *
+         * @description
+         *
+         * Queries rides of pickup.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::get::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#count
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Counts rides of pickup.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.rides.count = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::count::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#create
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.create = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::create::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#createMany
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.createMany = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::createMany::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#destroyAll
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Deletes all rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyAll = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::delete::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#destroyById
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Delete a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::destroyById::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#findById
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Find a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.findById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::findById::pickup::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Pickup.rides#updateById
+         * @methodOf lbServices.Pickup.rides
+         *
+         * @description
+         *
+         * Update a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.updateById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::updateById::pickup::rides"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -8945,6 +10722,110 @@ module.factory(
       urlBase + "/destinations/:id",
       { 'id': '@id' },
       {
+
+        // INTERNAL. Use Destination.requests.findById() instead.
+        "prototype$__findById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.requests.destroyById() instead.
+        "prototype$__destroyById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.requests.updateById() instead.
+        "prototype$__updateById__requests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/requests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Destination.rides.findById() instead.
+        "prototype$__findById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides.destroyById() instead.
+        "prototype$__destroyById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.rides.updateById() instead.
+        "prototype$__updateById__rides": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/destinations/:id/rides/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Destination.requests() instead.
+        "prototype$__get__requests": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/requests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.requests.create() instead.
+        "prototype$__create__requests": {
+          url: urlBase + "/destinations/:id/requests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.requests.destroyAll() instead.
+        "prototype$__delete__requests": {
+          url: urlBase + "/destinations/:id/requests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.requests.count() instead.
+        "prototype$__count__requests": {
+          url: urlBase + "/destinations/:id/requests/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides() instead.
+        "prototype$__get__rides": {
+          isArray: true,
+          url: urlBase + "/destinations/:id/rides",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Destination.rides.create() instead.
+        "prototype$__create__rides": {
+          url: urlBase + "/destinations/:id/rides",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Destination.rides.destroyAll() instead.
+        "prototype$__delete__rides": {
+          url: urlBase + "/destinations/:id/rides",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Destination.rides.count() instead.
+        "prototype$__count__rides": {
+          url: urlBase + "/destinations/:id/rides/count",
+          method: "GET"
+        },
 
         /**
          * @ngdoc method
@@ -9365,35 +11246,16 @@ module.factory(
           method: "POST"
         },
 
-        // INTERNAL. Use Ride.destinations() instead.
-        "::get::Ride::destinations": {
-          url: urlBase + "/Rides/:id/destinations",
+        // INTERNAL. Use Ride.destination() instead.
+        "::get::Ride::destination": {
+          url: urlBase + "/Rides/:id/destination",
           method: "GET"
         },
 
-        // INTERNAL. Use Ride.destinations.create() instead.
-        "::create::Ride::destinations": {
-          url: urlBase + "/Rides/:id/destinations",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.destinations.createMany() instead.
-        "::createMany::Ride::destinations": {
-          isArray: true,
-          url: urlBase + "/Rides/:id/destinations",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Ride.destinations.update() instead.
-        "::update::Ride::destinations": {
-          url: urlBase + "/Rides/:id/destinations",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Ride.destinations.destroy() instead.
-        "::destroy::Ride::destinations": {
-          url: urlBase + "/Rides/:id/destinations",
-          method: "DELETE"
+        // INTERNAL. Use Request.destination() instead.
+        "::get::request::destination": {
+          url: urlBase + "/requests/:id/destination",
+          method: "GET"
         },
       }
     );
@@ -9531,6 +11393,1550 @@ module.factory(
     */
     R.modelName = "Destination";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Destination.requests
+     * @header lbServices.Destination.requests
+     * @object
+     * @description
+     *
+     * The object `Destination.requests` groups methods
+     * manipulating `Request` instances related to `Destination`.
+     *
+     * Call {@link lbServices.Destination#requests Destination.requests()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination#requests
+         * @methodOf lbServices.Destination
+         *
+         * @description
+         *
+         * Queries requests of destination.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::get::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#count
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Counts requests of destination.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.requests.count = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::count::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#create
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.create = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::create::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#createMany
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Creates a new instance in requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.createMany = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::createMany::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#destroyAll
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Deletes all requests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyAll = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::delete::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#destroyById
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Delete a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.requests.destroyById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::destroyById::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#findById
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Find a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.findById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::findById::destination::requests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.requests#updateById
+         * @methodOf lbServices.Destination.requests
+         *
+         * @description
+         *
+         * Update a related item by id for requests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for requests
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Request` object.)
+         * </em>
+         */
+        R.requests.updateById = function() {
+          var TargetResource = $injector.get("Request");
+          var action = TargetResource["::updateById::destination::requests"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Destination.rides
+     * @header lbServices.Destination.rides
+     * @object
+     * @description
+     *
+     * The object `Destination.rides` groups methods
+     * manipulating `Ride` instances related to `Destination`.
+     *
+     * Call {@link lbServices.Destination#rides Destination.rides()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination#rides
+         * @methodOf lbServices.Destination
+         *
+         * @description
+         *
+         * Queries rides of destination.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::get::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#count
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Counts rides of destination.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.rides.count = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::count::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#create
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.create = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::create::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#createMany
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Creates a new instance in rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.createMany = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::createMany::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#destroyAll
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Deletes all rides of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyAll = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::delete::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#destroyById
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Delete a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.rides.destroyById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::destroyById::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#findById
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Find a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.findById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::findById::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Destination.rides#updateById
+         * @methodOf lbServices.Destination.rides
+         *
+         * @description
+         *
+         * Update a related item by id for rides.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for rides
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ride` object.)
+         * </em>
+         */
+        R.rides.updateById = function() {
+          var TargetResource = $injector.get("Ride");
+          var action = TargetResource["::updateById::destination::rides"];
+          return action.apply(R, arguments);
+        };
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.Icon
+ * @header lbServices.Icon
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Icon` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Icon",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Icons/:id",
+      { 'id': '@id' },
+      {
+
+        // INTERNAL. Use Icon.joins.findById() instead.
+        "prototype$__findById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Icon.joins.destroyById() instead.
+        "prototype$__destroyById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Icon.joins.updateById() instead.
+        "prototype$__updateById__joins": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Icons/:id/joins/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Icon.joins() instead.
+        "prototype$__get__joins": {
+          isArray: true,
+          url: urlBase + "/Icons/:id/joins",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Icon.joins.create() instead.
+        "prototype$__create__joins": {
+          url: urlBase + "/Icons/:id/joins",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Icon.joins.destroyAll() instead.
+        "prototype$__delete__joins": {
+          url: urlBase + "/Icons/:id/joins",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Icon.joins.count() instead.
+        "prototype$__count__joins": {
+          url: urlBase + "/Icons/:id/joins/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#create
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/Icons",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#createMany
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "createMany": {
+          isArray: true,
+          url: urlBase + "/Icons",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#upsert
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/Icons",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#exists
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` - 
+         */
+        "exists": {
+          url: urlBase + "/Icons/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#findById
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/Icons/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#find
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Icons",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#findOne
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/Icons/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#updateAll
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "updateAll": {
+          url: urlBase + "/Icons/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#deleteById
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "deleteById": {
+          url: urlBase + "/Icons/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#count
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "count": {
+          url: urlBase + "/Icons/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#prototype$updateAttributes
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/Icons/:id",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#createChangeStream
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Create a change stream.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `changes` – `{ReadableStream=}` - 
+         */
+        "createChangeStream": {
+          url: urlBase + "/Icons/change-stream",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Join.icon() instead.
+        "::get::Join::icon": {
+          url: urlBase + "/Joins/:id/icon",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#updateOrCreate
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Icon` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#update
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#destroyById
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#removeById
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["removeById"] = R["deleteById"];
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Icon#modelName
+    * @propertyOf lbServices.Icon
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Icon`.
+    */
+    R.modelName = "Icon";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.Icon.joins
+     * @header lbServices.Icon.joins
+     * @object
+     * @description
+     *
+     * The object `Icon.joins` groups methods
+     * manipulating `Join` instances related to `Icon`.
+     *
+     * Call {@link lbServices.Icon#joins Icon.joins()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon#joins
+         * @methodOf lbServices.Icon
+         *
+         * @description
+         *
+         * Queries joins of Icon.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::get::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#count
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Counts joins of Icon.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.joins.count = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::count::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#create
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Creates a new instance in joins of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins.create = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::create::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#createMany
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Creates a new instance in joins of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins.createMany = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::createMany::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#destroyAll
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Deletes all joins of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.joins.destroyAll = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::delete::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#destroyById
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Delete a related item by id for joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.joins.destroyById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::destroyById::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#findById
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Find a related item by id for joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins.findById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::findById::Icon::joins"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Icon.joins#updateById
+         * @methodOf lbServices.Icon.joins
+         *
+         * @description
+         *
+         * Update a related item by id for joins.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for joins
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Join` object.)
+         * </em>
+         */
+        R.joins.updateById = function() {
+          var TargetResource = $injector.get("Join");
+          var action = TargetResource["::updateById::Icon::joins"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
