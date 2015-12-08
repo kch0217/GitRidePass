@@ -1,5 +1,5 @@
 <ion-view title="Registration">
-    <ion-content padding="true" class="has-header has-footer" scroll="true">
+    <ion-content padding="true" class="has-header" scroll="true">
     <form name="myForm">
         <div class="list">
           <label class="item item-divider">
@@ -8,16 +8,16 @@
           </label>
           <label class="item item-input item-stacked-label">
               <span class="input-label">First name</span>
-              <span style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$error.required">
+              <div style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$error.required">
               First name is required
-              </span>
+              </div>
               <input type="text" placeholder="" ng-model="info.firstname" name="firstname" required>
             </label>
             <label class="item item-input item-stacked-label">
               <span class="input-label">Last name</span>
-              <span style="color:red" ng-show="myForm.lastname.$dirty && myForm.lastname.$error.required">
+              <div style="color:red" ng-show="myForm.lastname.$dirty && myForm.lastname.$error.required">
               Last name is required
-              </span>
+              </div>
               <input type="text" placeholder="" ng-model="info.lastname" name="lastname" required>
             </label>
 
@@ -32,38 +32,39 @@
             </label>
             <label class="item item-input item-stacked-label">
               <span class="input-label">Password</span>
-              <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$error.required">
+              <div style="color:red" ng-show="myForm.password.$dirty && myForm.password.$error.required">
               Password is required
-              </span>
+              </div>
               <input type="password" placeholder="" ng-model="info.password" name="password" required>
             </label>
 
             <label class="item item-input item-stacked-label">
-              <span class="input-label">Must match the password</span>
-              <span style="color:red" ng-show="myForm.password2.$dirty && myForm.password2.$error.compareTo">
-              Please type your password again
-              </span>
+              <span class="input-label">Please type your password again</span>
+              <div style="color:red" ng-show="myForm.password2.$dirty && myForm.password2.$error.compareTo">
+              Incorrect password
+              </div>
               <input type="password" placeholder="" ng-model="info.password2" name="password2" required compare-to="info.password">
             </label>
 
             <label class="item item-input item-stacked-label">
               <span class="input-label">Phone number</span>
-              <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$error.required">
+              <div style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$error.required">
               Phone number is required
-              </span>
+              </div>
               <input type="text" placeholder="" ng-model="info.phonenumber" name="phone" required>
             </label>
 
         </div>
 
-        </form>
+      </form>
+      <form name="myForm2">
         <div class="list">
             <label class="item item-divider">
                 <span>User Authentication</span>
             </label>
 
             <label class="item item-toggle">
-                Do you have an HKUST email account?
+                Have an HKUST email account?
                 <label class="toggle">
                    <input type="checkbox" ng-model="info.hkustMember">
                    <div class="track">
@@ -74,9 +75,13 @@
             </label>
             <label class="item item-input item-stacked-label" ng-if="info.hkustMember">
                 <span class="input-label">Your HKUST email address</span>
-                <input type="email" placeholder="" ng-model="info.email">
+                <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">
+              Incorrect email
+              </div>
+                <input type="email" placeholder="" ng-model="info.email" name="email" required>
             </label>
         </div>
+      </form>
 
         <div class="list">
             <label class="item item-divider">
@@ -93,24 +98,28 @@
 
         
             </label>
+            <form name="myForm3">
             <div ng-if="info.haveCar" ng-repeat="car in carLicence track by $index">
               <label class="item item-divider">
-                <span>Car {{$index +1}}</span>
+                <span>Car {{$index +1}}</span><span style="color:red" ng-show="myForm3.$dirty && myForm3.$error.required ">
+              Missing Data
+              </span>
               </label>
               <label class="item item-input item-stacked-label">
                   <span class="input-label">Licence number</span>
-                  <input type="text" placeholder="" ng-model="info.carNo[$index].license_number">
+                  <input type="text" placeholder="" ng-model="info.carNo[$index].license_number" required name="ln">
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Color</span>
-                <input type="text" placeholder="" ng-model="info.carNo[$index].color">
+                <input type="text" placeholder="" ng-model="info.carNo[$index].color" required name="color">
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Manufacturer</span>
-                <input type="text" placeholder="" ng-model="info.carNo[$index].maker">
+                <input type="text" placeholder="" ng-model="info.carNo[$index].maker" required name="maker">
               </label>
               
             </div>
+          </form>
 
             </label>
             <div class="button-bar" ng-if="info.haveCar">
@@ -125,13 +134,18 @@
             </label> -->
 
         </div>
+        
+        <div class="button-bar">
+          <button class="button button-balanced" ng-click="confirm()" ng-disabled="myForm.$error.required || myForm.$error.compareTo || myForm2.$error.email || myForm2.$error.required">Confirm</button>
+          <button class="button button-dark" ng-click="reset()">Reset</button>
+        </div>
     </ion-content>
 
-<ion-footer-bar align-title="left" class="bar-light">
+<!-- <ion-footer-bar align-title="left" class="bar-light">
 
   <div class="button-bar">
-  <a class="button button-balanced" ng-click="confirm()">Confirm</a>
-  <a class="button button-dark" ng-click="reset()">Reset</a>
+  <button class="button button-balanced" ng-click="confirm()" ng-disabled="myForm.$invalid || myForm.$error.compareTo || myForm2.$error.email">Confirm</button>
+  <button class="button button-dark" ng-click="reset()">Reset</button>
 
-</ion-footer-bar>
+</ion-footer-bar> -->
 </ion-view>

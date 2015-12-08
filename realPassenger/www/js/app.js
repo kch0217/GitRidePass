@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.directives', 'ngResource', 'lbServices'])
+angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services','starter.directives', 'ngResource', 'lbServices'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,6 +20,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+
+
+
+
+
+
   });
 })
 
@@ -80,12 +87,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
   })
 
   .state('tab.gohome-matching-confirm', {
-    url: '/gohome/:destination/:pickUp/:id',
+    url: '/gohome/:destination/:pickUp/:id/:licence',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'goHomeMatchingConfirmCtrl',
-        params: ['destination', 'pickUp','id']
+        params: ['destination', 'pickUp','id','licence']
       }
     }
   })
@@ -128,7 +135,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
-    LoopBackResourceProvider.setUrlBase('http://147.8.173.112:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://147.8.202.203:3000/api');
+     // LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 })
 
 

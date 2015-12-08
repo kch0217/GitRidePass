@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('signInCtrl', function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth){
+.controller('signInCtrl',function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister){
 
 
   // if (LoopBackAuth.currentUserId != null && LoopBackAuth.accessTokenId != null){
@@ -42,6 +42,8 @@ angular.module('starter.controllers', [])
       //success
       console.log(content);
       // console.log(code);
+      userRegister.register();
+      pushRegister.register();
       loadingService.end($ionicLoading);
       $state.go('tab.gohome');
     }, function(error){
@@ -64,6 +66,8 @@ angular.module('starter.controllers', [])
   $scope.numOfCar = 0;
   $scope.carLicence = [];
   $scope.info = { 'carNo':[], 'gender': 'male'}
+
+
 
   
 
@@ -173,7 +177,7 @@ angular.module('starter.controllers', [])
   $scope.reset = function(){
     $scope.numOfCar = 0;
     $scope.carLicence = [];
-    $scope.info = { 'carNo':[]};
+    $scope.info = { 'carNo':[],'gender': 'male'};
 
 
   }
@@ -244,6 +248,8 @@ $scope.pickupPt = availablePoints[4];
 
   $scope.destination = $stateParams.destination;
   $scope.pickUp = $stateParams.pickUp;
+  $scope.licence = 'TBC';
+  $scope.matchiconId = -1;
 
   $scope.searching = true;
   var timeCounter;
@@ -264,12 +270,23 @@ $scope.confirm = function(){
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
-  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'id':'001'});
+  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'id':'001', 'licence': $scope.licence});
 }
   
+  $scope.$on('match-received', function(event, args){
+    console.log("received a match from the server");
+    $scope.licence = args.licence;
+    $scope.matchiconId = args.matchicon;
+    
+    matched();
+    // $scope.carLicence = args.ln;
+
+  });
+
+
   //temp
   $scope.testing = function(){
-    timeCounter2 = $timeout(matched, 5000);
+    // timeCounter2 = $timeout(matched, 5000);
   }
 
 
@@ -307,7 +324,7 @@ $scope.confirm = function(){
 .controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet){
   
   //retrieve from server
-  $scope.licence = 'AB 123';
+  $scope.licence = $stateParams.licence;
   $scope.time = 1/2;
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
@@ -383,9 +400,10 @@ $scope.confirm = function(){
 
 })
 
-.controller('settingCtrl', function($scope, $state, Member){
+.controller('settingCtrl', function($scope, $state, Member, pushRegister){
   $scope.logout = function(){
     Member.logout({}, function(value, responseheader){
+      pushRegister.unregister();
       $state.go('signIn');
     }, function(error){
       console.log('fail to logout');
