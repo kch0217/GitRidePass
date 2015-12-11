@@ -86,6 +86,36 @@ angular.module('starter.services', [])
 
 })
 
+.service('eventTime', function($timeout){
+
+  this.countdown = 0;
+  this.counter = null;
+
+  this.setTime = function(time){
+    this.countdown = time;
+
+  }
+
+  this.startTime = function(){
+    this.counter = $timeout(counting , 1000);
+
+  }
+
+  var counting = function(){
+    if (this.countdown <= 0){
+      //stop
+    }
+    else
+    {
+      this.countdown = this.countdown - 10000;
+      this.counter = $timeout(counting, 1000);
+    }
+  }
+
+
+
+})
+
 
  
 ;

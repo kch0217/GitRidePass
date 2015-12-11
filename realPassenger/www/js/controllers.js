@@ -277,7 +277,7 @@ $scope.confirm = function(){
     console.log("received a match from the server");
     $scope.licence = args.licence;
     $scope.matchiconId = args.matchicon;
-    
+    $scope.ridetime = args.ridetime;
     matched();
     // $scope.carLicence = args.ln;
 
