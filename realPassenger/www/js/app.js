@@ -87,12 +87,12 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   })
 
   .state('tab.gohome-matching-confirm', {
-    url: '/gohome/:destination/:pickUp/:id/:licence',
+    url: '/gohome/:destination/:pickUp/:time/:licence',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'goHomeMatchingConfirmCtrl',
-        params: ['destination', 'pickUp','id','licence']
+        params: ['destination', 'pickUp','time','licence']
       }
     }
   })
@@ -108,15 +108,27 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
+
+  .state('tab.setting_change_PW',{
+    url: '/changePW',
+    views: {
+      'tab-setting':{
+        templateUrl: 'templates/changePassword.html',
+        controller: 'changePwCtrl'
       }
-    })
+    }
+
+  })
+
+  .state('tab.chat-detail', {
+    url: '/chats/:chatId',
+    views: {
+      'tab-chats': {
+        templateUrl: 'templates/chat-detail.html',
+        controller: 'ChatDetailCtrl'
+      }
+    }
+  })
 
   .state('tab.gohkust', {
     url: '/gohkust',
@@ -135,7 +147,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
-    LoopBackResourceProvider.setUrlBase('http://175.159.99.121:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://175.159.197.72:3000/api');
      // LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 })
 

@@ -183,8 +183,33 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('forgetCtrl', function($scope){
+.controller('forgetCtrl', function($scope, Member, $ionicPopup, $ionicHistory){
+  $scope.sendForget = function(email){
+    console.log(email);
+    Member.resetPw({'email': email}, function(value, responseheader){
+      console.log(value);
+      var alertPopup = $ionicPopup.alert({
+        title: 'Done',
+        template: 'Please check your email account.'
+      });
+      alertPopup.then(function(res) {
+        $ionicHistory.goBack();
+      });
 
+    }, function(error){
+
+      console.log(error);
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Email does not exist.'
+      });
+      alertPopup.then(function(res) {
+        $ionicHistory.goBack();
+      });
+    });
+  };
+
+  // Member.resetPassword({'email': 'testing@gmail.com'});
 })
 
 .controller('askAcceptCtrl', function($scope){
@@ -270,14 +295,32 @@ $scope.confirm = function(){
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
-  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'id':'001', 'licence': $scope.licence});
+  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence});
 }
   
   $scope.$on('match-received', function(event, args){
     console.log("received a match from the server");
+    console.log(args);
     $scope.licence = args.licence;
     $scope.matchiconId = args.matchicon;
-    $scope.ridetime = args.ridetime;
+
+    //calc time
+    var currentTime = new Date();
+    var targetTime = new Date(args.ridetime);
+
+    $scope.targetTime = args.ridetime;
+
+    currentTime.setSeconds(currentTime.getSeconds() + 20);
+    console.log(currentTime.getSeconds());
+    console.log(currentTime.getMinutes());
+    console.log(targetTime.getMinutes());
+    if (targetTime.getMinutes() - currentTime.getMinutes() < 0){
+      $scope.ridetime  = 60 + targetTime.getMinutes() - currentTime.getMinutes();
+    }
+    else
+      $scope.ridetime  = targetTime.getMinutes() - currentTime.getMinutes();
+    
+    console.log($scope.ridetime);
     matched();
     // $scope.carLicence = args.ln;
 
@@ -325,10 +368,42 @@ $scope.confirm = function(){
   
   //retrieve from server
   $scope.licence = $stateParams.licence;
-  $scope.time = 1/2;
+  $scope.targetTime = $stateParams.time;
+  
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
   $scope.confirmationTime = 20;
+
+  $scope.calcTime = function(){
+    var targetTime = new Date($scope.targetTime);
+    var currentTime = new Date();
+
+
+
+    var min, sec;
+    if (targetTime.getMinutes() < currentTime.getMinutes()){
+      min = targetTime.getMinutes() + 60 - currentTime.getMinutes();
+      sec = targetTime.getSeconds() - currentTime.getSeconds();
+      if (sec < 0){
+        sec+= 60;
+        min--;
+      }
+    }
+    else{
+      min = targetTime.getMinutes() - currentTime.getMinutes();
+      sec = targetTime.getSeconds() - currentTime.getSeconds();
+      if (sec < 0){
+        sec+= 60;
+        min--;
+      }
+    }
+
+    $scope.time = min + sec/60;
+
+
+      
+
+  }
 
   var timer;
   var timer2;
@@ -410,6 +485,52 @@ $scope.confirm = function(){
 
     })
     
+  }
+
+  $scope.changePW = function(){
+    $state.go("tab.setting_change_PW");
+
+  }
+
+})
+
+
+.controller('changePWCtrl', function($scope){
+  $scope.sendPW = function(){
+
+    loadingService.start($ionicLoading);
+    Member.updatePw({'oldpassword': this.info.oldpw, 'newpassword': this.info.newpw}, function(value, responseheader){
+      console.log(value);
+      if (value.status == 'fail'){
+        var alertPopup = $ionicPopup.alert({
+         title: 'Error',
+         template: 'Password cannot be changed.'
+       });
+       alertPopup.then(function(res) {
+       });
+       
+      }else{
+        var alertPopup = $ionicPopup.alert({
+           title: 'Done',
+           template: 'You can now use the new password.'
+        });
+        alertPopup.then(function(res) {
+           $ionicHistory.goBack();
+        });
+      }
+      loadingService.end($ionicLoading);
+
+    }, function(error){
+      var alertPopup = $ionicPopup.alert({
+         title: 'Error',
+         template: 'Password cannot be changed.'
+       });
+       alertPopup.then(function(res) {
+       });
+       loadingService.end($ionicLoading);
+
+    })
+
   }
 
 })

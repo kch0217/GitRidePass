@@ -4,7 +4,7 @@
         <form name="myForm">
             <label class="item item-input">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="" name="email" ng-model="email" required>
+                <input type="email" placeholder="" name="email" ng-model="info.email" required>
 
             </label>
 
@@ -14,7 +14,7 @@
             <span ng-show="myForm.email.$error.email">Invalid email address.</span>
         </span>
 
-        <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email" ng-click="sendForget()" style="border-radius: 18px;">Send</button>
+        <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email" ng-click="sendForget(info.email)" style="border-radius: 18px;">Send</button>
 
     </ion-content>
 
