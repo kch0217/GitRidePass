@@ -222,11 +222,13 @@ angular.module('starter.controllers', [])
   $scope.ready = function(destination){
     $ionicHistory.clearCache();
     Request.addRequest({'destination_name': destination}, function(value, responseheader){
-      console.log(value);
+      console.log(value.requestId);
+      var requestId = value.requestId;
+      $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
     }, function(error){
       console.log(error);
     })
-    $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination] });
+    
 
   };
 
@@ -269,12 +271,13 @@ $scope.pickupPt = availablePoints[4];
 })
 
 
-.controller('goHomeMatchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state){
+.controller('goHomeMatchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state, Request){
 
   $scope.destination = $stateParams.destination;
   $scope.pickUp = $stateParams.pickUp;
   $scope.licence = 'TBC';
   $scope.matchiconId = -1;
+  $scope.requestId = $stateParams.requestId;
 
   $scope.searching = true;
   var timeCounter;
@@ -285,6 +288,13 @@ $scope.pickupPt = availablePoints[4];
     console.log("Back");
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
+    Request.cancelMatch({"requestId": $scope.requestId}, function(value, responseheader){
+      console.log(value);
+    }, function(error){
+      console.log(error);
+
+
+    })
     // $ionicHistory.goBack();
     $state.go('tab.gohome');
 
@@ -295,7 +305,14 @@ $scope.confirm = function(){
     $timeout.cancel(timeCounter);
     $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
-  $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence});
+    Request.confirmMatch({"requestId": $scope.requestId}, function(value, responseheader){
+      console.log(value);
+    }, function(error){
+      console.log(error);
+
+
+    });
+    $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId});
 }
   
   $scope.$on('match-received', function(event, args){
@@ -303,6 +320,7 @@ $scope.confirm = function(){
     console.log(args);
     $scope.licence = args.licence;
     $scope.matchiconId = args.matchicon;
+    
 
     //calc time
     var currentTime = new Date();
@@ -364,7 +382,7 @@ $scope.confirm = function(){
 })
 
 
-.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet){
+.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet, Request){
   
   //retrieve from server
   $scope.licence = $stateParams.licence;
@@ -373,6 +391,7 @@ $scope.confirm = function(){
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
   $scope.confirmationTime = 20;
+  $scope.requestId = $stateParams.requestId;
 
   $scope.calcTime = function(){
     var targetTime = new Date($scope.targetTime);
@@ -409,8 +428,15 @@ $scope.confirm = function(){
   var timer2;
 
   $scope.cancel = function(){
+
     $timeout.cancel(timer);
     $timeout.cancel(timer2);
+    
+    Request.cancelConfirmMatch({'requestId': $scope.requestId}, function(value, responseheader){
+      console.log(value);
+    }, function(error){
+      console.log(error);
+    });
     $state.go('tab.gohome');
   }
 

@@ -76,23 +76,23 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   })
   .state('tab.gohome-matching', {
     cache: false,
-    url: '/gohome/:destination/:pickUp',
+    url: '/gohome/:destination/:pickUp/:requestId',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-leavematching.html',
         controller: 'goHomeMatchingCtrl',
-        params: ['destination', 'pickUp']
+        params: ['destination', 'pickUp','requestId']
       }
     }
   })
 
   .state('tab.gohome-matching-confirm', {
-    url: '/gohome/:destination/:pickUp/:time/:licence',
+    url: '/gohome/:destination/:pickUp/:time/:licence/:requestId',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'goHomeMatchingConfirmCtrl',
-        params: ['destination', 'pickUp','time','licence']
+        params: ['destination', 'pickUp','time','licence', 'requestId']
       }
     }
   })
@@ -114,7 +114,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     views: {
       'tab-setting':{
         templateUrl: 'templates/changePassword.html',
-        controller: 'changePwCtrl'
+        controller: 'changePWCtrl'
       }
     }
 
@@ -147,7 +147,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
-    LoopBackResourceProvider.setUrlBase('http://175.159.197.72:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://192.168.0.102:3000/api');
      // LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 })
 
