@@ -4,12 +4,12 @@
         <form name="myForm">
             <label class="item item-input">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="" name="email" ng-model="email" required>
+                <input type="email" placeholder="" name="email" ng-model="info.email" required>
 
             </label>
             <label class="item item-input">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="" name="password" ng-model="password" required>
+                <input type="password" placeholder="" name="password" ng-model="info.password" required>
             </label>
         </form>
         <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
@@ -19,7 +19,7 @@
        <span style="color:red" ng-show="myForm.password.$dirty">
             <span ng-show="myForm.password.$error.required">Password is required.</span>
         </span>
-        <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email || myForm.password.$error.required" ng-click="signin()" style="border-radius: 18px;">Login</button>
+        <button class="button button-balanced button-block" ng-disabled="myForm.email.$error.required || myForm.email.$error.email || myForm.password.$error.required" ng-click="signin(info)" style="border-radius: 18px;">Login</button>
         <div class="button-bar">
             <button class="button button-positive button-outline button-block button-small icon" ui-sref="register">Register</button>
             <button class="button button-assertive button-outline button-block button-small" ui-sref="forgetPW">Forget Password</button>

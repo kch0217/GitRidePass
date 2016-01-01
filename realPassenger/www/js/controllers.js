@@ -27,24 +27,25 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('signInCtrl',function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister){
+.controller('signInCtrl',function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory){
 
 
   // if (LoopBackAuth.currentUserId != null && LoopBackAuth.accessTokenId != null){
   //   $state.go('tab.gohome');
   // }
 
-  $scope.signin = function(){
+  $scope.signin = function(info){
     console.log('Test');
     loadingService.start($ionicLoading);
     
-    Member.login({"email": this.email, "password": this.password}, function(content, code){
+    Member.login({"email": info.email, "password": info.password}, function(content, code){
       //success
       console.log(content);
       // console.log(code);
       userRegister.register();
       pushRegister.register();
       loadingService.end($ionicLoading);
+      $localstorage.setObject('userInfo',{'email':info.email, 'pw': info.password});
       $state.go('tab.gohome');
     }, function(error){
       //fail
@@ -59,6 +60,20 @@ angular.module('starter.controllers', [])
     });
     
   }
+
+$scope.$on("$ionicView.enter", function(scopes, states){
+    $ionicHistory.clearHistory();
+    $ionicHistory.clearCache();
+    var user = $localstorage.getObject('userInfo');
+    if (user == null)
+      return;
+    if (!(user.email ==null || user.pw == null)){
+      $scope.signin({"email": user.email, "password": user.pw});
+    }
+
+    console.log("Go to login page");
+  });
+
 })
 
 
@@ -222,8 +237,9 @@ angular.module('starter.controllers', [])
   $scope.ready = function(destination){
     $ionicHistory.clearCache();
     Request.addRequest({'destination_name': destination}, function(value, responseheader){
-      console.log(value.requestId);
-      var requestId = value.requestId;
+      console.log(value.req.requestId);
+      var requestId = value.req.requestId;
+      destination = value.req.newDesName;
       $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
     }, function(error){
       console.log(error);
@@ -306,7 +322,7 @@ $scope.confirm = function(){
     $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
     Request.confirmMatch({"requestId": $scope.requestId}, function(value, responseheader){
-      console.log(value);
+      console.log(value.matchicon);
     }, function(error){
       console.log(error);
 
@@ -319,7 +335,10 @@ $scope.confirm = function(){
     console.log("received a match from the server");
     console.log(args);
     $scope.licence = args.licence;
-    $scope.matchiconId = args.matchicon;
+    // $scope.matchiconId = parseInt(args.matchicon);
+
+    // console.log($scope.matchiconId);
+    console.log(args.ridetime);
     
 
     //calc time
@@ -328,15 +347,20 @@ $scope.confirm = function(){
 
     $scope.targetTime = args.ridetime;
 
-    currentTime.setSeconds(currentTime.getSeconds() + 20);
-    console.log(currentTime.getSeconds());
-    console.log(currentTime.getMinutes());
-    console.log(targetTime.getMinutes());
-    if (targetTime.getMinutes() - currentTime.getMinutes() < 0){
-      $scope.ridetime  = 60 + targetTime.getMinutes() - currentTime.getMinutes();
+    currentTime.setSeconds(parseInt(currentTime.getSeconds()) + 20);
+    console.log("Current Time second is" + currentTime.getSeconds());
+    console.log("Target Time second is" + targetTime.getSeconds());
+    console.log("Current Time minute is" + currentTime.getMinutes());
+    console.log("Target Time minute is" + targetTime.getMinutes());
+    if (parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes()) < 0){
+      $scope.ridetime  = 60 + parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes());
     }
     else
-      $scope.ridetime  = targetTime.getMinutes() - currentTime.getMinutes();
+      $scope.ridetime  = parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes());
+
+    if (parseInt(targetTime.getSeconds()) < parseInt(currentTime.getSeconds())){
+      $scope.ridetime--;
+    }
     
     console.log($scope.ridetime);
     matched();
@@ -397,20 +421,23 @@ $scope.confirm = function(){
     var targetTime = new Date($scope.targetTime);
     var currentTime = new Date();
 
+    console.log(targetTime);
+    console.log(currentTime);
+
 
 
     var min, sec;
-    if (targetTime.getMinutes() < currentTime.getMinutes()){
-      min = targetTime.getMinutes() + 60 - currentTime.getMinutes();
-      sec = targetTime.getSeconds() - currentTime.getSeconds();
+    if (parseInt(targetTime.getMinutes()) < parseInt(currentTime.getMinutes())){
+      min = parseInt(targetTime.getMinutes()) + 60 - parseInt(currentTime.getMinutes());
+      sec = parseInt(targetTime.getSeconds()) - parseInt(currentTime.getSeconds());
       if (sec < 0){
         sec+= 60;
         min--;
       }
     }
     else{
-      min = targetTime.getMinutes() - currentTime.getMinutes();
-      sec = targetTime.getSeconds() - currentTime.getSeconds();
+      min = parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes());
+      sec = parseInt(targetTime.getSeconds()) - parseInt(currentTime.getSeconds());
       if (sec < 0){
         sec+= 60;
         min--;
@@ -501,10 +528,11 @@ $scope.confirm = function(){
 
 })
 
-.controller('settingCtrl', function($scope, $state, Member, pushRegister){
+.controller('settingCtrl', function($scope, $state, Member, pushRegister, $localstorage){
   $scope.logout = function(){
     Member.logout({}, function(value, responseheader){
       pushRegister.unregister();
+      $localstorage.setObject('userInfo', null);
       $state.go('signIn');
     }, function(error){
       console.log('fail to logout');
@@ -573,7 +601,7 @@ $scope.confirm = function(){
     if (timeInSec > 0){
       timeInSec--;
       var min = Math.floor(timeInSec/60);
-      var sec = timeInSec %60;
+      var sec = Math.floor(timeInSec %60);
       // console.log(min + " " + ctrl.context);
       if (min < 1 && ctrl.context =="matchToHome"){
         $scope.displayTime = "Arriving";
