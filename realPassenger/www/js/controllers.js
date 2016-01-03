@@ -334,12 +334,13 @@ $scope.confirm = function(){
     // $ionicHistory.goBack();
     Request.confirmMatch({"requestId": $scope.requestId}, function(value, responseheader){
       console.log(value.matchicon);
+      $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
     }, function(error){
       console.log(error);
 
 
     });
-    $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId});
+    
 }
   
   $scope.$on('match-received', function(event, args){
@@ -422,7 +423,7 @@ $scope.confirm = function(){
 })
 
 
-.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet, Request){
+.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet, Request, $ionicHistory){
   
   //retrieve from server
   $scope.licence = $stateParams.licence;
@@ -432,6 +433,7 @@ $scope.confirm = function(){
   $scope.location = $stateParams.pickUp;
   $scope.confirmationTime = 20;
   $scope.requestId = $stateParams.requestId;
+  $scope.matchicon = parseInt($stateParams.matchicon);
 
   $scope.calcTime = function(){
     var targetTime = new Date($scope.targetTime);
@@ -463,6 +465,19 @@ $scope.confirm = function(){
     $scope.time = min + sec/60;
 
 
+    $scope.$on("$ionicView.enter", function(scopes, states){
+      if($scope.matchicon < 10)
+        $scope.imglocation = "img/icon_00" + $scope.matchicon + ".png";
+      else
+        $scope.imglocation = "img/icon_0" + $scope.matchicon + ".png";
+
+      
+    });
+
+    $ionicHistory.nextViewOptions({
+      
+      disableBack: true
+    });
       
 
   }
@@ -526,8 +541,17 @@ $scope.confirm = function(){
      buttonClicked: function(index) {
         $ionicHistory.clearCache();
         $ionicHistory.clearHistory();
-        $state.go('tab.gohome-matching', {'destination': $scope.destination, 'pickUp': $scope.location },  { reload: true });
-        return true;
+        Request.addRequestAgain({'requestId': $scope.requestId}, function(value, responseheader){
+          var requestId = value.req.requestId;
+          var destination = value.req.newDesName;
+          $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination], 'requestId': requestId },  { reload: true });
+          return true;
+        }, function(error){
+          console.log(error);
+          return true;
+        })
+        
+        
      },
      destructiveButtonClicked: function(){
         $ionicHistory.clearCache();
@@ -536,9 +560,15 @@ $scope.confirm = function(){
      }
    });
 
+  $scope.goBack = function(){
+    $state.go('tab.gohome');
+  }
+
 
 
  };
+
+ var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
 
 
@@ -588,6 +618,9 @@ $scope.confirm = function(){
       $scope.setting.sameGender = false;
 
   });
+
+  var user = $localstorage.getObject('userInfo');
+  $scope.username = user.email;
 
 })
 

@@ -87,12 +87,12 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   })
 
   .state('tab.gohome-matching-confirm', {
-    url: '/gohome/:destination/:pickUp/:time/:licence/:requestId',
+    url: '/gohome/:destination/:pickUp/:time/:licence/:requestId/:matchicon',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'goHomeMatchingConfirmCtrl',
-        params: ['destination', 'pickUp','time','licence', 'requestId']
+        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon']
       }
     }
   })
