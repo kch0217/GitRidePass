@@ -44,9 +44,17 @@ angular.module('starter.controllers', [])
       // console.log(code);
       userRegister.register();
       pushRegister.register();
-      loadingService.end($ionicLoading);
+      
       $localstorage.setObject('userInfo',{'email':info.email, 'pw': info.password});
-      $state.go('tab.gohome');
+      Member.getGenderPreference(function(value, responseheaders){
+        loadingService.end($ionicLoading);
+        console.log("The gender preference is "+ value.status);
+        $localstorage.set('genderPreference', value.status);
+        $state.go('tab.gohome');
+      }, function(error){
+        loadingService.end($ionicLoading);
+      });
+      
     }, function(error){
       //fail
       loadingService.end($ionicLoading);
@@ -230,16 +238,19 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 .controller('askAcceptCtrl', function($scope){
 })
 
-.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory, Request){
+.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory, Request, $localstorage){
 
   
 
   $scope.ready = function(destination){
     $ionicHistory.clearCache();
-    Request.addRequest({'destination_name': destination}, function(value, responseheader){
+    $scope.genderPreferred = $localstorage.get("genderPreference", "false");
+
+    Request.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true")}, function(value, responseheader){
       console.log(value.req.requestId);
       var requestId = value.req.requestId;
       destination = value.req.newDesName;
+      
       $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
     }, function(error){
       console.log(error);
@@ -361,8 +372,13 @@ $scope.confirm = function(){
     if (parseInt(targetTime.getSeconds()) < parseInt(currentTime.getSeconds())){
       $scope.ridetime--;
     }
-    
+    Request.checkAutoCancel({'requestId': $scope.requestId}, function(value, responseheaders){
+      console.log(value);
+    }, function(error){
+
+    });
     console.log($scope.ridetime);
+
     matched();
     // $scope.carLicence = args.ln;
 
@@ -533,6 +549,7 @@ $scope.confirm = function(){
     Member.logout({}, function(value, responseheader){
       pushRegister.unregister();
       $localstorage.setObject('userInfo', null);
+      $localstorage.set('genderPreference', null);
       $state.go('signIn');
     }, function(error){
       console.log('fail to logout');
@@ -545,6 +562,32 @@ $scope.confirm = function(){
     $state.go("tab.setting_change_PW");
 
   }
+
+  $scope.setting = {'sameGender': false};
+
+  $scope.saveSettings = function(genderPreferred){
+    console.log(genderPreferred);
+    $localstorage.set('genderPreference', genderPreferred);
+    Member.setGenderPreference({'gender_preference': genderPreferred}, function(value, responseheader){
+      console.log(value);
+    }, function(error){
+
+    });
+  }
+
+  $scope.$on("$ionicView.enter", function(scopes, states){
+    
+    $scope.setting.sameGender = $localstorage.get('genderPreference', "false");
+    console.log($scope.setting.sameGender);
+    if ($scope.setting.sameGender == null){
+      $scope.setting.sameGender = "false";
+    }
+    if ($scope.setting.sameGender ==="true")
+      $scope.setting.sameGender = true;
+    else
+      $scope.setting.sameGender = false;
+
+  });
 
 })
 

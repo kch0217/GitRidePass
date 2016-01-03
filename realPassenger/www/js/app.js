@@ -147,7 +147,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
-    LoopBackResourceProvider.setUrlBase('http://175.159.230.25:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://147.8.202.71:3000/api');
      // LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 })
 
