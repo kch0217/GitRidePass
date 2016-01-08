@@ -702,4 +702,11 @@ $scope.confirm = function(){
 
 
 
+})
+
+.controller('toUSTCtrl', function($scope){
+  $scope.ready = function(destination){
+    console.log(destination);
+  }
+
 });

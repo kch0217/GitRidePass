@@ -134,8 +134,8 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     url: '/gohkust',
     views: {
       'tab-gohkust': {
-        templateUrl: 'templates/passenger-toUSTaskaccept.html',
-        controller: 'askAcceptCtrl'
+        templateUrl: 'templates/passenger-toUST.html',
+        controller: 'toUSTCtrl'
       }
     }
   });
