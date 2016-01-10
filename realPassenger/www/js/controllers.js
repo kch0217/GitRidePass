@@ -144,7 +144,7 @@ $scope.$on("$ionicView.enter", function(scopes, states){
                         "last_name": $scope.info.lastname,
                         "phone_number": parseInt($scope.info.phonenumber),
                         "gender": $scope.info.gender,
-                        "gender_preference": 'no',
+                        "gender_preference": 0,
                         "authorized": 'no',
                         "isDriver": $scope.numOfCar>0? 'yes': 'no',
                         "email": $scope.info.email,
@@ -170,15 +170,34 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 
 
 
-      Member.register(datasent, function(content){
+      Member.validationandregister(datasent, function(content){
         console.log(content);
-        var alertPopup = $ionicPopup.alert({
+        if (content.status == 'success'){
+          Member.register(datasent, function(value, responseheader){
+            console.log(value);
+          }, function(error){
+
+          });
+          var alertPopup = $ionicPopup.alert({
          title: 'Done',
          template: 'Please activate your account from your email.'
        });
        alertPopup.then(function(res) {
          $ionicHistory.goBack();
        });
+        }else
+        {
+
+          var alertPopup = $ionicPopup.alert({
+           title: 'Error',
+           template: 'Please check your information.'
+         });
+         alertPopup.then(function(res) {
+           
+         });
+
+        }
+
       }, function(error){
         console.log(error);
 
@@ -560,9 +579,7 @@ $scope.confirm = function(){
      }
    });
 
-  $scope.goBack = function(){
-    $state.go('tab.gohome');
-  }
+
 
 
 
@@ -570,7 +587,10 @@ $scope.confirm = function(){
 
  var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
-
+  $scope.goBack = function(){
+    console.log("Pressed Go home");
+    $state.go('tab.gohome');
+  }
 
 })
 
