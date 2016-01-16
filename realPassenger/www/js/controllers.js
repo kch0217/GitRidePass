@@ -1,63 +1,34 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
-
-.controller('signInCtrl',function($scope, $state, Member,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory){
+.controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService){
 
 
   // if (LoopBackAuth.currentUserId != null && LoopBackAuth.accessTokenId != null){
   //   $state.go('tab.gohome');
   // }
 
+
+
+
   $scope.signin = function(info){
-    console.log('Test');
     loadingService.start($ionicLoading);
-    
-    Member.login({"email": info.email, "password": info.password}, function(content, code){
-      //success
-      console.log(content);
-      // console.log(code);
+    console.log('Test');
+    console.log(info.email);
+    console.log(info.password);
+
+    LoginService.login(info).then(function(value){
       userRegister.register();
       pushRegister.register();
-      
       $localstorage.setObject('userInfo',{'email':info.email, 'pw': info.password});
-      Member.getGenderPreference(function(value, responseheaders){
-        loadingService.end($ionicLoading);
-        console.log("The gender preference is "+ value.status);
-        $localstorage.set('genderPreference', value.status);
-        $state.go('tab.gohome');
-      }, function(error){
-        loadingService.end($ionicLoading);
-      });
-      
-    }, function(error){
-      //fail
-      loadingService.end($ionicLoading);
+
+      return LoginService.getGenderPreference();
+
+    }).then(function(value){
+      $localstorage.set('genderPreference', value.status);
+      $state.go('tab.gohome');
+    }).catch(function(error){
       var alertPopup = $ionicPopup.alert({
         title: 'Error',
         template: 'Unable to login'
@@ -65,7 +36,10 @@ angular.module('starter.controllers', [])
       alertPopup.then(function(res) {
         console.log('Error to login');
       });
+    }).finally(function(){
+      loadingService.end($ionicLoading);
     });
+
     
   }
 
@@ -85,7 +59,7 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 })
 
 
-.controller('registerCtrl',function($scope, $ionicPopup, $ionicHistory, Member){
+.controller('registerCtrl',function($scope, $ionicPopup, $ionicHistory, LoginService, commonCallback){
   $scope.numOfCar = 0;
   $scope.carLicence = [];
   $scope.info = { 'carNo':[], 'gender': 'male'}
@@ -135,83 +109,63 @@ $scope.$on("$ionicView.enter", function(scopes, states){
      title: 'Confirm you application',
      template: 'Do you want to submit the data?'
    });
-   confirmPopup.then(function(res) {
-     if(res) {
+
+    var datasent = { "first_name": $scope.info.firstname,
+                  "last_name": $scope.info.lastname,
+                  "phone_number": parseInt($scope.info.phonenumber),
+                  "gender": $scope.info.gender,
+                  "gender_preference": 0,
+                  "authorized": 'no',
+                  "isDriver": $scope.numOfCar>0? 'yes': 'no',
+                  "email": $scope.info.email,
+                  "password": $scope.info.password,
+                  "car": $scope.info.carNo
+                };
+
+    confirmPopup.then(function(res) {
+      console.log(res);
+      if(res) {
        //submit
 
 
-       var datasent = { "first_name": $scope.info.firstname,
-                        "last_name": $scope.info.lastname,
-                        "phone_number": parseInt($scope.info.phonenumber),
-                        "gender": $scope.info.gender,
-                        "gender_preference": 0,
-                        "authorized": 'no',
-                        "isDriver": $scope.numOfCar>0? 'yes': 'no',
-                        "email": $scope.info.email,
-                        "password": $scope.info.password,
-                        "car": $scope.info.carNo
-                      };
-
-//       var test = {   "first_name": "string",   "last_name": "string",   "phone_number": 0,   "gender": "string",   "gender_preference": "string",   "authorized": "string",   "isDriver": "yes",   "email": "nic@nic.com",   "password": "123456",
-// "car": [
-// {"license_number": "DLLM",   "color": "pink",   "maker": "BENZ"},
-// {"license_number": "DLLLLM",   "color": "pink",   "maker": "BENZ"}
-// ]
-// }
-
-
-
-//       Member.register(test, function(content, code){
-
-//         console.log(content);
-//       }, function(error){
-//         console.log(error);
-//       });
-
-
-
-      Member.validationandregister(datasent, function(content){
-        console.log(content);
-        if (content.status == 'success'){
-          Member.register(datasent, function(value, responseheader){
-            console.log(value);
-          }, function(error){
-
-          });
-          var alertPopup = $ionicPopup.alert({
-         title: 'Done',
-         template: 'Please activate your account from your email.'
-       });
-       alertPopup.then(function(res) {
-         $ionicHistory.goBack();
-       });
-        }else
-        {
-
-          var alertPopup = $ionicPopup.alert({
-           title: 'Error',
-           template: 'Please check your information.'
-         });
-         alertPopup.then(function(res) {
-           
-         });
-
-        }
-
-      }, function(error){
-        console.log(error);
-
-      })
-
-
-
-
-
-
-     } else {
        
-     }
-   });
+      console.log(datasent);
+
+      return LoginService.validation(datasent);
+
+
+      } else {
+      return commonCallback.emptyErrorHandling();  
+      }
+
+    }).then(function(value){
+      console.log(value);
+      if (value.status =='success'){
+
+      return LoginService.register(datasent);
+      }
+      else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please check your information.'
+        });
+        alertPopup.then(function(res) {
+        
+        });
+        return commonCallback.emptyErrorHandling();
+      }
+
+    }).then(function(value){
+      return $ionicPopup.alert({
+           title: 'Done',
+           template: 'Please activate your account from your email.'
+      });
+
+    }).then(function(value){
+      $ionicHistory.goBack();
+    }).catch(function(error){
+      console.log(error);
+    });
 
 
   }
@@ -257,7 +211,7 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 .controller('askAcceptCtrl', function($scope){
 })
 
-.controller('goHomeCtrl', function($scope, $state, $ionicActionSheet, $ionicHistory, Request, $localstorage){
+.controller('goHomeCtrl', function($scope, $state,  $ionicHistory, $localstorage, RideRequestService){
 
   
 
@@ -265,15 +219,17 @@ $scope.$on("$ionicView.enter", function(scopes, states){
     $ionicHistory.clearCache();
     $scope.genderPreferred = $localstorage.get("genderPreference", "false");
 
-    Request.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true")}, function(value, responseheader){
+    RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true")}).then(function(value){
       console.log(value.req.requestId);
       var requestId = value.req.requestId;
       destination = value.req.newDesName;
       
       $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
-    }, function(error){
-      console.log(error);
-    })
+
+    }).catch(function(error){
+
+    });
+
     
 
   };
@@ -281,38 +237,8 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 
 var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
-$scope.pickupPt = availablePoints[4];
+  $scope.pickupPt = availablePoints[4];
 
- //   // Triggered on a button click, or some other target
- // $scope.showOption = function() {
-
- //   // Show the action sheet
- //   var hideSheet = $ionicActionSheet.show({
- //     buttons: [
- //       { text: 'North Gate' },
- //       { text: 'South Gate' },
- //       { text: 'Piazza' },
- //       { text: 'Hall 9' }
- //     ],
- //     destructiveText: 'No preferred point',
- //     titleText: 'Choose a pickup point',
- //     cancelText: 'Cancel',
- //     cancel: function() {
- //          // add cancel code..
- //        },
- //     buttonClicked: function(index) {
- //        $scope.pickupPt = availablePoints[index]; 
- //        return true;
- //     },
- //     destructiveButtonClicked: function(){
- //        $scope.pickupPt = availablePoints[4];
- //        return true;
- //     }
- //   });
-
-
-
- // };
 
 })
 
@@ -327,13 +253,13 @@ $scope.pickupPt = availablePoints[4];
 
   $scope.searching = true;
   var timeCounter;
-  var timeCounter2;
+  // var timeCounter2;
 
   $scope.goBack = function() {
     //contact the server to call off the ride
     console.log("Back");
     $timeout.cancel(timeCounter);
-    $timeout.cancel(timeCounter2);
+    // $timeout.cancel(timeCounter2);
     Request.cancelMatch({"requestId": $scope.requestId}, function(value, responseheader){
       console.log(value);
     }, function(error){
@@ -349,7 +275,7 @@ $scope.pickupPt = availablePoints[4];
 
 $scope.confirm = function(){
     $timeout.cancel(timeCounter);
-    $timeout.cancel(timeCounter2);
+    // $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
     Request.confirmMatch({"requestId": $scope.requestId}, function(value, responseheader){
       console.log(value.matchicon);
@@ -404,11 +330,28 @@ $scope.confirm = function(){
 
   });
 
+  $scope.$on('cancel-received', function(event, args){
+    cnosole.log("received a cancel from the server");
+    $timeout.cancel(timeCounter);
 
-  //temp
-  $scope.testing = function(){
-    // timeCounter2 = $timeout(matched, 5000);
-  }
+    $scope.searching = true;
+
+    $scope.requestId = args.requestId;
+    $scope.destination = args.newDesName;
+
+
+    var alertPopup = $ionicPopup.alert({
+         title: 'Sorry!',
+         template: 'The driver has cancelled it.'
+    });
+    alertPopup.then(function(res) {
+    
+    });
+
+
+  });
+
+
 
 
   
@@ -591,6 +534,26 @@ $scope.confirm = function(){
     console.log("Pressed Go home");
     $state.go('tab.gohome');
   }
+
+
+  $scope.$on('cancel-received', function(event, args){
+    cnosole.log("received a cancel from the server");
+    $timeout.cancel(timer);
+    $timeout.cancel(timer2);
+
+
+
+
+    var alertPopup = $ionicPopup.alert({
+         title: 'Sorry!',
+         template: 'The driver has cancelled it.'
+    });
+    alertPopup.then(function(res) {
+      $state.go('tab.gohome-matching', {'destination': args.newDesName, 'pickUp': availablePoints[destination], 'requestId': args.requestId },  { reload: true });
+    });
+
+
+  });
 
 })
 

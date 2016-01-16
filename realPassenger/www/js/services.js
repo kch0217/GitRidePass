@@ -49,10 +49,16 @@ angular.module('starter.services', [])
       if (notification.payload!=null){
 
         var data = notification.payload;
-        $rootScope.$broadcast('match-received',{"ridetime": data.ridetime,
+        if (data.status === "match")
+          $rootScope.$broadcast('match-received',{"ridetime": data.ridetime,
                                                 "matchicon": data.matchicon,
                                                 "destination": data.destination,
                                                 "licence": data.license_number });
+        else
+          $rootScope.$broadcast('cancel-received', {
+            "requestId": data.requestId,
+            "newDesName": data.newDesName
+          });
       }
     },
     "onRegister": function(data) {
@@ -134,4 +140,90 @@ angular.module('starter.services', [])
 }])
 
  
-;
+.factory('commonCallback', function($q){
+  return {
+    defaultHandling: function(promise){
+
+      var deferred = $q.defer();
+      promise.then(function(value, responseHeaders){
+        deferred.resolve(value);
+      }, function(error){
+        console.log(error);
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
+    }, 
+
+    emptyErrorHandling: function(){
+      var deferred = $q.defer();
+      deferred.reject('early exit!');
+      return deferred.promise;
+    },
+
+    success: function(value, responseHeaders){
+      var deferred = $q.defer();
+      deferred.resolve(value);
+      return deferred.promise;
+    },
+    error: function(error){
+      var deferred = $q.defer();
+      deferred.resolve(error);
+      return deferred.promise;
+    }
+  }
+
+})
+
+.factory('LoginService', function(Member, commonCallback){
+
+
+
+
+  return {
+    login: function(info){
+
+      var promise = Member.login({"email": info.email, "password": info.password}).$promise;
+
+      return commonCallback.defaultHandling(promise);
+    },
+
+    getGenderPreference: function(){
+
+      var promise = Member.getGenderPreference().$promise;
+
+
+
+      return commonCallback.defaultHandling(promise);
+    },
+
+    validation: function(datasent){
+      var promise = Member.validationandregister(datasent).$promise;
+
+      return commonCallback.defaultHandling(promise);
+    },
+
+    register: function(datasent){
+      var promise = Member.register(datasent).$promise;
+
+      return commonCallback.defaultHandling(promise);
+    }
+
+  }
+
+})
+
+.factory('RideRequestService', function(Ride, Request, commonCallback){
+  return{
+    addRide: function(info){
+      var promise = Ride.addRide(info).$promise;
+
+      return commonCallback.defaultHandling(promise);
+    },
+
+    addRequest: function(info){
+      var promise = Request.addRequest(info).$promise;
+      return commonCallback.defaultHandling(promise);
+    }
+  }
+});
