@@ -219,7 +219,7 @@ $scope.$on("$ionicView.enter", function(scopes, states){
     $ionicHistory.clearCache();
     $scope.genderPreferred = $localstorage.get("genderPreference", "false");
 
-    RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true")}).then(function(value){
+    RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true"), 'leaveUst': true}).then(function(value){
       console.log(value.req.requestId);
       var requestId = value.req.requestId;
       destination = value.req.newDesName;
@@ -243,7 +243,7 @@ var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sa
 })
 
 
-.controller('goHomeMatchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state, Request){
+.controller('matchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state, Request, $ionicPopup){
 
   $scope.destination = $stateParams.destination;
   $scope.pickUp = $stateParams.pickUp;
@@ -260,7 +260,11 @@ var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sa
     console.log("Back");
     $timeout.cancel(timeCounter);
     // $timeout.cancel(timeCounter2);
-    Request.cancelMatch({"requestId": $scope.requestId}, function(value, responseheader){
+    var leaveOption = true;
+    if ($scope.destination ==="HKUST"){
+      leaveOption = false;
+    }
+    Request.cancelMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
       console.log(value);
     }, function(error){
       console.log(error);
@@ -268,7 +272,12 @@ var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sa
 
     })
     // $ionicHistory.goBack();
-    $state.go('tab.gohome');
+    if ($scope.destination ==="HKUST"){
+      $state.go('tab.gohkust');
+    }
+    else
+      $state.go('tab.gohome');
+    
 
   };
 
@@ -277,9 +286,16 @@ $scope.confirm = function(){
     $timeout.cancel(timeCounter);
     // $timeout.cancel(timeCounter2);
     // $ionicHistory.goBack();
-    Request.confirmMatch({"requestId": $scope.requestId}, function(value, responseheader){
+    var leaveOption = true;
+    if ($scope.destination ==="HKUST"){
+      leaveOption = false;
+    }
+    Request.confirmMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
       console.log(value.matchicon);
-      $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
+      if ($scope.destination === "HKUST")
+        $state.go("tab.gohkust-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
+      else
+        $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
     }, function(error){
       console.log(error);
 
@@ -318,7 +334,11 @@ $scope.confirm = function(){
     if (parseInt(targetTime.getSeconds()) < parseInt(currentTime.getSeconds())){
       $scope.ridetime--;
     }
-    Request.checkAutoCancel({'requestId': $scope.requestId}, function(value, responseheaders){
+    var leaveOption = true;
+    if ($scope.destination ==="HKUST"){
+      leaveOption = false;
+    }
+    Request.checkAutoCancel({'requestId': $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheaders){
       console.log(value);
     }, function(error){
 
@@ -331,13 +351,14 @@ $scope.confirm = function(){
   });
 
   $scope.$on('cancel-received', function(event, args){
-    cnosole.log("received a cancel from the server");
+    console.log("received a cancel from the server");
     $timeout.cancel(timeCounter);
 
     $scope.searching = true;
 
     $scope.requestId = args.requestId;
-    $scope.destination = args.newDesName;
+    if ($scope.destination !== "HKUST")
+      $scope.destination = args.newDesName;
 
 
     var alertPopup = $ionicPopup.alert({
@@ -385,7 +406,7 @@ $scope.confirm = function(){
 })
 
 
-.controller('goHomeMatchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet, Request, $ionicHistory){
+.controller('matchingConfirmCtrl', function($scope, $stateParams, $state, $timeout, $ionicHistory, $ionicActionSheet, Request, $ionicHistory,$ionicPopup){
   
   //retrieve from server
   $scope.licence = $stateParams.licence;
@@ -396,6 +417,7 @@ $scope.confirm = function(){
   $scope.confirmationTime = 20;
   $scope.requestId = $stateParams.requestId;
   $scope.matchicon = parseInt($stateParams.matchicon);
+  console.log($scope.destination, $scope.location);
 
   $scope.calcTime = function(){
     var targetTime = new Date($scope.targetTime);
@@ -451,13 +473,24 @@ $scope.confirm = function(){
 
     $timeout.cancel(timer);
     $timeout.cancel(timer2);
+
+    var leaveOption = true;
+    if ($scope.destination ==="HKUST"){
+      leaveOption = false;
+    }
     
-    Request.cancelConfirmMatch({'requestId': $scope.requestId}, function(value, responseheader){
+    Request.cancelConfirmMatch({'requestId': $scope.requestId,'leaveUst': leaveOption}, function(value, responseheader){
       console.log(value);
     }, function(error){
       console.log(error);
     });
-    $state.go('tab.gohome');
+
+    if ($scope.destination ==="HKUST"){
+      console.log("Going back to HKUST");
+      $state.go("tab.gohkust");
+    }
+    else
+        $state.go('tab.gohome');
   }
 
   $scope.finishedCount = false;
@@ -503,9 +536,17 @@ $scope.confirm = function(){
      buttonClicked: function(index) {
         $ionicHistory.clearCache();
         $ionicHistory.clearHistory();
-        Request.addRequestAgain({'requestId': $scope.requestId}, function(value, responseheader){
+        var leaveOption = true;
+        if ($scope.destination ==="HKUST"){
+          leaveOption = false;
+        }
+        Request.addRequestAgain({'requestId': $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
           var requestId = value.req.requestId;
           var destination = value.req.newDesName;
+        if ($scope.destination ==="HKUST"){
+          $state.go('tab.gohkust-matching', {'destination': "HKUST", 'pickUp': $scope.location, 'requestId': requestId },  { reload: true });
+        }
+        else
           $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination], 'requestId': requestId },  { reload: true });
           return true;
         }, function(error){
@@ -517,7 +558,10 @@ $scope.confirm = function(){
      },
      destructiveButtonClicked: function(){
         $ionicHistory.clearCache();
-        $state.go("tab.gohome");
+        if ($scope.destination ==="HKUST")
+          $state.go("tab.gohkust");
+        else
+          $state.go("tab.gohome");
         return true;
      }
    });
@@ -531,13 +575,18 @@ $scope.confirm = function(){
  var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
   $scope.goBack = function(){
-    console.log("Pressed Go home");
-    $state.go('tab.gohome');
+    console.log("Pressed Go home/hkust");
+    if ($scope.destination){
+      $state.go("tab.gohkust")
+    }
+    else
+
+      $state.go('tab.gohome');
   }
 
 
   $scope.$on('cancel-received', function(event, args){
-    cnosole.log("received a cancel from the server");
+    console.log("received a cancel from the server");
     $timeout.cancel(timer);
     $timeout.cancel(timer2);
 
@@ -549,7 +598,11 @@ $scope.confirm = function(){
          template: 'The driver has cancelled it.'
     });
     alertPopup.then(function(res) {
-      $state.go('tab.gohome-matching', {'destination': args.newDesName, 'pickUp': availablePoints[destination], 'requestId': args.requestId },  { reload: true });
+      console.log($scope.destination);
+      if ($scope.destination === "HKUST")
+        $state.go('tab.gohkust-matching', {'destination': "HKUST", 'pickUp': $scope.location, 'requestId': args.requestId },  { reload: true });
+      else
+        $state.go('tab.gohome-matching', {'destination': args.newDesName, 'pickUp': availablePoints[args.newDesName], 'requestId': args.requestId },  { reload: true });
     });
 
 
@@ -687,9 +740,29 @@ $scope.confirm = function(){
 
 })
 
-.controller('toUSTCtrl', function($scope){
-  $scope.ready = function(destination){
-    console.log(destination);
-  }
+.controller('toUSTCtrl', function($scope, $ionicHistory, $localstorage, RideRequestService, $state){
+    $scope.ready = function(destination){
+    $ionicHistory.clearCache();
+    $scope.genderPreferred = $localstorage.get("genderPreference", "false");
+
+    RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true"), 'leaveUst': false}).then(function(value){
+      console.log(value.req.requestId);
+      var requestId = value.req.requestId;
+      destination = value.req.newDesName;
+      
+      $state.go('tab.gohkust-matching', {'destination': "HKUST", 'pickUp': destination,'requestId': requestId });
+
+    }).catch(function(error){
+
+    });
+
+    
+
+  };
+
+
+ 
+
 
 });
+

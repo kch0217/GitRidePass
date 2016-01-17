@@ -28,6 +28,9 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 
   });
+  $ionicPlatform.registerBackButtonAction(function (event) {
+                    event.preventDefault();
+            }, 100);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -79,8 +82,8 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     url: '/gohome/:destination/:pickUp/:requestId',
     views: {
       'tab-gohome': {
-        templateUrl: 'templates/passenger-leavematching.html',
-        controller: 'goHomeMatchingCtrl',
+        templateUrl: 'templates/passenger-matching.html',
+        controller: 'matchingCtrl',
         params: ['destination', 'pickUp','requestId']
       }
     }
@@ -91,11 +94,12 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
-        controller: 'goHomeMatchingConfirmCtrl',
+        controller: 'matchingConfirmCtrl',
         params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon']
       }
     }
   })
+
 
 
 
@@ -138,7 +142,32 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
         controller: 'toUSTCtrl'
       }
     }
-  });
+  })
+
+
+  .state('tab.gohkust-matching', {
+    cache: false,
+    url: '/gohkust/:destination/:pickUp/:requestId',
+    views: {
+      'tab-gohkust': {
+        templateUrl: 'templates/passenger-matching.html',
+        controller: 'matchingCtrl',
+        params: ['destination', 'pickUp','requestId']
+      }
+    }
+  })
+
+  .state('tab.gohkust-matching-confirm', {
+    url: '/gohkust/:destination/:pickUp/:time/:licence/:requestId/:matchicon',
+    views: {
+      'tab-gohkust': {
+        templateUrl: 'templates/passenger-confirmmatch.html',
+        controller: 'matchingConfirmCtrl',
+        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon']
+      }
+    }
+  })
+;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/signin');

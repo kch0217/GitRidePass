@@ -43,7 +43,7 @@
     <div class="item" >
   	<center style="font-size: 20px">
   
-   	HKUST North Gate
+   	{{location}}
    	</center>
 
 
@@ -90,7 +90,7 @@
 
 
   </ion-content>
-  <ion-footer-bar class="bar-assertive" ng-click="goBack()" ng-if="!finishedCount && (confirmationTime!=0)">
+  <ion-footer-bar class="bar-assertive" ng-click="cancel()" ng-if="!finishedCount && (confirmationTime!=0)">
 
   <h1 class="title" ng-click='cancel()'>Cancel <span class="badge badge-assertive">{{confirmationTime}}</span></h1>
   
