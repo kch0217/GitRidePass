@@ -1,4 +1,4 @@
-<ion-view title="Login">
+<!-- <ion-view title="Login">
     <ion-content padding="true" class="has-header has-footer">
         <center><h3>RideSharing - Passenger</h3></center>
         <form name="myForm">
@@ -29,6 +29,55 @@
 <ion-footer-bar align-title="left" class="bar-light">
 
   <h1 class="title">Only for HKUST members</h1>
+
+</ion-footer-bar>
+</ion-view> -->
+
+
+<!-- v2 -->
+
+<ion-view hide-nav-bar="true">
+    <ion-content padding="true" class="has-footer login" overflow-scroll="true">
+        <div class="form-box animated bounceInDown"> 
+            <div class="form-top">
+                <div class="form-top-left">
+                    <h3>Login to our application</h3>
+                    <p>Enter e-mail and password to log on:</p>
+                </div>
+
+            </div>
+            <form name="myForm" class="form-bottom">
+
+                <div class="item item-input login">
+                    <input type="email" placeholder="Your Email" name="email" ng-model="info.email" required class="login">
+                </div>
+
+                <div class="item item-input login">
+                    <input type="password" placeholder="Your Password" name="password" ng-model="info.password" required class="login">
+
+                </div>
+                <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                    <span ng-show="myForm.email.$error.required">Email is required.</span>
+                    <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                </span>
+                <span style="color:red" ng-show="myForm.password.$dirty">
+                    <span ng-show="myForm.password.$error.required">Password is required.</span>
+                </span>
+                            <button class="button submitB button-block" ng-click="signin(info)" style="border-radius: 18px;" ng-disabled="myForm.email.$error.required || myForm.email.$error.email || myForm.password.$error.required">Login</button>
+            <div class="button-bar">
+                <button class="button button-balanced button-block button-small additionalB" ui-sref="register" style="border-radius: 18px;">Register</button>
+                <button class="button button-assertive button-block button-small additionalB" ui-sref="forgetPW" style="border-radius: 18px;">Forget Password</button>
+            </div>
+            </form>
+
+        </div>
+
+
+    </ion-content>
+
+<ion-footer-bar align-title="left" class="bar-light">
+
+  <h1 class="title animated tada infinite">Only for HKUST members</h1>
 
 </ion-footer-bar>
 </ion-view>

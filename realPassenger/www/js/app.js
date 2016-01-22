@@ -63,7 +63,8 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    controller: 'tabController'
   })
 
   // Each tab has its own nav history stack:
@@ -124,15 +125,6 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
   })
 
-  .state('tab.chat-detail', {
-    url: '/chats/:chatId',
-    views: {
-      'tab-chats': {
-        templateUrl: 'templates/chat-detail.html',
-        controller: 'ChatDetailCtrl'
-      }
-    }
-  })
 
   .state('tab.gohkust', {
     url: '/gohkust',
@@ -177,7 +169,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
     LoopBackResourceProvider.setUrlBase('http://ridesharingfyp.ddns.net:3000/api');
-     // LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
+     // LoopBackResourceProvider.setUrlBase('http://192.168.0.110:3000/api');
 })
 
 

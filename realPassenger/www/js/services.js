@@ -224,6 +224,11 @@ angular.module('starter.services', [])
     addRequest: function(info){
       var promise = Request.addRequest(info).$promise;
       return commonCallback.defaultHandling(promise);
+    },
+    getQueueSeatNumber: function(leaveOption){
+      // console.log(leaveOption);
+      var promise = Request.getQueueSeatNumber({"leaveUst": leaveOption}).$promise;
+      return commonCallback.defaultHandling(promise);
     }
   }
 });

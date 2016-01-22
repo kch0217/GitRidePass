@@ -5,12 +5,6 @@ angular.module('starter.controllers', [])
 .controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService){
 
 
-  // if (LoopBackAuth.currentUserId != null && LoopBackAuth.accessTokenId != null){
-  //   $state.go('tab.gohome');
-  // }
-
-
-
 
   $scope.signin = function(info){
     loadingService.start($ionicLoading);
@@ -237,7 +231,13 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 
 var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
-  $scope.pickupPt = availablePoints[4];
+  // $scope.pickupPt = availablePoints[4];
+    $scope.$on("$ionicView.enter", function(scopes, states){
+    
+    RideRequestService.getQueueSeatNumber(true).then(function(value){
+      $scope.statistics = value.num;
+    });
+  });
 
 
 })
@@ -411,7 +411,7 @@ $scope.confirm = function(){
   //retrieve from server
   $scope.licence = $stateParams.licence;
   $scope.targetTime = $stateParams.time;
-  
+  var targetTime = new Date($scope.targetTime);
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
   $scope.confirmationTime = 20;
@@ -449,7 +449,12 @@ $scope.confirm = function(){
     $scope.time = min + sec/60;
 
 
-    $scope.$on("$ionicView.enter", function(scopes, states){
+
+      
+
+  }
+
+  $scope.$on("$ionicView.enter", function(scopes, states){
       if($scope.matchicon < 10)
         $scope.imglocation = "img/icon_00" + $scope.matchicon + ".png";
       else
@@ -462,9 +467,6 @@ $scope.confirm = function(){
       
       disableBack: true
     });
-      
-
-  }
 
   var timer;
   var timer2;
@@ -498,7 +500,9 @@ $scope.confirm = function(){
   $scope.countDown = function(){
     console.log("countdown");
 
-    timer = $timeout(changeCount,1000*60*($scope.time+1));
+    // timer = $timeout(changeCount,1000*60*($scope.time+1));
+    targetTime = targetTime.setMinutes(targetTime.getMinutes() + 1);
+    timer = $timeout(changeCount,1000);
     timer2 = $timeout(confirmCountDown, 1000);
   }
 
@@ -510,8 +514,18 @@ $scope.confirm = function(){
   }
 
   var changeCount  = function(){
-    $scope.finishedCount = true;
-    console.log($scope.finishedCount);
+    var currentTime = new Date();
+    if (targetTime > currentTime){
+      timer = $timeout(changeCount, 1000);
+      console.log("counting");
+    }
+    else{
+      console.log('finish counting');
+      $scope.finishedCount = true;
+      console.log($scope.finishedCount);
+    }
+
+
   }
 
   $ionicHistory.nextViewOptions({
@@ -543,6 +557,8 @@ $scope.confirm = function(){
         Request.addRequestAgain({'requestId': $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
           var requestId = value.req.requestId;
           var destination = value.req.newDesName;
+          $timeout.cancel(timer);
+          $timeout.cancel(timer2);
         if ($scope.destination ==="HKUST"){
           $state.go('tab.gohkust-matching', {'destination': "HKUST", 'pickUp': $scope.location, 'requestId': requestId },  { reload: true });
         }
@@ -558,6 +574,8 @@ $scope.confirm = function(){
      },
      destructiveButtonClicked: function(){
         $ionicHistory.clearCache();
+        $timeout.cancel(timer);
+          $timeout.cancel(timer2);
         if ($scope.destination ==="HKUST")
           $state.go("tab.gohkust");
         else
@@ -703,36 +721,35 @@ $scope.confirm = function(){
 
 
 .controller('timeCtrl', function($scope, $timeout){
-  var timeInSec = this.time*60;
+  // var timeInSec = this.time*60;
+  var targetTime = new Date(this.time);
+  console.log(targetTime);
   $scope.displayTime = null;
   var ctrl = this;
 
   
 
   $scope.startTime = function(){
-    if (timeInSec > 0){
-      timeInSec--;
-      var min = Math.floor(timeInSec/60);
-      var sec = Math.floor(timeInSec %60);
-      // console.log(min + " " + ctrl.context);
-      if (min < 1 && ctrl.context =="matchToHome"){
+    var currentTime = new Date();
+    if (targetTime > currentTime){
+      var difference = targetTime.getTime() - currentTime.getTime();
+      difference = difference/1000;
+      var second = Math.floor(difference % 60);
+      difference = difference/60;
+      var minute = Math.floor(difference % 60);
+      if (minute < 1){
         $scope.displayTime = "Arriving";
-        console.log("matchToHome");
-      }else{
-        if (sec <10)
-          sec = '0' + sec;
-        $scope.displayTime = min + ' : ' + sec;
-
       }
+      else{
+        if (second < 10)
+          second = '0' + second;
+        $scope.displayTime = minute + ' : ' + second;
+      }
+      $timeout($scope.startTime);
 
-
-
-      $timeout($scope.startTime, 1000);
     }
-    else if (ctrl.context == "matchToHome" && sec > -60 ){
-      timeInSec--;
-      $timeout($scope.startTime, 1000);
-    }
+
+
     
   }
 
@@ -764,5 +781,24 @@ $scope.confirm = function(){
  
 
 
+})
+
+.controller("tabController", function($scope){
+  $scope.disableSelected = [true, false, false];
+  $scope.select = function(dest){
+    // console.log(dest, $scope.disableSelected[dest]);
+    if (dest === 0 && !$scope.disableSelected[dest]){
+      // console.log("0 is selected");
+      $scope.disableSelected = [true, false, false];
+    }
+    else if (dest === 1 && !$scope.disableSelected[dest]){
+      // console.log("1 is selected");
+      $scope.disableSelected = [false, true, false];
+    }
+    else if (dest === 2 && !$scope.disableSelected[dest]){
+      // console.log("2 is selected");
+      $scope.disableSelected = [false, false, true];
+    }
+  }
 });
 

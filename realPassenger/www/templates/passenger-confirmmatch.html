@@ -1,23 +1,23 @@
 <ion-view view-title="Ride Confirmed" hide-back-button="true">
-  <ion-content>
+<ion-content>
 <div class="list card">
 
   <div class="item" >
   	<center style="font-size: 30px"><i class="icon ion-model-s"></i>
-  
-   	{{licence}}
-   	</center>
+      
+      {{licence}}
+    </center>
 
-      </div>
+  </div>
 
   <div class="item item-divider">
-  <center>towards</center>
+    <center>towards</center>
   </div>
 
   <div class="item" >
     <center style="font-size: 30px">
-    {{destination}}
- 
+      {{destination}}
+      
     </center>
 
   </div>
@@ -25,93 +25,60 @@
   
 
   <div class="item item-divider">
-	<center>departing in</center>
-  </div>
+   <center>departing in</center>
+ </div>
 
-  <div class="item" >
-  	<center style="font-size: 30px"><i class="icon ion-ios-time-outline" ng-init="calcTime(); countdown();"></i>
-  
-   	<timer time="time" context="'matchToHome'" ng-init="calcTime(); countDown();"></timer>
-   	</center>
+ <div class="item" >
+   <center style="font-size: 30px"><i class="icon ion-ios-time-outline" ng-init="calcTime(); countdown();"></i>
+    
+   	<timer time="targetTime" context="'matchToHome'" ng-init="calcTime(); countDown();"></timer>
+   </center>
 
-  </div>
+ </div>
 
-    <div class="item item-divider">
-	<center>from</center>
-  </div>
+ <div class="item item-divider">
+   <center>from</center>
+ </div>
 
-    <div class="item" >
-  	<center style="font-size: 20px">
-  
+ <div class="item" >
+   <center style="font-size: 20px">
+    
    	{{location}}
-   	</center>
+   </center>
 
 
-  </div>
+ </div>
 
 
 
 
 </div>
 
-<!-- <div class="row">
-	<div class="col"> -->
-		<div class="list card">
-			<div class="item item-divider">
-				<center>Verification Code</center>
-			</div>
-			<div class="item">
-				<center><img ng-src="{{imglocation}}" width="200"></center>
-			</div>
 
-		</div>
-	<!-- </div> -->
-<!-- 	<div class="col">
-		<div class="list card">
-    <a class="item item-divider item-icon-left" href="#">
-      <i class="icon ion-ios-chatboxes-outline"></i>
-      Chatroom
-      </a>
+<div class="list card">
+ <div class="item item-divider">
+  <center>Verification Code</center>
+</div>
+<div class="item">
+  <center><img ng-src="{{imglocation}}" width="200"></center>
+</div>
 
-		</div>
-
-      <div class="list card">
-    <a class="item item-divider item-icon-left" href="#">
-      <i class="icon ion-map"></i>
-      Map
-      </a>
-
-    </div>
-
-
-	</div> -->
-<!-- </div> -->
+</div>
 
 
 
-  </ion-content>
-  <ion-footer-bar class="bar-assertive" ng-click="cancel()" ng-if="!finishedCount && (confirmationTime!=0)">
 
-  <h1 class="title" ng-click='cancel()'>Cancel <span class="badge badge-assertive">{{confirmationTime}}</span></h1>
-  
+</ion-content>
+<ion-footer-bar class="bar-assertive" ng-click="cancel()" ng-if="!finishedCount && (confirmationTime!=0)">
+
+<h1 class="title" ng-click='cancel()'>Cancel <span class="badge badge-assertive">{{confirmationTime}}</span></h1>
+
 
 </ion-footer-bar>
 
-<!--   <ion-footer-bar class="bar-balanced" ng-click="goBack()" >
+<ion-footer-bar ng-if="finishedCount">
 
-  <h1 class="title" ng-click='cancel()'>Finished</h1>
-
-</ion-footer-bar>
-
-  <ion-footer-bar class="bar-assertive" ng-click="cancelOption()" ng-if="finishedCount">
-
-  <h1 class="title" ng-click='cancelOption()'>Cancel</h1>
-
-</ion-footer-bar> -->
-
-  <ion-footer-bar ng-if="finishedCount">
-
- <div class="button-bar">
+<div class="button-bar">
   <a class="button button-balanced" ng-click="goBack()">Finish</a>
   <a class="button button-assertive" ng-click="cancelOption()">Cancel</a>
 </div>
