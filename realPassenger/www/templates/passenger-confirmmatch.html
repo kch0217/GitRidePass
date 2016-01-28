@@ -1,10 +1,11 @@
 <ion-view view-title="Ride Confirmed" hide-back-button="true">
-<ion-content>
-<div class="list card">
+<ion-content ng-class="{'goust': destination === 'HKUST', 'gohome': destination!=='HKUST'}" padding="true">
+
+<!-- <div class="list card">
 
   <div class="item" >
   	<center style="font-size: 30px"><i class="icon ion-model-s"></i>
-      
+
       {{licence}}
     </center>
 
@@ -17,7 +18,7 @@
   <div class="item" >
     <center style="font-size: 30px">
       {{destination}}
-      
+
     </center>
 
   </div>
@@ -30,7 +31,7 @@
 
  <div class="item" >
    <center style="font-size: 30px"><i class="icon ion-ios-time-outline" ng-init="calcTime(); countdown();"></i>
-    
+
    	<timer time="targetTime" context="'matchToHome'" ng-init="calcTime(); countDown();"></timer>
    </center>
 
@@ -42,7 +43,7 @@
 
  <div class="item" >
    <center style="font-size: 20px">
-    
+
    	{{location}}
    </center>
 
@@ -65,7 +66,63 @@
 
 </div>
 
+ -->
 
+
+ <!-- v2 -->
+
+
+
+<div class="row info-panel">
+  <div class="col col-50">
+    <img ng-src="{{imglocation}}" class="match-icon" width="100%">
+  </div>
+  <div class="col col-50">
+    <br>
+      <center style="font-size: 30px; color: #ef4e3a"><i class="icon ion-model-s"></i> {{licence}}</center>
+
+
+   
+    
+  
+   <br> 
+    <center style="font-size: 20px; color: #444">towards</center>
+    <br>
+    
+      <center style="font-size: 30px; color: #ef4e3a;">{{destination}}</center>
+
+    
+   
+
+    
+  </div>
+  
+</div>
+
+  <div class="list">
+    <div class="item match">
+    <center>departing in</center>
+    </div>
+
+    <div class="item item-divider important-label" >
+      <center><i class="icon ion-ios-time-outline" ng-init="calcTime(); countdown();"></i>
+    
+      <timer time="targetTime" class="animated pulse infinite" ng-init="calcTime(); countDown();"></timer>
+      </center>
+
+    </div>
+    <div class="item match">
+  <center>from</center>
+  </div>
+
+    <div class="item item-divider important-label">
+    <center><i class="icon ion-flag"></i>
+    {{location}}
+    </center>
+
+  </div>
+
+  </div>
 
 
 </ion-content>
@@ -79,8 +136,8 @@
 <ion-footer-bar ng-if="finishedCount">
 
 <div class="button-bar">
-  <a class="button button-balanced" ng-click="goBack()">Finish</a>
-  <a class="button button-assertive" ng-click="cancelOption()">Cancel</a>
+  <button class="button button-balanced" style="border-radius: 10px;" ng-click="goBack()">Finish</button>
+  <button class="button button-assertive" style="border-radius: 10px;" ng-click="cancelOption()">Cancel</button>
 </div>
 
 </ion-footer-bar>

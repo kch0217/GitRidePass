@@ -301,6 +301,7 @@ $scope.confirm = function(){
 
 
     });
+    // $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':13});
     
 }
   
@@ -366,7 +367,10 @@ $scope.confirm = function(){
          template: 'The driver has cancelled it.'
     });
     alertPopup.then(function(res) {
-    
+      if ($scope.destination == null || $scope.destination ==""){
+        console.log("error.");
+      }
+      
     });
 
 

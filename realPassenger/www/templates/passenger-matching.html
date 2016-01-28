@@ -1,82 +1,88 @@
 <ion-view view-title="Matching in Progress" hide-back-button="true">
-<ion-content>
-<div class="list card" ng-if='searching'>
+<ion-content padding="true" ng-class="{'goust': destination === 'HKUST', 'gohome': destination!=='HKUST'}">
+<!-- <div class="list card" ng-if='searching'> -->
 
 
-
-  <div class="item item-divider">
-   <center>Your destination is</center>
- </div>
-
- <div class="item" >
+<div class="info-panel" ng-if='searching'>
   <br>
-  <center style="font-size: 40px">
+  <div>
+   <center style="font-size: 20px">Your destination is</center>
+ </div>
+<br>
+ <div>
+  
+  <center class="itemlabel">
 
     {{destination}}
   </center>
-  <br>
+  
 
 </div>
-
-<div class="item item-divider">
-	<center>from</center>
+<br>
+<div>
+	<center style="font-size: 20px">from</center>
 </div>
-
-<div class="item">
- <center style="font-size: 20px" ng-if="pickUp!='No Preference'">
+<br>
+<div>
+ <center ng-if="pickUp!='No Preference'" class="itemlabel">
 
   {{pickUp}}
 </center>
-<center style="font-size: 20px" ng-if="pickUp=='No Preference'">
+<center ng-if="pickUp=='No Preference'" class="itemlabel">
 
   TBC
 </center>
 
 </div>
-
+<br>
 
 </div>
 
-<div class="list card" ng-if="!searching">
+<div ng-if="!searching">
 
- <div class="item" >
-  <center style="font-size: 30px">
+ <div class="item match item-divider animated swing infinite" >
+  <center>
 
     Found a match
   </center>
 
 </div>
 
-<div class="item">
-  <center style="font-size: 30px"><i class="icon ion-model-s"></i>
+<br>
+<div class="info-panel">
+  <br>
+<div>
+  <center class="itemlabel"><i class="icon ion-model-s"></i>
 
     {{licence}}
   </center>
 
 </div>
-
-<div class="item item-divider">
-  <center>departing in</center>
+<br>
+<div>
+  <center style="font-size: 20px">departing in</center>
 </div>
-
-<div class="item" >
-  <center style="font-size: 30px"><i class="icon ion-ios-time-outline"></i>
+<br>
+<div>
+  <center style="font-size: 30px" class="itemlabel"><i class="icon ion-ios-time-outline"></i>
 
     {{ridetime}} minutes
   </center>
 
 </div>
-
-<div class="item item-divider" >
-  <center>from</center>
+<br>
+<div>
+  <center style="font-size: 20px">from</center>
 </div>
-
-<div class="item">
-  <center style="font-size: 20px">
+<br>
+<div >
+  <center style="font-size: 20px" class="itemlabel">
 
     {{pickUp}}
   </center>
 
+</div>
+<br>
 </div>
 
 
@@ -87,7 +93,7 @@
 
 <center><ion-spinner class="spinner-positive" ng-init="testing()" ng-if='searching'></ion-spinner></center>
 
-<center style="font-size: 40px" ng-if='!searching'>{{countDownTime}} sec to accept </center>
+<center style="font-size: 30px" ng-if='!searching'>{{countDownTime}} sec to accept </center>
 
 
 
@@ -100,8 +106,8 @@
 </ion-footer-bar>
 <ion-footer-bar ng-if="!searching">
 <div class="button-bar">
-  <a class="button button-balanced" ng-click="confirm()">Accept</a>
-  <a class="button button-assertive" ng-click="goBack()">Cancel</a>
+  <button class="button button-balanced" style="border-radius: 15px" ng-click="confirm()">Accept</a>
+  <button class="button button-assertive" style="border-radius: 15px" ng-click="goBack()">Cancel</a>
 </div>
 </ion-footer-bar>
 
