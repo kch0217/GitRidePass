@@ -51,7 +51,6 @@ angular.module('starter.services', [])
         var data = notification.payload;
         if (data.status === "match")
           $rootScope.$broadcast('match-received',{"ridetime": data.ridetime,
-                                                "matchicon": data.matchicon,
                                                 "destination": data.destination,
                                                 "licence": data.license_number });
         else
@@ -229,6 +228,87 @@ angular.module('starter.services', [])
       // console.log(leaveOption);
       var promise = Request.getQueueSeatNumber({"leaveUst": leaveOption}).$promise;
       return commonCallback.defaultHandling(promise);
+    },
+    checkValid: function(requestId){
+      var promise = Request.checkValid({"requestId": requestId}).$promise;
+      return commonCallback.defaultHandling(promise);
     }
   }
+})
+
+.service('safeChecking', function(){
+  var pageControl = [true, true];
+
+  this.safeToStart = function(page){
+    if (pageControl[0] && pageControl[1])
+      return true;
+    else
+      return false;
+  }
+
+  this.start = function(page){
+    pageControl[page] = false;
+  }
+
+  this.end = function(page){
+    pageControl[page] = true;
+  }
+
+})
+
+.service('QueueSeatProvider', function(RideRequestService){
+  var queueSeat = {'home': null, 'hkust': null};
+
+  this.update = function(leaveUst, callback){
+    if (queueSeat.home == null || queueSeat.hkust == null){
+      RideRequestService.getQueueSeatNumber(true).then(function(value){
+        console.log("QueueSeatProvider Leave UST", value);
+        queueSeat['home'] = value.num;
+        return RideRequestService.getQueueSeatNumber(false);
+      }).then(function(value){
+        console.log("QueueSeatProvider Go UST", value);
+        queueSeat['hkust'] = value.num;
+      }).catch(function(error){
+        console.log(error);
+      }).finally(function(){
+        if (callback !== null){
+          // console.log(queueSeat);
+          console.log(leaveUst);
+          if (leaveUst){
+            // console.log("QueueSeatProvider return home");
+            callback(queueSeat['home']);
+          }
+          else{
+            // console.log("QueueSeatProvider going hkust", queueSeat['hkust'], callback);
+            callback(queueSeat['hkust']);
+          }
+            
+        }
+      });
+    }else
+    {
+      if (callback !== null){
+        // console.log("QueueSeatProvider no update callback", leaveUst, callback);
+        if (leaveUst == "true"){
+          // console.log("QueueSeatProvider no update callback 2", queueSeat['home']);
+          callback(queueSeat['home']);
+        }
+        else{
+          // console.log("QueueSeatProvider no update callback 3", queueSeat['hkust']);
+          callback(queueSeat['hkust']);
+        }
+          
+
+      }
+
+    }
+  }
+
+  this.clear = function(){
+    queueSeat = {'home': null, 'hkust': null};
+  }
+
+
+
+
 });

@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService){
+.controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService, commonCallback, RideRequestService){
 
 
 
@@ -11,6 +11,8 @@ angular.module('starter.controllers', [])
     console.log('Test');
     console.log(info.email);
     console.log(info.password);
+    var previousInfo = $localstorage.getObject("offerInfo");
+    var previousRequest = $localstorage.getObject("requestInfo");
 
     LoginService.login(info).then(function(value){
       userRegister.register();
@@ -21,7 +23,39 @@ angular.module('starter.controllers', [])
 
     }).then(function(value){
       $localstorage.set('genderPreference', value.status);
-      $state.go('tab.gohome');
+      
+      var currentTime = new Date();
+      var targetTime = new Date(previousInfo.time);
+      var userinfo = $localstorage.getObject('userInfo');
+      console.log(previousInfo);
+      if (previousInfo == null || JSON.stringify(previousInfo) === "{}" || currentTime >= targetTime || userinfo.email !== previousInfo.owner)
+        // $state.go('tab.gohome');
+        return RideRequestService.checkValid(null);
+      else{
+        return RideRequestService.checkValid(previousInfo.requestId);
+
+      } 
+
+
+
+
+
+      // $state.go('tab.gohome');
+    }).then(function(value){
+      console.log(value);
+      if (value.valid){
+        if (previousInfo.destination === "HKUST"){
+          $state.go("tab.gohkust-matching-confirm", {'destination': previousInfo.destination, 'pickUp': previousInfo.pickUp, 'time':previousInfo.time, 'licence': previousInfo.licence, 'requestId': previousInfo.requestId, 'matchicon':previousInfo.matchicon});
+        }
+        else
+          $state.go("tab.gohome-matching-confirm", {'destination': previousInfo.destination, 'pickUp': previousInfo.pickUp, 'time':previousInfo.time, 'licence': previousInfo.licence, 'requestId': previousInfo.requestId, 'matchicon':previousInfo.matchicon});
+        
+
+      }else{
+        $state.go('tab.gohome');
+      }
+
+
     }).catch(function(error){
       var alertPopup = $ionicPopup.alert({
         title: 'Error',
@@ -30,6 +64,8 @@ angular.module('starter.controllers', [])
       alertPopup.then(function(res) {
         console.log('Error to login');
       });
+      //delete
+      // $state.go('tab.gohome');
     }).finally(function(){
       loadingService.end($ionicLoading);
     });
@@ -46,6 +82,7 @@ $scope.$on("$ionicView.enter", function(scopes, states){
     if (!(user.email ==null || user.pw == null)){
       $scope.signin({"email": user.email, "password": user.pw});
     }
+    previousInfo = $localstorage.getObject("offerInfo");
 
     console.log("Go to login page");
   });
@@ -205,45 +242,66 @@ $scope.$on("$ionicView.enter", function(scopes, states){
 .controller('askAcceptCtrl', function($scope){
 })
 
-.controller('goHomeCtrl', function($scope, $state,  $ionicHistory, $localstorage, RideRequestService){
+.controller('goHomeCtrl', function($scope, $state,  $ionicHistory, $localstorage, RideRequestService, safeChecking, $ionicPopup, QueueSeatProvider){
 
   
 
   $scope.ready = function(destination){
     $ionicHistory.clearCache();
+    if (!safeChecking.safeToStart()){
+      var warningPopup = $ionicPopup.alert({
+         title: 'Error',
+         template: 'You can only initiate one request.'
+       });
+      warningPopup.then(function(res){
+
+      }, function(error){
+
+      });
+      return;
+    }
+
     $scope.genderPreferred = $localstorage.get("genderPreference", "false");
 
     RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true"), 'leaveUst': true}).then(function(value){
       console.log(value.req.requestId);
       var requestId = value.req.requestId;
       destination = value.req.newDesName;
-      
+      var userinfo = $localstorage.getObject('userInfo');
+      $localstorage.setObject('requestInfo', {'owner': userinfo.email, 'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
+      safeChecking.start(0);
       $state.go('tab.gohome-matching', {'destination': destination, 'pickUp': availablePoints[destination],'requestId': requestId });
 
     }).catch(function(error){
 
     });
-
-    
-
   };
 
 
-var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
+  var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
   // $scope.pickupPt = availablePoints[4];
-    $scope.$on("$ionicView.enter", function(scopes, states){
+  $scope.$on("$ionicView.enter", function(scopes, states){
     
     RideRequestService.getQueueSeatNumber(true).then(function(value){
       $scope.statistics = value.num;
     });
+    safeChecking.end(0);
+
   });
+
+  $scope.doRefresh = function(){
+    QueueSeatProvider.clear();
+    QueueSeatProvider.update(true, null);
+    $scope.$broadcast('scroll.refreshComplete', {"leaveUst": true});
+    $scope.$apply();
+  }
 
 
 })
 
 
-.controller('matchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state, Request, $ionicPopup){
+.controller('matchingCtrl', function($scope, $stateParams, $ionicHistory, $timeout, $state, Request, $ionicPopup, $localstorage){
 
   $scope.destination = $stateParams.destination;
   $scope.pickUp = $stateParams.pickUp;
@@ -264,6 +322,7 @@ var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sa
     if ($scope.destination ==="HKUST"){
       leaveOption = false;
     }
+    $localstorage.setObject('requestInfo', null);
     Request.cancelMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
       console.log(value);
     }, function(error){
@@ -292,6 +351,9 @@ $scope.confirm = function(){
     }
     Request.confirmMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
       console.log(value.matchicon);
+      var userinfo = $localstorage.getObject('userInfo');
+      $localstorage.setObject('requestInfo', null);
+      $localstorage.setObject('offerInfo', {'owner': userinfo.email, 'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon})
       if ($scope.destination === "HKUST")
         $state.go("tab.gohkust-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
       else
@@ -390,6 +452,7 @@ $scope.confirm = function(){
 
   var decreaseCount = function(){
     $scope.countDownTime--;
+    console.log("confirm Counting...");
     if ($scope.countDownTime ==0){
       $scope.goBack();
     }
@@ -505,13 +568,17 @@ $scope.confirm = function(){
     console.log("countdown");
 
     // timer = $timeout(changeCount,1000*60*($scope.time+1));
-    targetTime = targetTime.setMinutes(targetTime.getMinutes() + 1);
+    //change less than 1 min
+
+
+    targetTime = targetTime.setMinutes(targetTime.getMinutes() - 1);
     timer = $timeout(changeCount,1000);
     timer2 = $timeout(confirmCountDown, 1000);
   }
 
   var confirmCountDown = function(){
     $scope.confirmationTime--;
+    console.log("confirm Counting...")
     if ($scope.confirmationTime > 0){
       timer2 = $timeout(confirmCountDown, 1000);
     }
@@ -520,8 +587,9 @@ $scope.confirm = function(){
   var changeCount  = function(){
     var currentTime = new Date();
     if (targetTime > currentTime){
-      timer = $timeout(changeCount, 1000);
       console.log("counting");
+      timer = $timeout(changeCount, 1000);
+      
     }
     else{
       console.log('finish counting');
@@ -598,7 +666,7 @@ $scope.confirm = function(){
 
   $scope.goBack = function(){
     console.log("Pressed Go home/hkust");
-    if ($scope.destination){
+    if ($scope.destination == "HKUST"){
       $state.go("tab.gohkust")
     }
     else
@@ -730,6 +798,7 @@ $scope.confirm = function(){
   console.log(targetTime);
   $scope.displayTime = null;
   var ctrl = this;
+  var counter;
 
   
 
@@ -749,7 +818,7 @@ $scope.confirm = function(){
           second = '0' + second;
         $scope.displayTime = minute + ' : ' + second;
       }
-      $timeout($scope.startTime);
+      counter = $timeout($scope.startTime);
 
     }
 
@@ -757,19 +826,36 @@ $scope.confirm = function(){
     
   }
 
-
+  $scope.$on('$destroy', function(){
+    $timeout.cancel(counter);
+  });
 
 })
 
-.controller('toUSTCtrl', function($scope, $ionicHistory, $localstorage, RideRequestService, $state){
+.controller('toUSTCtrl', function($scope, $ionicHistory, $localstorage, RideRequestService, $state, safeChecking, $ionicPopup, QueueSeatProvider){
     $scope.ready = function(destination){
     $ionicHistory.clearCache();
+    if (!safeChecking.safeToStart()){
+      var warningPopup = $ionicPopup.alert({
+         title: 'Error',
+         template: 'You can only initiate one request.'
+       });
+      warningPopup.then(function(res){
+
+      }, function(error){
+
+      });
+      return;
+    }
     $scope.genderPreferred = $localstorage.get("genderPreference", "false");
 
     RideRequestService.addRequest({'destination_name': destination, 'gender_preference': ($scope.genderPreferred==="true"), 'leaveUst': false}).then(function(value){
       console.log(value.req.requestId);
       var requestId = value.req.requestId;
       destination = value.req.newDesName;
+      safeChecking.start(1);
+      var userinfo = $localstorage.getObject('userInfo');
+      $localstorage.setObject('requestInfo', {'owner': userinfo.email, 'destination': "HKUST", 'pickUp': destination,'requestId': requestId });
       
       $state.go('tab.gohkust-matching', {'destination': "HKUST", 'pickUp': destination,'requestId': requestId });
 
@@ -780,6 +866,17 @@ $scope.confirm = function(){
     
 
   };
+
+  $scope.$on("$ionicView.enter", function(scopes, states){
+    safeChecking.end(1);
+  });
+
+  $scope.doRefresh = function(){
+    QueueSeatProvider.clear();
+    QueueSeatProvider.update(false, null);
+    $scope.$broadcast('scroll.refreshComplete', {"leaveUst": false});
+    $scope.$apply();
+  }
 
 
  

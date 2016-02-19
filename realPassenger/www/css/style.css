@@ -59,6 +59,16 @@ textarea.form-control {
 	border: none;
 }
 
+.item.ChoiHung {
+	color: white;
+	background-color: rgba(79,167, 74, 0.8);
+}
+
+.item.HangHau{
+	color: white;
+
+	background-color: rgba(153, 106, 178, 0.8);
+}
 
 input.login::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #fff;

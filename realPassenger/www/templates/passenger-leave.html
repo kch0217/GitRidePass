@@ -1,6 +1,7 @@
 <ion-view view-title="Go Home">
   <ion-content padding="true" class="has-header gohome">
-
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
 
 
 
@@ -9,22 +10,22 @@
 
   <br>
   <div class="animated slideInUp">
-    <a href="#" class="item item-icon-left" ng-click="ready('Choi Hung')">
+    <div class="item item-icon-left ChoiHung" ng-click="ready('Choi Hung')">
       <i class="icon ion-android-train"></i>
-      Choi Hung
-      <span class="badge badge-assertive">{{statistics.chCount}}</span>
-    </a>
+      <!-- <span class="badge badge-assertive">{{statistics.chCount}}</span> -->
+      <location-display info="true" location="Choi Hung">Choi Hung</location-display>
+    </div>
 
-    <a href="#" class="item item-icon-left" ng-click="ready('Hang Hau')">
+    <div class="item item-icon-left HangHau" ng-click="ready('Hang Hau')">
       <i class="icon ion-android-train"></i>
-      Hang Hau
-      <span class="badge badge-assertive">{{statistics.hhCount}}</span>
-    </a>
+      <!-- <span class="badge badge-assertive">{{statistics.hhCount}}</span> -->
+      <location-display info="true" location="Hang Hau">Hang Hau</location-display>
+    </div>
 
-    <a href="#" class="item item-icon-left" ng-click="ready('To Be Confirmed')">
+    <div class="item item-icon-left" ng-click="ready('To Be Confirmed')">
       <i class="icon ion-android-train"></i>
       Any MTR station
-    </a>
+    </div>
   </div>
 
 

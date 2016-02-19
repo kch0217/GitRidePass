@@ -212,7 +212,7 @@
       <span>User Authentication</span>
     </label>
 
-    <label class="item item-toggle">
+<!--     <label class="item item-toggle">
       Have an HKUST email account?
       <label class="toggle">
        <input type="checkbox" ng-model="info.hkustMember">
@@ -221,13 +221,13 @@
        </div>
      </label>
      
-   </label>
-   <label class="item item-input item-stacked-label" ng-if="info.hkustMember">
+   </label> -->
+   <label class="item item-input item-stacked-label">
     <span class="input-label">Your HKUST email address</span>
-    <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">
+    <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid || myForm2.email.$error.domainCheck)">
       Incorrect email
     </div>
-    <input type="email" placeholder="" ng-model="info.email" name="email" required>
+    <input type="email" placeholder="" ng-model="info.email" name="email" domain-check required>
   </label>
 </div>
 </form>
@@ -281,7 +281,7 @@
 </div>
 
 <div class="button-bar">
-  <button class="button button-balanced" style="border-radius: 18px;" ng-click="confirm()" ng-disabled="myForm.$error.required || myForm.$error.compareTo || myForm2.$error.email || myForm2.$error.required">Confirm</button>
+  <button class="button button-balanced" style="border-radius: 18px;" ng-click="confirm()" ng-disabled="myForm.$error.required || myForm.$error.compareTo || myForm2.$error.email || myForm2.$error.required || myForm2.$error.domainCheck">Confirm</button>
   <button class="button button-dark" ng-click="reset()" style="border-radius: 18px;">Reset</button>
 </div>
 </ion-content>
