@@ -24,6 +24,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 
 
+
   });
   $ionicPlatform.registerBackButtonAction(function (event) {
                     event.preventDefault();
@@ -77,7 +78,6 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     }
   })
   .state('tab.gohome-matching', {
-    cache: false,
     url: '/gohome/:destination/:pickUp/:requestId',
     views: {
       'tab-gohome': {
@@ -136,7 +136,6 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 
 
   .state('tab.gohkust-matching', {
-    cache: false,
     url: '/gohkust/:destination/:pickUp/:requestId',
     views: {
       'tab-gohkust': {
@@ -167,7 +166,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
     // LoopBackResourceProvider.setUrlBase('http://ridesharingfyp.ddns.net:3000/api');
-     LoopBackResourceProvider.setUrlBase('http://192.168.0.110:3000/api');
+     LoopBackResourceProvider.setUrlBase('http://192.168.0.111:3000/api');
 })
 
 

@@ -223,8 +223,9 @@
      
    </label> -->
    <label class="item item-input item-stacked-label">
-    <span class="input-label">Your HKUST email address</span>
-    <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid || myForm2.email.$error.domainCheck)">
+    <div class="input-label">Your email address</div>
+    <div style="color:red" class="item-text-wrap" ng-hide="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">*Non-HKUST email requires extra verification</div>
+    <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">
       Incorrect email
     </div>
     <input type="email" placeholder="" ng-model="info.email" name="email" domain-check required>

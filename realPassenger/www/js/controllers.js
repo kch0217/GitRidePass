@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService, commonCallback, RideRequestService){
+.controller('signInCtrl',function($scope, $state,$ionicPopup, loadingService, $ionicLoading, LoopBackAuth, userRegister, pushRegister, $localstorage, $ionicHistory, LoginService, commonCallback, RideRequestService, pushIDManager){
 
 
 
@@ -13,10 +13,12 @@ angular.module('starter.controllers', [])
     console.log(info.password);
     var previousInfo = $localstorage.getObject("offerInfo");
     var previousRequest = $localstorage.getObject("requestInfo");
+    
 
     LoginService.login(info).then(function(value){
-      userRegister.register();
-      pushRegister.register();
+      pushIDManager.init();
+      // userRegister.register();
+      // pushRegister.register();
       $localstorage.setObject('userInfo',{'email':info.email, 'pw': info.password});
 
       return LoginService.getGenderPreference();
@@ -366,6 +368,8 @@ $scope.confirm = function(){
     // $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':13});
     
 }
+
+
   
   $scope.$on('match-received', function(event, args){
     console.log("received a match from the server");
@@ -430,7 +434,7 @@ $scope.confirm = function(){
     });
     alertPopup.then(function(res) {
       if ($scope.destination == null || $scope.destination ==""){
-        console.log("error.");
+        console.log("error");
       }
       
     });
@@ -441,23 +445,30 @@ $scope.confirm = function(){
 
 
 
-  
+  var timer20;
+  $scope.confirmCounting = true;
   var matched = function(){
+    timer20 = new Date();
+    timer20.setSeconds(parseInt(timer20.getSeconds()) + 20);
+    var currentTime = new Date();
     $scope.searching = false;
-    $scope.countDownTime = 20;
+    $scope.countDownTime = Math.floor((timer20.getTime() - currentTime.getTime())/1000);
     console.log('matched');
     timeCounter = $timeout(decreaseCount, 1000);
 
   }
 
   var decreaseCount = function(){
-    $scope.countDownTime--;
+    // $scope.countDownTime--;
+    var currentTime = new Date();
     console.log("confirm Counting...");
-    if ($scope.countDownTime ==0){
-      $scope.goBack();
+    if (currentTime >= timer20){
+      // $scope.goBack();
+      $scope.confirmCounting = false;
     }
     else
     {
+      $scope.countDownTime = Math.floor((timer20.getTime() - currentTime.getTime())/1000);
       timeCounter = $timeout(decreaseCount, 1000);
     }
 
@@ -703,7 +714,7 @@ $scope.confirm = function(){
 .controller('settingCtrl', function($scope, $state, Member, pushRegister, $localstorage){
   $scope.logout = function(){
     Member.logout({}, function(value, responseheader){
-      pushRegister.unregister();
+      // pushRegister.unregister();
       $localstorage.setObject('userInfo', null);
       $localstorage.set('genderPreference', null);
       $state.go('signIn');

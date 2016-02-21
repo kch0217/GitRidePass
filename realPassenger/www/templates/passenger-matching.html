@@ -106,7 +106,7 @@
 </ion-footer-bar>
 <ion-footer-bar ng-if="!searching">
 <div class="button-bar">
-  <button class="button button-balanced" style="border-radius: 15px" ng-click="confirm()">Accept</a>
+  <button class="button button-balanced" style="border-radius: 15px" ng-click="confirm()" ng-disabled="!confirmCounting">Accept</a>
   <button class="button button-assertive" style="border-radius: 15px" ng-click="goBack()">Cancel</a>
 </div>
 </ion-footer-bar>

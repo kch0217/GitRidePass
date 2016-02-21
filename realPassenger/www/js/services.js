@@ -311,4 +311,74 @@ angular.module('starter.services', [])
 
 
 
+})
+
+.service("pushIDManager", function($ionicPlatform, Member, $rootScope){
+  var gcmID;
+  var push;
+  var manager = this;
+
+  this.init = function(){
+    $ionicPlatform.ready(function(){
+      push = PushNotification.init({
+        android:{
+          senderID: "721443256606"
+        },
+        ios: {
+          
+          "badge": "true",
+          "sound": "true",
+          "alert": "true"
+        
+        },
+        windows: {}
+      });
+
+      push.on('registration', function(data){
+        console.log("receive data", data);
+        manager.registerGCM(data.registrationId);
+        Member.updateToken({'deviceToken': data.registrationId}, function(value, responseheaders){
+          console.log(value);
+        }, function(error){
+          console.log(error);
+        });
+
+      });
+
+      push.on('notification', function(data) {
+        // console.log(data.message);
+        // console.log(data.title);
+        // console.log(data.count);
+        // console.log(data.sound);
+        // console.log(data.image);
+        console.log("Received push", data.additionalData);
+        var pushData = data.additionalData;
+        if (pushData.status == "match"){
+          $rootScope.$broadcast('match-received',{"ridetime": pushData.ridetime,
+                                      "destination": pushData.destination,
+                                      "licence": pushData.license_number });  
+        }
+        else if (pushData.status =="cancel"){
+            $rootScope.$broadcast('cancel-received', {
+            "requestId": pushData.requestId,
+            "newDesName": pushData.newDesName
+          });
+        }
+
+      });
+
+      push.on('error', function(e) {
+        console.log(e.message);
+      });
+
+
+    });
+    
+  }
+
+  this.registerGCM = function(id){
+    gcmID = id;
+  }
+
+
 });
