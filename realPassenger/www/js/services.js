@@ -380,5 +380,15 @@ angular.module('starter.services', [])
     gcmID = id;
   }
 
+  this.unregister = function(){
+    if (push!= null){
+      push.unregister(function(){
+        console.log("success to unregister");
+      }, function(){
+        console.log("fail to unregister");
+      })
+    }
+  }
+
 
 });

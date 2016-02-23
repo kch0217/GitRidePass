@@ -385,6 +385,17 @@ $scope.confirm = function(){
     var currentTime = new Date();
     var targetTime = new Date(args.ridetime);
 
+    if (targetTime <= currentTime || (targetTime.getTime() - currentTime.getTime())/1000/60 % 60 <= 1 ){
+      
+      var alertPopup = $ionicPopup.alert({
+       title: 'Sorry!',
+       template: 'The ride has expired.'
+      });
+      alertPopup.then(function(res) {
+        
+      });
+      return;
+    }
     $scope.targetTime = args.ridetime;
 
     currentTime.setSeconds(parseInt(currentTime.getSeconds()) + 20);
@@ -711,9 +722,10 @@ $scope.confirm = function(){
 
 })
 
-.controller('settingCtrl', function($scope, $state, Member, pushRegister, $localstorage){
+.controller('settingCtrl', function($scope, $state, Member, pushRegister, $localstorage, pushIDManager){
   $scope.logout = function(){
     Member.logout({}, function(value, responseheader){
+      pushIDManager.unregister();
       // pushRegister.unregister();
       $localstorage.setObject('userInfo', null);
       $localstorage.set('genderPreference', null);
