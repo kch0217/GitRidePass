@@ -232,6 +232,26 @@ angular.module('starter.services', [])
     checkValid: function(requestId){
       var promise = Request.checkValid({"requestId": requestId}).$promise;
       return commonCallback.defaultHandling(promise);
+    },
+
+    addRequestAgain: function(info){
+      var promise = Request.addRequestAgain(info).$promise;
+      return commonCallback.defaultHandling(promise);
+    },
+
+    cancelMatch: function(info){
+      var promise = Request.cancelMatch(info).$promise;
+      return commonCallback.defaultHandling(promise);
+    },
+
+    confirmMatch: function(info){
+      var promise = Request.confirmMatch(info).$promise;
+      return commonCallback.defaultHandling(promise);
+    },
+
+    cancelConfirmMatch: function(info){
+      var promise = Request.cancelConfirmMatch(info).$promise;
+      return commonCallback.defaultHandling(promise);
     }
   }
 })
@@ -274,7 +294,7 @@ angular.module('starter.services', [])
         if (callback !== null){
           // console.log(queueSeat);
           console.log(leaveUst);
-          if (leaveUst){
+          if (leaveUst == "true"){
             // console.log("QueueSeatProvider return home");
             callback(queueSeat['home']);
           }

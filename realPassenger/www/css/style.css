@@ -218,9 +218,6 @@ button.additionalB:active:focus, button.additionalB.active:focus, button.submitB
 
 .info-panel {
 	background: rgba(255, 255, 255, 0.6);
-	-moz-border-radius: 15px 15px 15px 15px; -webkit-border-radius: 15px 15px 15px 15px; border-radius: 15px 15px 15px 15px;
-	
-
 }
 
 .match-icon{
@@ -242,7 +239,7 @@ button.additionalB:active:focus, button.additionalB.active:focus, button.submitB
 
 .important-label{
 	font-family: Impact, Charcoal, sans-serif;	
-	font-size: 30px;
+	font-size: 20px;
 	
 }
 
