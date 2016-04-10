@@ -107,7 +107,7 @@
     <div class="item item-divider important-label" >
       <center><i class="icon ion-ios-time-outline" ng-init="calcTime(); countdown();"></i>
     
-      <timer time="targetTime" class="animated pulse infinite" ng-init="calcTime(); countDown();"></timer>
+      <b><timer time="targetTime" class="animated pulse infinite" ng-init="calcTime(); countDown();"></timer></b>
       </center>
 
     </div>
@@ -126,7 +126,7 @@
 
 
 </ion-content>
-<ion-footer-bar class="bar-assertive" ng-click="cancel()" ng-if="!finishedCount && (confirmationTime!=0)">
+<ion-footer-bar class="bar-assertive" ng-click="cancel()" ng-if="!finishedCount && (confirmationTime>0)">
 
 <h1 class="title" ng-click='cancel()'>Cancel <span class="badge badge-assertive">{{confirmationTime}}</span></h1>
 

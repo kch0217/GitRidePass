@@ -89,12 +89,12 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   })
 
   .state('tab.gohome-matching-confirm', {
-    url: '/gohome/:destination/:pickUp/:time/:licence/:requestId/:matchicon',
+    url: '/gohome/:destination/:pickUp/:time/:licence/:requestId/:matchicon/:countDown',
     views: {
       'tab-gohome': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'matchingConfirmCtrl',
-        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon']
+        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon', 'countDown']
       }
     }
   })
@@ -147,12 +147,12 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   })
 
   .state('tab.gohkust-matching-confirm', {
-    url: '/gohkust/:destination/:pickUp/:time/:licence/:requestId/:matchicon',
+    url: '/gohkust/:destination/:pickUp/:time/:licence/:requestId/:matchicon/:countDown',
     views: {
       'tab-gohkust': {
         templateUrl: 'templates/passenger-confirmmatch.html',
         controller: 'matchingConfirmCtrl',
-        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon']
+        params: ['destination', 'pickUp','time','licence', 'requestId', 'matchicon', 'countDown']
       }
     }
   })
@@ -167,6 +167,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
   // Change the URL where to access the LoopBack REST API server
     LoopBackResourceProvider.setUrlBase('http://ridesharingfyp.ddns.net:3000/api');
      // LoopBackResourceProvider.setUrlBase('http://192.168.0.111:3000/api');
+     LoopBackResourceProvider.setUrlBase('http://54.254.203.214:3000/api');
 })
 
 

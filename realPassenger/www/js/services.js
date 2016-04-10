@@ -206,6 +206,11 @@ angular.module('starter.services', [])
       var promise = Member.register(datasent).$promise;
 
       return commonCallback.defaultHandling(promise);
+    },
+
+    registerForNon : function(datasent){
+      var promise = Member.registerNonUST(datasent).$promise;
+      return commonCallback.defaultHandling(promise);
     }
 
   }
@@ -251,6 +256,11 @@ angular.module('starter.services', [])
 
     cancelConfirmMatch: function(info){
       var promise = Request.cancelConfirmMatch(info).$promise;
+      return commonCallback.defaultHandling(promise);
+    },
+
+    checkPending: function(info){
+      var promise = Request.checkPending(info).$promise;
       return commonCallback.defaultHandling(promise);
     }
   }
@@ -339,6 +349,7 @@ angular.module('starter.services', [])
   var manager = this;
 
   this.init = function(){
+    // return;
     $ionicPlatform.ready(function(){
       push = PushNotification.init({
         android:{

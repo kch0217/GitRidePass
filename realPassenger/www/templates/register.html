@@ -222,14 +222,41 @@
      </label>
      
    </label> -->
-   <label class="item item-input item-stacked-label">
+<!--    <label class="item item-input item-stacked-label">
     <div class="input-label">Your email address</div>
     <div style="color:red" class="item-text-wrap" ng-hide="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">*Non-HKUST email requires extra verification</div>
     <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">
       Incorrect email
     </div>
     <input type="email" placeholder="" ng-model="info.email" name="email" domain-check required>
-  </label>
+  </label> -->
+  <label class="item item-toggle">
+                Have an HKUST ITSC?
+                <label class="toggle">
+                   <input type="checkbox" ng-model="info.hkustMember">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                </label>
+        
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="!info.hkustMember">
+                <div class="input-label">Your email address</div>
+                <div style="color:red" class="item-text-wrap" ng-hide="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">*Non-HKUST email requires extra verification</div>
+                <div style="color:red" ng-show="myForm2.email.$dirty && (myForm2.email.$error.required || myForm2.email.$invalid)">
+              Incorrect email
+              </div>
+                <input type="email" placeholder="" ng-model="info.email" name="email" domain-check required>
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="info.hkustMember">
+              <div class="input-label">Your ITSC</div>
+              <div style="color:red" class="item-text-wrap" ng-hide="myForm2.email.$dirty">*Use @ust.hk to login</div>
+              <div style="color:red" ng-show="myForm2.email.$dirty && myForm2.email.$error.required">
+                ITSC is required
+              </div>
+              <input type="text" placeholder="" ng-model="info.email" name="email" domain-check required>
+
+            </label>
 </div>
 </form>
 <br>
