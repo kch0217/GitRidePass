@@ -343,6 +343,20 @@ angular.module('starter.services', [])
 
 })
 
+.service("errorBox", function($ionicPopup){
+  this.start = function(){
+    console.log("Starting a dialog");
+    var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Connection problem!'
+    });
+    alertPopup.then(function(res) {
+        
+    });
+  }
+
+})
+
 .service("pushIDManager", function($ionicPlatform, Member, $rootScope){
   var gcmID;
   var push;
