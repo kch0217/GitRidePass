@@ -174,8 +174,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
 .config(function(LoopBackResourceProvider){
   // Change the URL where to access the LoopBack REST API server
     LoopBackResourceProvider.setUrlBase('http://ridesharingfyp.ddns.net:3000/api');
-     // LoopBackResourceProvider.setUrlBase('http://192.168.0.111:3000/api');
-     // LoopBackResourceProvider.setUrlBase('http://54.169.96.236:3000/api');
+
 })
 
 

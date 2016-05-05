@@ -25,8 +25,7 @@ angular.module('starter.controllers', [])
 
     LoginService.login(info).then(function(value){
       pushIDManager.init();
-      // userRegister.register();
-      // pushRegister.register();
+      
       $localstorage.setObject('userInfo',{'email':info.email, 'pw': info.password});
 
       return LoginService.getGenderPreference();
@@ -40,12 +39,9 @@ angular.module('starter.controllers', [])
         targetTime = new Date(previousInfo.time);
       var userinfo = $localstorage.getObject('userInfo');
       console.log(currentTime, targetTime);
-      // if (currentTime > targetTime){
-      //   console.log("HELPHELP");
-      // }
+
       if (previousInfo == null || JSON.stringify(previousInfo) === "{}" || currentTime >= targetTime || userinfo.email !== previousInfo.owner){
-        // $state.go('tab.gohome');
-        //TODO check previousRequest
+
         if (previousInfo != null){
           $localstorage.setObject('offerInfo', null);
           previousInfo = null
@@ -132,8 +128,7 @@ angular.module('starter.controllers', [])
       alertPopup.then(function(res) {
         console.log('Error to login');
       });
-      //delete
-      // $state.go('tab.gohome');
+
     }).finally(function(){
       loadingService.end($ionicLoading);
     });
@@ -237,11 +232,7 @@ angular.module('starter.controllers', [])
       loadingService.start($ionicLoading);
       console.log(res);
       if(res) {
-       //submit
 
-
-       
-      console.log(datasent);
 
       return LoginService.validation(datasent);
 
@@ -305,10 +296,10 @@ angular.module('starter.controllers', [])
 
 .controller('forgetCtrl', function($scope, Member, $ionicPopup, $ionicHistory, loadingService, $ionicLoading){
   $scope.sendForget = function(email){
-    console.log(email);
+
     loadingService.start($ionicLoading);
     Member.resetPw({'email': email}, function(value, responseheader){
-      console.log(value);
+
       var alertPopup = $ionicPopup.alert({
         title: 'Done',
         template: 'Please check your email account.'
@@ -377,7 +368,7 @@ angular.module('starter.controllers', [])
 
   var availablePoints = {'Hang Hau' : 'North Gate', 'Choi Hung' :'South Gate', 'Sai Kung': 'North Gate' };
 
-  // $scope.pickupPt = availablePoints[4];
+
   $scope.$on("$ionicView.enter", function(scopes, states){
     QueueSeatProvider.clear();
     QueueSeatProvider.update(true, null);
@@ -412,13 +403,12 @@ angular.module('starter.controllers', [])
   $scope.searching = true;
   var timeCounter;
   console.log($scope.pickUp);
-  // var timeCounter2;
+
 
   $scope.goBack = function() {
     //contact the server to call off the ride
-    console.log("Back");
+
     $timeout.cancel(timeCounter);
-    // $timeout.cancel(timeCounter2);
     var leaveOption = true;
     if ($scope.destination ==="HKUST"){
       leaveOption = false;
@@ -426,7 +416,7 @@ angular.module('starter.controllers', [])
     $localstorage.setObject('requestInfo', null);
     loadingService.start($ionicLoading);
     RideRequestService.cancelMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}).then(function(value){
-      console.log(value);
+
     }).catch(function(error){
       errorBox.start();
       console.log(error);
@@ -434,16 +424,7 @@ angular.module('starter.controllers', [])
       loadingService.end($ionicLoading);
     })
     
-    // Request.cancelMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
-    //   console.log(value);
-      
-    // }, function(error){
-    //   console.log(error);
-      
 
-
-    // })
-    // $ionicHistory.goBack();
     if ($scope.destination ==="HKUST"){
       $state.go('tab.gohkust');
     }
@@ -456,8 +437,7 @@ angular.module('starter.controllers', [])
 
 $scope.confirm = function(){
     $timeout.cancel(timeCounter);
-    // $timeout.cancel(timeCounter2);
-    // $ionicHistory.goBack();
+
     var leaveOption = true;
     if ($scope.destination ==="HKUST"){
       leaveOption = false;
@@ -481,21 +461,7 @@ $scope.confirm = function(){
       loadingService.end($ionicLoading);
     })
 
-    // Request.confirmMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
-    //   console.log(value.matchicon);
-    //   var userinfo = $localstorage.getObject('userInfo');
-    //   $localstorage.setObject('requestInfo', null);
-    //   $localstorage.setObject('offerInfo', {'owner': userinfo.email, 'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon})
-    //   if ($scope.destination === "HKUST")
-    //     $state.go("tab.gohkust-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
-    //   else
-    //     $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':value.matchicon});
-    // }, function(error){
-    //   console.log(error);
 
-
-    // });
-    // $state.go("tab.gohome-matching-confirm", {'destination': $scope.destination, 'pickUp': $scope.pickUp, 'time':$scope.targetTime, 'licence': $scope.licence, 'requestId': $scope.requestId, 'matchicon':13});
     
 }
 
@@ -505,9 +471,7 @@ $scope.confirm = function(){
     console.log("received a match from the server");
     console.log(args);
     $scope.licence = args.licence;
-    // $scope.matchiconId = parseInt(args.matchicon);
 
-    // console.log($scope.matchiconId);
     console.log(args.ridetime);
     
 
@@ -531,7 +495,6 @@ $scope.confirm = function(){
         loadingService.start($ionicLoading);
         return RideRequestService.cancelMatch({"requestId": $scope.requestId, 'leaveUst': leaveOption});
       }).then(function(res){
-        console.log(res);
         return RideRequestService.addRequestAgain({'requestId': $scope.requestId, 'leaveUst': leaveOption});
       }).then(function(res){
         $scope.requestId = res.req.requestId;
@@ -554,10 +517,7 @@ $scope.confirm = function(){
     $scope.targetTime = args.ridetime;
 
     currentTime.setSeconds(parseInt(currentTime.getSeconds()) + 20);
-    console.log("Current Time second is" + currentTime.getSeconds());
-    console.log("Target Time second is" + targetTime.getSeconds());
-    console.log("Current Time minute is" + currentTime.getMinutes());
-    console.log("Target Time minute is" + targetTime.getMinutes());
+
     if (parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes()) < 0){
       $scope.ridetime  = 60 + parseInt(targetTime.getMinutes()) - parseInt(currentTime.getMinutes());
     }
@@ -573,11 +533,11 @@ $scope.confirm = function(){
     }
 
     Request.checkAutoCancel({'requestId': $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheaders){
-      console.log(value);
+
     }, function(error){
 
     });
-    console.log($scope.ridetime);
+
 
     matched();
     // $scope.carLicence = args.ln;
@@ -585,14 +545,7 @@ $scope.confirm = function(){
   });
 
   $scope.$on('cancel-received', function(event, args){
-    console.log("received a cancel from the server");
     $timeout.cancel(timeCounter);
-
-    
-
-    // $scope.requestId = args.requestId;
-    // if ($scope.destination !== "HKUST")
-    //   $scope.destination = args.newDesName;
 
 
     var alertPopup = $ionicPopup.alert({
@@ -642,7 +595,7 @@ $scope.confirm = function(){
     var currentTime = new Date();
     $scope.searching = false;
     $scope.countDownTime = Math.floor((timer20.getTime() - currentTime.getTime())/1000);
-    console.log('matched');
+    
     timeCounter = $timeout(decreaseCount, 1000);
 
   }
@@ -650,7 +603,7 @@ $scope.confirm = function(){
   var decreaseCount = function(){
     // $scope.countDownTime--;
     var currentTime = new Date();
-    console.log("confirm Counting...");
+    
     if (currentTime >= timer20){
       // $scope.goBack();
       $scope.confirmCounting = false;
@@ -688,20 +641,19 @@ $scope.confirm = function(){
   $scope.destination = $stateParams.destination;
   $scope.location = $stateParams.pickUp;
   var cur_time = new Date();
-  console.log($stateParams.countDown);
+  
   var conf_time = new Date($stateParams.countDown);
   $scope.confirmationTime =  parseInt((conf_time.getTime() - cur_time.getTime())/1000);
-  console.log("Count time", $scope.confirmationTime);
+  
   $scope.requestId = $stateParams.requestId;
   $scope.matchicon = parseInt($stateParams.matchicon);
-  // console.log($scope.destination, $scope.location);
+  
 
   $scope.calcTime = function(){
     var targetTime = new Date($scope.targetTime);
     var currentTime = new Date();
 
-    console.log(targetTime);
-    console.log(currentTime);
+
 
 
 
@@ -773,11 +725,7 @@ $scope.confirm = function(){
       loadingService.end($ionicLoading)
     })
     
-    // Request.cancelConfirmMatch({'requestId': $scope.requestId,'leaveUst': leaveOption}, function(value, responseheader){
-    //   console.log(value);
-    // }, function(error){
-    //   console.log(error);
-    // });
+
     $localstorage.setObject("offerInfo", null);
 
     if ($scope.destination ==="HKUST"){
@@ -793,8 +741,7 @@ $scope.confirm = function(){
   $scope.countDown = function(){
     console.log("countdown");
 
-    // timer = $timeout(changeCount,1000*60*($scope.time+1));
-    //change less than 1 min
+
 
 
     targetTime = targetTime.setMinutes(targetTime.getMinutes() - 1);
@@ -872,13 +819,7 @@ $scope.confirm = function(){
           loadingService.end($ionicLoading);
         });
 
-        // Request.addRequestAgain({'requestId': $scope.requestId, 'leaveUst': leaveOption}, function(value, responseheader){
 
-        //   return true;
-        // }, function(error){
-        //   console.log(error);
-        //   return true;
-        // })
         
         
      },
@@ -963,7 +904,6 @@ $scope.confirm = function(){
   $scope.logout = function(){
     Member.logout({}, function(value, responseheader){
       pushIDManager.unregister();
-      // pushRegister.unregister();
       $localstorage.setObject('userInfo', null);
       $localstorage.set('genderPreference', null);
       $state.go('signIn');
